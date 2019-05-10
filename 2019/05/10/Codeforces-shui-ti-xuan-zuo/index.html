@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+<script>
+	(function(){
+		if(''){
+			if (prompt('请输入文章密码','') !== ''){
+				alert('密码错误！');
+				history.back();
+			}
+		}
+	})();
+</script>
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="真·水题">
+<meta name="keywords" content="CF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces水题选做">
+<meta property="og:url" content="http://yoursite.com/2019/05/10/Codeforces-shui-ti-xuan-zuo/index.html">
+<meta property="og:site_name" content="daniel14311531&#39;s blog">
+<meta property="og:description" content="真·水题">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-10T12:22:55.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codeforces水题选做">
+<meta name="twitter:description" content="真·水题">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/10/Codeforces-shui-ti-xuan-zuo/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Codeforces水题选做 | daniel14311531's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">daniel14311531's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">the cruel world</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/10/Codeforces-shui-ti-xuan-zuo/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daniel14311531">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="daniel14311531's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Codeforces水题选做
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-10 20:14:21 / 修改时间：20:22:55" itemprop="dateCreated datePublished" datetime="2019-05-10T20:14:21+08:00">2019-05-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">真·水题</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="【CF319E】Ping-Pong"><a href="#【CF319E】Ping-Pong" class="headerlink" title="【CF319E】Ping-Pong"></a>【CF319E】Ping-Pong</h3><p><a href="http://codeforces.com/problemset/problem/319/E" target="_blank" rel="noopener">【CF319E】Ping-Pong</a><br>考虑区间 $ [a, b] $ 和区间 $ [c, d] $ 之间连的是单向边还是双向边。<br>若 $ a &lt; c &lt; b &lt; d $ 或 $ c &lt; a &lt; d &lt; b $ ，则连的是双向边，即可以互相到达，用并查集维护，线段树维护区间关系，由于一个点只会被插入一次、删除一次，所以复杂度正确。<br>若两个区间为包含关系，则为单向边，这时候不好判断。考虑一个区间所在并查集的区间并是一个大区间，所以询问时只需要比较两个区间所在的并查集大区间是否有交即可。<br><a href="http://codeforces.com/contest/319/submission/53607247" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF700D】Huffman-Coding-on-Segment"><a href="#【CF700D】Huffman-Coding-on-Segment" class="headerlink" title="【CF700D】Huffman Coding on Segment"></a>【CF700D】Huffman Coding on Segment</h3><p><a href="http://codeforces.com/problemset/problem/700/D" target="_blank" rel="noopener">【CF700D】Huffman Coding on Segment</a><br>单纯的暴力就是统计一段区间出现的每种数的个数，然后放在一个堆里贪心。<br>统计一段区间出现的每种数的个数显然可以用莫队维护，但计算答案十分麻烦。<br>考虑出现次数大于 $ \sqrt{n} $ 的数的个数不超过 $ \sqrt{n} $ 个，所以将出现个数不大于 $ \sqrt{n} $ 开个桶暴力扫描（计算过程中大于 $ \sqrt{n} $ 后丢堆里），否则放在一个堆里贪心。<br>时间复杂度 $ O(n \sqrt{n} \log n) $ 。<br><a href="http://codeforces.com/contest/700/submission/53652279" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF235D】Graph-Game"><a href="#【CF235D】Graph-Game" class="headerlink" title="【CF235D】Graph Game"></a>【CF235D】Graph Game</h3><p><a href="http://codeforces.com/problemset/problem/235/D" target="_blank" rel="noopener">【CF235D】Graph Game</a><br>设 $ f[i][j] $ 为 $ i $ 被选为分治点时与 $ j $ 连通的概率，则 $ Ans = \sum {f[i][j]} $ 。<br>对于一棵树， $ f[i][j] = \frac{1}{dist(i, j)} $ ，即 $ i $ ，即 $ i $ 为 $ i $ 到 $ j $ 第一个选择的点。<br>然而这是一颗基环树。对于不经过环的点对，则 $ f[i][j] = \frac{1}{dist(i, j)} $ ，适用。否则设将环分成长度为 $ x, y $ 的两部分，通过容斥可以得出 $ f[i][j] = \frac{1}{dist(i, j) + x} + \frac{1}{dist(i, j) + y} - \frac{1}{dist(i, j) + x + y} $ 。<br>暴力枚举根，然后暴力 $ dfs $ ，复杂度 $ O(n^2) $。<br><a href="http://codeforces.com/contest/235/submission/53661120" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF1088F】Ehab-and-a-weird-weight-formula"><a href="#【CF1088F】Ehab-and-a-weird-weight-formula" class="headerlink" title="【CF1088F】Ehab and a weird weight formula"></a>【CF1088F】Ehab and a weird weight formula</h3><p><a href="http://codeforces.com/problemset/problem/1088/F" target="_blank" rel="noopener">【CF1088F】Ehab and a weird weight formula</a><br>将点的代价转为边的代价，则边的代价为 $ \lceil\log_2{dist(x, y)}\rceil \times \min(v_x, v_y) + v_x + v_y $ 。<br>考虑将点权最小的点作为根，存在结论 $ v_u &gt; v_{fa[u]} (u \neq root) $ 。证明即若存在一个儿子节点权值比当前节点小，则这个儿子节点的某个儿子权值比这个儿子节点还小，最后的叶子节点会很尴尬。<br>如此边权计算中的 $ \min $ 也可去掉。<br>那显然改造过的树每个节点的新父亲要么是根，要么是第 $ 2^k $ 个祖先。暴力 $ dfs $ 并找祖先，时间复杂度 $ O(n \log n) $ 。<br><a href="http://codeforces.com/contest/1088/submission/53701616" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF1110G】Tree-Tac-Toe"><a href="#【CF1110G】Tree-Tac-Toe" class="headerlink" title="【CF1110G】Tree-Tac-Toe"></a>【CF1110G】Tree-Tac-Toe</h3><p><a href="http://codeforces.com/problemset/problem/1110/G" target="_blank" rel="noopener">【CF1110G】Tree-Tac-Toe</a><br>黑方根本不可能赢。<br>如果有一个点度大于3或度为3且有其中两个儿子度大于1则白方赢。<br>如果有白点，相当于存在一个度为3的点连向这个点（没有颜色）。<br>特判一种像骨头然后中间有奇数个点的情况，这种情况白方赢。<br>否则平局。<br><a href="http://codeforces.com/contest/1110/submission/53707943" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF653G】Move-by-Prime"><a href="#【CF653G】Move-by-Prime" class="headerlink" title="【CF653G】Move by Prime"></a>【CF653G】Move by Prime</h3><p><a href="http://codeforces.com/problemset/problem/653/G" target="_blank" rel="noopener">【CF653G】Move by Prime</a><br>每个质数是互相独立的。处理出每个数包含某个质数的多少次，进行若干次操作后质数的指数选中位数最优。<br>有 $ n $ 个物品，两两不相同。它们被分成两堆，左边那堆 $ x $ 个，右边那堆 $ n−x $ 个。从左边那堆拿出 $ p $ 个物品，从右边拿出 $ q $ 个物品，要求 $ p &gt; q $ 。<br>方案数为 $ \sum_{i = 0}^{x - 1} \binom{n}{i} $ ，<a href="http://r64.is-programmer.com/posts/200573.html" target="_blank" rel="noopener">证明链接</a>。<br>维护组合数前缀和即可。<br><a href="http://codeforces.com/contest/653/submission/53731697" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF1030G】Linear-Congruential-Generator"><a href="#【CF1030G】Linear-Congruential-Generator" class="headerlink" title="【CF1030G】Linear Congruential Generator"></a>【CF1030G】Linear Congruential Generator</h3><p><a href="http://codeforces.com/problemset/problem/1030/G" target="_blank" rel="noopener">【CF1030G】Linear Congruential Generator</a><br>每个函数进行 $ 0 $ 或 $ 1 $ 次变换会进入一个循环，形如 $ \rho $ 状。<br>设第 $ i $ 个函数环长 $ c_i $ ，链长 $ p_i $ ，最后答案为 $ lcm{c_1, c_2, \dots , c_n} + max{p_1, p_2, \dots , c_n} $ 。<br><a href="http://codeforces.com/contest/1030/submission/53786113" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF19E】Fairy"><a href="#【CF19E】Fairy" class="headerlink" title="【CF19E】Fairy"></a>【CF19E】Fairy</h3><p><a href="http://codeforces.com/problemset/problem/19/E" target="_blank" rel="noopener">【CF19E】Fairy</a><br>当这张图只有偶环时，任意断掉一条边即可。<br>当这张图存在奇环时，用树上差分的思想，维护每条边在几个奇环内，直接 $ dfs $ 即可。<br><a href="http://codeforces.com/contest/19/submission/53790617" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF453E】Little-Pony-and-Lord-Tirek"><a href="#【CF453E】Little-Pony-and-Lord-Tirek" class="headerlink" title="【CF453E】Little Pony and Lord Tirek"></a>【CF453E】Little Pony and Lord Tirek</h3><p><a href="http://codeforces.com/problemset/problem/453/E" target="_blank" rel="noopener">【CF453E】Little Pony and Lord Tirek</a><br>特殊考虑还未被吸收过的马。<br>对于被同一时间吸收的马，将马按恢复完成所需时间从小到大排序。显然恢复完成所需时间不大于经过时间的马的魔力已经满了，否则等于效率乘时间。维护前缀魔力Max和、后缀效率和，询问时二分即可。<br>可以用 $ ODT $ 或线段树维护。<br><a href="http://codeforces.com/contest/453/submission/53810126" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF461E】Appleman-and-a-Game"><a href="#【CF461E】Appleman-and-a-Game" class="headerlink" title="【CF461E】Appleman and a Game"></a>【CF461E】Appleman and a Game</h3><p><a href="http://codeforces.com/problemset/problem/461/E" target="_blank" rel="noopener">【CF461E】Appleman and a Game</a><br>考虑如何构造 s 串使得 Appleman 最难受。假设当前 $ s[1 \to u] $ 串已经被匹配，则选择最短的 $ s[u + 1 \to len] $ 串，使得 $ s[u + 1 \to len] $ 在 t 串中出现且 $ s[u + 1 \to len + 1] $ 不在 t 串中出现。<br>由于随着操作次数增加， s 串变长，所以考虑二分答案，即判断若干次操作后 s 串长度是否可能不大于 $ n $ 。<br>由于 $ n $ 很大，所以不能用递推维护，可以选择矩阵乘法。<br><a href="http://codeforces.com/contest/461/submission/53835059" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF504E】Misha-and-LCP-on-Tree"><a href="#【CF504E】Misha-and-LCP-on-Tree" class="headerlink" title="【CF504E】Misha and LCP on Tree"></a>【CF504E】Misha and LCP on Tree</h3><p><a href="http://codeforces.com/problemset/problem/504/E" target="_blank" rel="noopener">【CF504E】Misha and LCP on Tree</a><br>字符串比较选用好写常数小的 $ hash $ 。用 $ hash $ 维护一个点往上跑到根与从根跑到这个点的 $ hash $ 值，询问一条自上向下的链时可以用差分维护。<br>将树进行树链剖分，路径被分成数量为 $ \log n $ 级别的向上或向下的段，然后逐段比较。<br>由于需要考虑到行走方向，所以代码量大。<br><a href="http://codeforces.com/contest/504/submission/53839918" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF587F】Duff-is-Mad"><a href="#【CF587F】Duff-is-Mad" class="headerlink" title="【CF587F】Duff is Mad"></a>【CF587F】Duff is Mad</h3><p><a href="http://codeforces.com/problemset/problem/587/F" target="_blank" rel="noopener">【CF587F】Duff is Mad</a><br>建出AC自动机的fail树，一个节点的祖先是这个节点表示的串的后缀。<br>存在两种暴力：  </p>
+<ol>
+<li>将 $ s_k $ 每个位置打上标记，然后对于 $ s_{1 \dots n} $ 询问 $ endpos $ 的子树中有多少个标记。  </li>
+<li>先将询问作前缀和差分处理，将 $ s_{1 \dots n} $ 逐个将 $ endpos $ 对应子树加上区间标记，对于每一个询问串，计算每一个前缀对应在fail树上的位置上标记个数之和。  </li>
+</ol>
+<p>由于长度不小于 $ \sqrt{n} $ 的串至多有 $ \sqrt{n} $ 个，所以对于长度不小于 $ \sqrt{n} $ 的串用第一种暴力，否则用第二种暴力。<br>由于询问次数远大于修改次数，所以用分块维护前缀和即可。<br><a href="http://codeforces.com/contest/504/submission/53850414" target="_blank" rel="noopener">Code</a></p>
+<hr>
+<h3 id="【CF274E】Mirror-Room"><a href="#【CF274E】Mirror-Room" class="headerlink" title="【CF274E】Mirror Room"></a>【CF274E】Mirror Room</h3><p><a href="http://codeforces.com/problemset/problem/274/E" target="_blank" rel="noopener">【CF274E】Mirror Room</a><br>发现障碍物是在 $ n $ 的数量级的，容易发现最后经过的路径要么是一条不相交的回路，要么是一条不相交的线，碰壁次数不多（大概数 $ 4 \times n $ 次）。<br>每次二分找到反弹点，大力分类讨论即可。<br><a href="http://codeforces.com/contest/274/submission/53867825" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF626G】Raffles"><a href="#【CF626G】Raffles" class="headerlink" title="【CF626G】Raffles"></a>【CF626G】Raffles</h3><p><a href="http://codeforces.com/problemset/problem/626/G" target="_blank" rel="noopener">【CF626G】Raffles</a><br>考虑对于一种彩票，设已经投注 $ num_i $ 次，多投注一次对答案的贡献是 $ S = p_i \times (\frac{num_i + 1}{l_i + num_i + 1} - \frac{num_i}{num_i + l_i}) $ ，发现随着 $ num_i $ 的增大 $ S $ 在减小。<br>考虑每次贪心每次取贡献最大且可以合法投注的奖池投注，最后答案显然最优。<br>每次修改只会对 $ l_i $ 进行 $ +1/-1 $ 的操作，对投注方案的修改极少。当手上还有票时直接选择投注，否则与当前已投注贡献最小的比较并判断是否取代。<br>修改 $ num_i $ 、查找贡献最大/最小可以用线段树维护。<br><a href="http://codeforces.com/contest/626/submission/53895132" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF771E】Bear-and-Rectangle-Strips"><a href="#【CF771E】Bear-and-Rectangle-Strips" class="headerlink" title="【CF771E】Bear and Rectangle Strips"></a>【CF771E】Bear and Rectangle Strips</h3><p><a href="http://codeforces.com/problemset/problem/771/E" target="_blank" rel="noopener">【CF771E】Bear and Rectangle Strips</a><br>由于只有两列，我们可以用map找到第一列、第二列以及两列合在一起的矩形合法的左端点最靠右的位置。<br>设 $ dp[i] $ 表示前 $ i $ 列最多有几个矩形，通过记忆化搜索完成DP即可通过此题。<br><a href="http://codeforces.com/contest/771/submission/53897846" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF1063F】String-Journey"><a href="#【CF1063F】String-Journey" class="headerlink" title="【CF1063F】String Journey"></a>【CF1063F】String Journey</h3><p><a href="http://codeforces.com/problemset/problem/1063/F" target="_blank" rel="noopener">【CF1063F】String Journey</a><br><a href="https://www.cnblogs.com/ywwyww/p/9789607.html" target="_blank" rel="noopener">这里有各种做法</a><br>有一种 $ O(n \sqrt{n}) $ 的做法。考虑存在一种方案， $ |t_1| = |t_2| + 1 $ ，即 $ t_1 $ 去掉开头或去掉结尾一个字符得到 $ t_2 $ 。<br>枚举长度从后向前枚举串，用哈希值比较后面是否存在一个符合条件的 $ t_{i + 1} $ （ $ f_i = f_{i + 1} + 1 $ ， $ lcp(t_i, t_{i + 1}) = |t_{i + 1}| $ 或 $ lcs(t_i, t_{i + 1}) = |t_{i + 1}| $ ）。<br><a href="http://codeforces.com/contest/1063/submission/53903412" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+<h3 id="【CF1103D】Professional-layer"><a href="#【CF1103D】Professional-layer" class="headerlink" title="【CF1103D】Professional layer"></a>【CF1103D】Professional layer</h3><p><a href="http://codeforces.com/problemset/problem/1103/D" target="_blank" rel="noopener">【CF1103D】Professional layer</a><br>考虑真正有用的素因数是所有数的 $ \gcd $ 所包含的素因数。显然这样的素因数不会超过 $ 12 $ 个。<br>考虑每多选出一个数，素因数个数会至少减一，所以做多选 $ 12 $ 个数。<br>考虑一个数包含 $ \gcd $ 的多少（设为 $ d $ ），对于同样一个 $ d $ ，显然会贪心地取前 $ 12 $ 个。<br>状压DP维护选了几个数、还有那些素数没被去掉的最小代价。<br><a href="http://codeforces.com/contest/1103/submission/53956168" target="_blank" rel="noopener">Code</a>  </p>
+<hr>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CF/" rel="tag"># CF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/08/LOJ3044-ZJOI2019-Minimax-sou-suo/" rel="next" title="【LOJ3044】【ZJOI2019】Minimax 搜索">
+                <i class="fa fa-chevron-left"></i> 【LOJ3044】【ZJOI2019】Minimax 搜索
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="daniel14311531">
+            
+              <p class="site-author-name" itemprop="name">daniel14311531</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF319E】Ping-Pong"><span class="nav-number">1.</span> <span class="nav-text">【CF319E】Ping-Pong</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF700D】Huffman-Coding-on-Segment"><span class="nav-number">2.</span> <span class="nav-text">【CF700D】Huffman Coding on Segment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF235D】Graph-Game"><span class="nav-number">3.</span> <span class="nav-text">【CF235D】Graph Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF1088F】Ehab-and-a-weird-weight-formula"><span class="nav-number">4.</span> <span class="nav-text">【CF1088F】Ehab and a weird weight formula</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF1110G】Tree-Tac-Toe"><span class="nav-number">5.</span> <span class="nav-text">【CF1110G】Tree-Tac-Toe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF653G】Move-by-Prime"><span class="nav-number">6.</span> <span class="nav-text">【CF653G】Move by Prime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF1030G】Linear-Congruential-Generator"><span class="nav-number">7.</span> <span class="nav-text">【CF1030G】Linear Congruential Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF19E】Fairy"><span class="nav-number">8.</span> <span class="nav-text">【CF19E】Fairy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF453E】Little-Pony-and-Lord-Tirek"><span class="nav-number">9.</span> <span class="nav-text">【CF453E】Little Pony and Lord Tirek</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF461E】Appleman-and-a-Game"><span class="nav-number">10.</span> <span class="nav-text">【CF461E】Appleman and a Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF504E】Misha-and-LCP-on-Tree"><span class="nav-number">11.</span> <span class="nav-text">【CF504E】Misha and LCP on Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF587F】Duff-is-Mad"><span class="nav-number">12.</span> <span class="nav-text">【CF587F】Duff is Mad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF274E】Mirror-Room"><span class="nav-number">13.</span> <span class="nav-text">【CF274E】Mirror Room</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF626G】Raffles"><span class="nav-number">14.</span> <span class="nav-text">【CF626G】Raffles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF771E】Bear-and-Rectangle-Strips"><span class="nav-number">15.</span> <span class="nav-text">【CF771E】Bear and Rectangle Strips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF1063F】String-Journey"><span class="nav-number">16.</span> <span class="nav-text">【CF1063F】String Journey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【CF1103D】Professional-layer"><span class="nav-number">17.</span> <span class="nav-text">【CF1103D】Professional layer</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">daniel14311531</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
