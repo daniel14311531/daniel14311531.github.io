@@ -107,25 +107,27 @@
 
 
 
-  <meta name="description" content="https://loj.ac/problem/2330">
-<meta name="keywords" content="DP">
+  <meta name="description" content="hopeless">
+<meta name="keywords" content="游记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【LOJ2330】「清华集训 2017」榕树之心">
-<meta property="og:url" content="http://yoursite.com/2019/04/21/LOJ2330-qing-hua-ji-xun-2017-rong-shu-zhi-xin/index.html">
+<meta property="og:title" content="PKUSC2019游记">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/PKUSC2019-you-ji/index.html">
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
-<meta property="og:description" content="https://loj.ac/problem/2330">
+<meta property="og:description" content="hopeless">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-21T05:37:11.991Z">
+<meta property="og:image" content="https://cdn.luogu.org/upload/pic/59546.png">
+<meta property="og:updated_time" content="2019-05-27T03:13:57.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【LOJ2330】「清华集训 2017」榕树之心">
-<meta name="twitter:description" content="https://loj.ac/problem/2330">
+<meta name="twitter:title" content="PKUSC2019游记">
+<meta name="twitter:description" content="hopeless">
+<meta name="twitter:image" content="https://cdn.luogu.org/upload/pic/59546.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/21/LOJ2330-qing-hua-ji-xun-2017-rong-shu-zhi-xin/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/PKUSC2019-you-ji/">
 
 
 
@@ -135,7 +137,7 @@
   };
 </script>
 
-  <title>【LOJ2330】「清华集训 2017」榕树之心 | daniel14311531's blog</title>
+  <title>PKUSC2019游记 | daniel14311531's blog</title>
   
 
 
@@ -321,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/LOJ2330-qing-hua-ji-xun-2017-rong-shu-zhi-xin/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/PKUSC2019-you-ji/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daniel14311531">
@@ -338,7 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【LOJ2330】「清华集训 2017」榕树之心
+          <h1 class="post-title" itemprop="name headline">PKUSC2019游记
 
               
             
@@ -364,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2019-04-21 11:48:52 / 修改时间：13:37:11" itemprop="dateCreated datePublished" datetime="2019-04-21T11:48:52+08:00">2019-04-21</time>
+              <time title="创建时间：2019-05-27 10:59:28 / 修改时间：11:13:57" itemprop="dateCreated datePublished" datetime="2019-05-27T10:59:28+08:00">2019-05-27</time>
             
 
             
@@ -388,7 +390,7 @@
           
 
           
-              <div class="post-description">https://loj.ac/problem/2330</div>
+              <div class="post-description">hopeless</div>
           
 
         </div>
@@ -405,13 +407,7 @@
 
       
         <a id="more"></a>  
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2330" target="_blank" rel="noopener">「清华集训 2017」榕树之心</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>考虑只询问 $ 1 $ 号节点怎么做。假如我们选择一个子树然后再选择另一个子树，那么这次操作就抵消了。<br>对于每一个节点，将它每一个子树的大小计为 $ a_i $ ，然后每次选择 $ a_x, a_y ( a_x &gt; 0, a_y &gt; 0 ) $ ，使 $ –a_x, –a_y $ ，使 $ \sum{a_i} $ 最小。最后有两种情况：  </p>
-<ol>
-<li>当 $ Max ( a_i ) \times 2 &gt;= \sum{a_i} $ ，则该节点子树贡献为 $ Max ( a_i ) \times 2 - \sum{a_i} $ 。  </li>
-<li>否则每次去两个最大值消耗，该节点子树贡献为 $ ( \sum{a_i} ) \mod 2 $ 。  </li>
-</ol>
-<p>然后就可以在节点不同的儿子中内部抵消，就可以进行树形 DP ，记录一个节点儿子子树消耗后最大值、次大值以及该点子树消耗后的权值。<br>询问所有点则可以用用类似换根 DP 的方法。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fst first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> snd second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100010</span>, INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> W, T;</span><br><span class="line"><span class="keyword">int</span> n, ans[N], dep[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; e[N];</span><br><span class="line">pii f[<span class="number">2</span>][N], a[N];</span><br><span class="line"><span class="comment">// f[0][x] &gt; f[1][x]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">Max</span><span class="params">(<span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> T &amp;y)</span> </span>&#123; <span class="keyword">return</span> x &gt; y ? x : y; &#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> pii &amp;x, <span class="keyword">const</span> pii &amp;y) &#123;</span><br><span class="line">	<span class="keyword">return</span> x.fst == y.fst ? x.snd &gt; y.snd : x.fst &lt; y.fst;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> ff)</span> </span>&#123;</span><br><span class="line">	a[u].fst = <span class="number">1</span>, dep[u] = dep[ff] + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(v ^ ff) &#123;</span><br><span class="line">		dfs1(v, u), a[u].fst += a[v].fst;</span><br><span class="line">		<span class="keyword">if</span>(f[<span class="number">1</span>][u] &lt; a[v]) f[<span class="number">1</span>][u] = a[v];</span><br><span class="line">		<span class="keyword">if</span>(f[<span class="number">1</span>][u] &gt; f[<span class="number">0</span>][u]) swap(f[<span class="number">1</span>][u], f[<span class="number">0</span>][u]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(f[<span class="number">0</span>][u].fst) &#123;</span><br><span class="line">		<span class="keyword">if</span>(a[u].fst - f[<span class="number">0</span>][u].fst - <span class="number">1</span> &gt;= f[<span class="number">0</span>][u].snd + <span class="number">1</span>)</span><br><span class="line">			a[u].snd = (a[u].fst - <span class="number">1</span>) &amp; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> a[u].snd = f[<span class="number">0</span>][u].snd + <span class="number">1</span> - (a[u].fst - f[<span class="number">0</span>][u].fst - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> a[u].snd = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> ff, pii x)</span> </span>&#123;</span><br><span class="line">	pii U = Max(x, f[<span class="number">0</span>][u]); <span class="keyword">int</span> sz = n - dep[u] + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(U.fst) &#123;</span><br><span class="line">		<span class="keyword">if</span>(sz - U.fst - <span class="number">1</span> &gt;= U.snd + <span class="number">1</span>) ans[u] = (sz - <span class="number">1</span>) &amp; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> ans[u] = U.snd + <span class="number">1</span> - (sz - U.fst - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(v ^ ff) &#123;</span><br><span class="line">		<span class="keyword">if</span>(f[<span class="number">0</span>][u] == a[v]) dfs2(v, u, Max(x, f[<span class="number">1</span>][u]));</span><br><span class="line">		<span class="keyword">else</span> dfs2(v, u, Max(x, f[<span class="number">0</span>][u]));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;W, &amp;T);</span><br><span class="line">	<span class="keyword">for</span>(; T; --T) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			e[i].clear(), f[<span class="number">0</span>][i] = f[<span class="number">1</span>][i] = a[i] = mp(<span class="number">0</span>, INF);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, x, y; i &lt; n; i++)</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y), e[x].pb(y), e[y].pb(x);</span><br><span class="line">		dfs1(<span class="number">1</span>, <span class="number">0</span>), dfs2(<span class="number">1</span>, <span class="number">0</span>, mp(<span class="number">0</span>, INF));</span><br><span class="line">		<span class="keyword">if</span>(W == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">"%d"</span>, ans[<span class="number">1</span>] == <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">"%d"</span>, ans[i] == <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>DAY1 完挂。。。<br>难受，根本翻不了盘，付出再多，最后还是功亏一篑，离一等只有第一天的第一题。如果只是三等奖那也就死心了。出发前种下满满的希望，最后收获沉甸甸的绝望。。。<br>明年就高一了，再也没有年级优势，得奖更难了。。。<br>机会越来越少了，感觉水平还是一年前。。。<br>平时也不熬夜打比赛，导致了比赛发挥不稳定。。。<br>最后配图：<br><img src="https://cdn.luogu.org/upload/pic/59546.png" alt="sayaka">  </p>
 
       
     </div>
@@ -435,7 +431,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DP/" rel="tag"># DP</a>
+            <a href="/tags/游记/" rel="tag"># 游记</a>
           
         </div>
       
@@ -448,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/Codeforces-1109F-Sasha-and-Algorithm-of-Silence's-Sounds/" rel="next" title="【Codeforces 1109F】 Sasha and Algorithm of Silence's Sounds">
-                <i class="fa fa-chevron-left"></i> 【Codeforces 1109F】 Sasha and Algorithm of Silence's Sounds
+              <a href="/2019/05/23/codeplus-2018-4-yue-sai-zu-he-shu-wen-ti-2/" rel="next" title="【CodePlus 2018 4 月赛】组合数问题 2">
+                <i class="fa fa-chevron-left"></i> 【CodePlus 2018 4 月赛】组合数问题 2
               </a>
             
           </div>
@@ -457,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/21/ZJOI2012-xiao-lan-de-hao-you/" rel="prev" title="【ZJOI2012】小蓝的好友">
-                【ZJOI2012】小蓝的好友 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -505,17 +497,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -606,23 +589,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#做法"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
