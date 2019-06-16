@@ -410,7 +410,7 @@
 <hr>
 <h3 id="【CF235D】Graph-Game"><a href="#【CF235D】Graph-Game" class="headerlink" title="【CF235D】Graph Game"></a>【CF235D】Graph Game</h3><p><a href="http://codeforces.com/problemset/problem/235/D" target="_blank" rel="noopener">【CF235D】Graph Game</a><br>设 $ f[i][j] $ 为 $ i $ 被选为分治点时与 $ j $ 连通的概率，则 $ Ans = \sum {f[i][j]} $ 。<br>对于一棵树， $ f[i][j] = \frac{1}{dist(i, j)} $ ，即 $ i $ ，即 $ i $ 为 $ i $ 到 $ j $ 第一个选择的点。<br>然而这是一颗基环树。对于不经过环的点对，则 $ f[i][j] = \frac{1}{dist(i, j)} $ ，适用。否则设将环分成长度为 $ x, y $ 的两部分，通过容斥可以得出 $ f[i][j] = \frac{1}{dist(i, j) + x} + \frac{1}{dist(i, j) + y} - \frac{1}{dist(i, j) + x + y} $ 。<br>暴力枚举根，然后暴力 $ dfs $ ，复杂度 $ O(n^2) $。<br><a href="http://codeforces.com/contest/235/submission/53661120" target="_blank" rel="noopener">Code</a>  </p>
 <hr>
-<h3 id="【CF1088F】Ehab-and-a-weird-weight-formula"><a href="#【CF1088F】Ehab-and-a-weird-weight-formula" class="headerlink" title="【CF1088F】Ehab and a weird weight formula"></a>【CF1088F】Ehab and a weird weight formula</h3><p><a href="http://codeforces.com/problemset/problem/1088/F" target="_blank" rel="noopener">【CF1088F】Ehab and a weird weight formula</a><br>将点的代价转为边的代价，则边的代价为 $ \lceil\log<em>2{dist(x, y)}\rceil \times \min(v_x, v_y) + v_x + v_y $ 。<br>考虑将点权最小的点作为根，存在结论 $ v_u &gt; v</em>{fa[u]} (u \neq root) $ 。证明即若存在一个儿子节点权值比当前节点小，则这个儿子节点的某个儿子权值比这个儿子节点还小，最后的叶子节点会很尴尬。<br>如此边权计算中的 $ \min $ 也可去掉。<br>那显然改造过的树每个节点的新父亲要么是根，要么是第 $ 2^k $ 个祖先。暴力 $ dfs $ 并找祖先，时间复杂度 $ O(n \log n) $ 。<br><a href="http://codeforces.com/contest/1088/submission/53701616" target="_blank" rel="noopener">Code</a>  </p>
+<h3 id="【CF1088F】Ehab-and-a-weird-weight-formula"><a href="#【CF1088F】Ehab-and-a-weird-weight-formula" class="headerlink" title="【CF1088F】Ehab and a weird weight formula"></a>【CF1088F】Ehab and a weird weight formula</h3><p><a href="http://codeforces.com/problemset/problem/1088/F" target="_blank" rel="noopener">【CF1088F】Ehab and a weird weight formula</a><br>将点的代价转为边的代价，则边的代价为 $ \lceil\log_2{dist(x, y)}\rceil \times \min(v_x, v_y) + v_x + v_y $ 。<br>考虑将点权最小的点作为根，存在结论 $ v_u &gt; v_{fa[u]} (u \neq root) $ 。证明即若存在一个儿子节点权值比当前节点小，则这个儿子节点的某个儿子权值比这个儿子节点还小，最后的叶子节点会很尴尬。<br>如此边权计算中的 $ \min $ 也可去掉。<br>那显然改造过的树每个节点的新父亲要么是根，要么是第 $ 2^k $ 个祖先。暴力 $ dfs $ 并找祖先，时间复杂度 $ O(n \log n) $ 。<br><a href="http://codeforces.com/contest/1088/submission/53701616" target="_blank" rel="noopener">Code</a>  </p>
 <hr>
 <h3 id="【CF1110G】Tree-Tac-Toe"><a href="#【CF1110G】Tree-Tac-Toe" class="headerlink" title="【CF1110G】Tree-Tac-Toe"></a>【CF1110G】Tree-Tac-Toe</h3><p><a href="http://codeforces.com/problemset/problem/1110/G" target="_blank" rel="noopener">【CF1110G】Tree-Tac-Toe</a><br>黑方根本不可能赢。<br>如果有一个点度大于3或度为3且有其中两个儿子度大于1则白方赢。<br>如果有白点，相当于存在一个度为3的点连向这个点（没有颜色）。<br>特判一种像骨头然后中间有奇数个点的情况，这种情况白方赢。<br>否则平局。<br><a href="http://codeforces.com/contest/1110/submission/53707943" target="_blank" rel="noopener">Code</a>  </p>
 <hr>
@@ -428,7 +428,7 @@
 <hr>
 <h3 id="【CF587F】Duff-is-Mad"><a href="#【CF587F】Duff-is-Mad" class="headerlink" title="【CF587F】Duff is Mad"></a>【CF587F】Duff is Mad</h3><p><a href="http://codeforces.com/problemset/problem/587/F" target="_blank" rel="noopener">【CF587F】Duff is Mad</a><br>建出AC自动机的fail树，一个节点的祖先是这个节点表示的串的后缀。<br>存在两种暴力：  </p>
 <ol>
-<li>将 $ s<em>k $ 每个位置打上标记，然后对于 $ s</em>{1 \dots n} $ 询问 $ endpos $ 的子树中有多少个标记。  </li>
+<li>将 $ s_k $ 每个位置打上标记，然后对于 $ s_{1 \dots n} $ 询问 $ endpos $ 的子树中有多少个标记。  </li>
 <li>先将询问作前缀和差分处理，将 $ s_{1 \dots n} $ 逐个将 $ endpos $ 对应子树加上区间标记，对于每一个询问串，计算每一个前缀对应在fail树上的位置上标记个数之和。  </li>
 </ol>
 <p>由于长度不小于 $ \sqrt{n} $ 的串至多有 $ \sqrt{n} $ 个，所以对于长度不小于 $ \sqrt{n} $ 的串用第一种暴力，否则用第二种暴力。<br>由于询问次数远大于修改次数，所以用分块维护前缀和即可。<br><a href="http://codeforces.com/contest/504/submission/53850414" target="_blank" rel="noopener">Code</a></p>
@@ -439,7 +439,7 @@
 <hr>
 <h3 id="【CF771E】Bear-and-Rectangle-Strips"><a href="#【CF771E】Bear-and-Rectangle-Strips" class="headerlink" title="【CF771E】Bear and Rectangle Strips"></a>【CF771E】Bear and Rectangle Strips</h3><p><a href="http://codeforces.com/problemset/problem/771/E" target="_blank" rel="noopener">【CF771E】Bear and Rectangle Strips</a><br>由于只有两列，我们可以用map找到第一列、第二列以及两列合在一起的矩形合法的左端点最靠右的位置。<br>设 $ dp[i] $ 表示前 $ i $ 列最多有几个矩形，通过记忆化搜索完成DP即可通过此题。<br><a href="http://codeforces.com/contest/771/submission/53897846" target="_blank" rel="noopener">Code</a>  </p>
 <hr>
-<h3 id="【CF1063F】String-Journey"><a href="#【CF1063F】String-Journey" class="headerlink" title="【CF1063F】String Journey"></a>【CF1063F】String Journey</h3><p><a href="http://codeforces.com/problemset/problem/1063/F" target="_blank" rel="noopener">【CF1063F】String Journey</a><br><a href="https://www.cnblogs.com/ywwyww/p/9789607.html" target="_blank" rel="noopener">这里有各种做法</a><br>有一种 $ O(n \sqrt{n}) $ 的做法。考虑存在一种方案， $ |t<em>1| = |t_2| + 1 $ ，即 $ t_1 $ 去掉开头或去掉结尾一个字符得到 $ t_2 $ 。<br>枚举长度从后向前枚举串，用哈希值比较后面是否存在一个符合条件的 $ t</em>{i + 1} $ （ $ f<em>i = f</em>{i + 1} + 1 $ ， $ lcp(t<em>i, t</em>{i + 1}) = |t<em>{i + 1}| $ 或 $ lcs(t_i, t</em>{i + 1}) = |t_{i + 1}| $ ）。<br><a href="http://codeforces.com/contest/1063/submission/53903412" target="_blank" rel="noopener">Code</a>  </p>
+<h3 id="【CF1063F】String-Journey"><a href="#【CF1063F】String-Journey" class="headerlink" title="【CF1063F】String Journey"></a>【CF1063F】String Journey</h3><p><a href="http://codeforces.com/problemset/problem/1063/F" target="_blank" rel="noopener">【CF1063F】String Journey</a><br><a href="https://www.cnblogs.com/ywwyww/p/9789607.html" target="_blank" rel="noopener">这里有各种做法</a><br>有一种 $ O(n \sqrt{n}) $ 的做法。考虑存在一种方案， $ |t_1| = |t_2| + 1 $ ，即 $ t_1 $ 去掉开头或去掉结尾一个字符得到 $ t_2 $ 。<br>枚举长度从后向前枚举串，用哈希值比较后面是否存在一个符合条件的 $ t_{i + 1} $ （ $ f_i = f_{i + 1} + 1 $ ， $ lcp(t_i, t_{i + 1}) = |t_{i + 1}| $ 或 $ lcs(t_i, t_{i + 1}) = |t_{i + 1}| $ ）。<br><a href="http://codeforces.com/contest/1063/submission/53903412" target="_blank" rel="noopener">Code</a>  </p>
 <hr>
 <h3 id="【CF1103D】Professional-layer"><a href="#【CF1103D】Professional-layer" class="headerlink" title="【CF1103D】Professional layer"></a>【CF1103D】Professional layer</h3><p><a href="http://codeforces.com/problemset/problem/1103/D" target="_blank" rel="noopener">【CF1103D】Professional layer</a><br>考虑真正有用的素因数是所有数的 $ \gcd $ 所包含的素因数。显然这样的素因数不会超过 $ 12 $ 个。<br>考虑每多选出一个数，素因数个数会至少减一，所以做多选 $ 12 $ 个数。<br>考虑一个数包含 $ \gcd $ 的多少（设为 $ d $ ），对于同样一个 $ d $ ，显然会贪心地取前 $ 12 $ 个。<br>状压DP维护选了几个数、还有那些素数没被去掉的最小代价。<br><a href="http://codeforces.com/contest/1103/submission/53956168" target="_blank" rel="noopener">Code</a>  </p>
 <hr>
@@ -563,7 +563,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
