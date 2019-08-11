@@ -96,20 +96,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="daniel14311531&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/平衡树/index.html">
+  <meta name="description" content="https://loj.ac/problem/2391">
+<meta name="keywords" content="DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「JOISC 2017 Day 1」港口设施">
+<meta property="og:url" content="http://yoursite.com/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/index.html">
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
+<meta property="og:description" content="https://loj.ac/problem/2391">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-11T05:59:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="daniel14311531&#39;s blog">
+<meta name="twitter:title" content="「JOISC 2017 Day 1」港口设施">
+<meta name="twitter:description" content="https://loj.ac/problem/2391">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/平衡树/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/">
 
 
 
@@ -119,7 +124,7 @@
   };
 </script>
 
-  <title>标签: 平衡树 | daniel14311531's blog</title>
+  <title>「JOISC 2017 Day 1」港口设施 | daniel14311531's blog</title>
   
 
 
@@ -167,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -226,7 +231,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -285,76 +290,181 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>平衡树<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daniel14311531">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="daniel14311531's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/05/21/APIO2018-xin-jia/" itemprop="url">
-            
-              <span itemprop="name">【APIO2018】新家</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">「JOISC 2017 Day 1」港口设施
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-21T22:26:56+08:00" content="2019-05-21">
-          05-21
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-11 13:59:28 / 修改时间：13:59:04" itemprop="dateCreated datePublished" datetime="2019-08-11T13:59:28+08:00">2019-08-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">https://loj.ac/problem/2391</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>  
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2391" target="_blank" rel="noopener">「JOISC 2017 Day 1」港口设施</a>  </p>
+<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>考虑两个箱子如果进出栈时间呈<strong>嵌套关系</strong>，则这两个箱子就<strong>不能</strong>在同一个栈中。<br>考虑对于这种嵌套关系的两个箱子连一条边，最后的图中的二分图的方案数即总方案数。<br>如果暴力连边，那么边数可达 $ n^2 $ 个，显然过不去。<br>观察我们目前的连边方案：对于一个物品 $ u $ ，它会和之前物品序列中一段连续的物品 $ v1, v2, \dots, vk $ 连边。此时 $ v1, v2, \dots, vk $ 都是<strong>连通且同色</strong>的。<br>那么如果下一轮的连边的范围和 $ v1, v2, \dots, vk $ 有交，那么由连通性，这些边其实只连一条就够了。<br>具体地，对于每个左端点，我们对其维护一个 $ nxt $ ，表示如果现在再对它进行连边，应该跳到哪里。这样连边的数量就会减少很多，且不改变二分性和连通性。<br>最后 $ dfs $ 染色即可。时间复杂度 $ O(n \log n) $ 。  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, b) for(int i = (a); i &lt;= (b); i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> per(i, a, b) for(int i = (a); i &gt;= (b); i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2000010</span>;</span><br><span class="line"><span class="keyword">int</span> n, a[N], b[N], ar[N], ans = <span class="number">1</span>, fa1[N], fa2[N], nxt[N];</span><br><span class="line"><span class="keyword">int</span> clr[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; e[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> *fa, <span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> fa[x] == x ? x : fa[x] = find(fa, fa[x]); &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">		<span class="keyword">if</span>(clr[v] == <span class="number">-1</span>) clr[v] = clr[u] ^ <span class="number">1</span>, dfs(v);</span><br><span class="line">		<span class="keyword">if</span>(clr[v] == clr[u]) &#123; <span class="built_in">puts</span>(<span class="string">"0"</span>); <span class="built_in">exit</span>(<span class="number">0</span>); &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n), ans = <span class="number">1</span>;</span><br><span class="line">	rep(i, <span class="number">1</span>, n + n + <span class="number">1</span>) fa1[i] = fa2[i] = i;</span><br><span class="line">	rep(i, <span class="number">1</span>, n) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a[i], &amp;b[i]), clr[i] = <span class="number">-1</span>;</span><br><span class="line">		ar[a[i]] = ar[b[i]] = i, fa1[b[i]] = b[i] + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, n + n) <span class="keyword">if</span>(b[ar[i]] == i) &#123;</span><br><span class="line">		<span class="keyword">int</span> lst = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = find(fa1, a[ar[i]] + <span class="number">1</span>); j &lt;= i; j = find(fa1, j + <span class="number">1</span>)) &#123;</span><br><span class="line">			j = find(fa2, j), e[ar[i]].pb(ar[j]), e[ar[j]].pb(ar[i]);</span><br><span class="line">			<span class="keyword">if</span>(lst) fa2[lst] = j; lst = j;</span><br><span class="line">		&#125;</span><br><span class="line">		fa1[a[ar[i]]] = a[ar[i]] + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, n) <span class="keyword">if</span>(clr[i] == <span class="number">-1</span>) clr[i] = <span class="number">0</span>, dfs(i), ans = ans * <span class="number">2</span> % mod;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DP/" rel="tag"># DP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/APIO2019-qiao-liang/" rel="next" title="【APIO2019】桥梁">
+                <i class="fa fa-chevron-left"></i> 【APIO2019】桥梁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -375,8 +485,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -479,6 +598,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#做法"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -610,6 +746,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
