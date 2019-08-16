@@ -395,7 +395,7 @@
       
         <a id="more"></a>  
 <h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2330" target="_blank" rel="noopener">「清华集训 2017」榕树之心</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>考虑只询问 $ 1 $ 号节点怎么做。假如我们选择一个子树然后再选择另一个子树，那么这次操作就抵消了。<br>对于每一个节点，将它每一个子树的大小计为 $ a_i $ ，然后每次选择 $ a_x, a_y ( a_x &gt; 0, a_y &gt; 0 ) $ ，使 $ –a_x, –a_y $ ，使 $ \sum{a_i} $ 最小。最后有两种情况：  </p>
+<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>考虑只询问 $ 1 $ 号节点怎么做。假如我们选择一个子树然后再选择另一个子树，那么这次操作就抵消了。<br>对于每一个节点，将它每一个子树的大小计为 $ a_i $ ，然后每次选择 $ a_x, a_y ( a_x &gt; 0, a_y &gt; 0 ) $ ，使 $ —a_x, —a_y $ ，使 $ \sum{a_i} $ 最小。最后有两种情况：  </p>
 <ol>
 <li>当 $ Max ( a_i ) \times 2 &gt;= \sum{a_i} $ ，则该节点子树贡献为 $ Max ( a_i ) \times 2 - \sum{a_i} $ 。  </li>
 <li>否则每次去两个最大值消耗，该节点子树贡献为 $ ( \sum{a_i} ) \mod 2 $ 。  </li>
@@ -521,7 +521,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
