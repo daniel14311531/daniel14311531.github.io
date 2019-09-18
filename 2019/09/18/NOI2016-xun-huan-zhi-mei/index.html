@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="https://loj.ac/problem/573">
+  <meta name="description" content="https://loj.ac/problem/2085">
 <meta name="keywords" content="数论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【libreoj573】单枪匹马">
-<meta property="og:url" content="http://yoursite.com/2019/07/08/【libreoj573】dan-qiang-pi-ma/index.html">
+<meta property="og:title" content="「NOI2016」循环之美">
+<meta property="og:url" content="http://yoursite.com/2019/09/18/NOI2016-xun-huan-zhi-mei/index.html">
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
-<meta property="og:description" content="https://loj.ac/problem/573">
+<meta property="og:description" content="https://loj.ac/problem/2085">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-08T11:20:21.334Z">
+<meta property="og:updated_time" content="2019-09-18T07:20:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【libreoj573】单枪匹马">
-<meta name="twitter:description" content="https://loj.ac/problem/573">
+<meta name="twitter:title" content="「NOI2016」循环之美">
+<meta name="twitter:description" content="https://loj.ac/problem/2085">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/08/【libreoj573】dan-qiang-pi-ma/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/18/NOI2016-xun-huan-zhi-mei/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>【libreoj573】单枪匹马 | daniel14311531's blog</title>
+  <title>「NOI2016」循环之美 | daniel14311531's blog</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/【libreoj573】dan-qiang-pi-ma/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/18/NOI2016-xun-huan-zhi-mei/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daniel14311531">
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【libreoj573】单枪匹马
+          <h1 class="post-title" itemprop="name headline">「NOI2016」循环之美
 
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2019-07-08 19:16:02 / 修改时间：19:20:21" itemprop="dateCreated datePublished" datetime="2019-07-08T19:16:02+08:00">2019-07-08</time>
+              <time title="创建时间：2019-09-18 15:21:22 / 修改时间：15:20:56" itemprop="dateCreated datePublished" datetime="2019-09-18T15:21:22+08:00">2019-09-18</time>
             
 
             
@@ -377,7 +377,7 @@
           
 
           
-              <div class="post-description">https://loj.ac/problem/573</div>
+              <div class="post-description">https://loj.ac/problem/2085</div>
           
 
         </div>
@@ -394,39 +394,26 @@
 
       
         <a id="more"></a>  
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/573" target="_blank" rel="noopener">【libreoj573】单枪匹马</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>可以证明直接计算不需要约分，可以直接取模。<br>证明：若 $ \frac{x}{y} $ 中 $ x, y $ 互质，则 $ a + \frac{x}{y} = \frac{ay + x}{y} $ 中 $ ay + x, y $ 互质（考虑辗转相除法中 <code>gcd(X, Y) = gcd(Y, X % Y) (Y = y, X = ax + y)</code> ）。<br>这样可以得到 $ 35 pts $ 。<br>设 $ f[a_0 \dots a_n] = \frac{x[a_0 \dots a_n]}{y[a_0 \dots a_n]} $ ，则：  </p>
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2085" target="_blank" rel="noopener">「NOI2016」循环之美</a>  </p>
+<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>设 $ k $ 进制下循环位数为 $ a $ ，则 $ xk^a \equiv x (\mod y) $ ，即 $ k^a \equiv 1 (\mod y) $ ，则 $ \gcd(k, y) = 1 $ 。  </p>
 <script type="math/tex; mode=display">
-\frac{x[a_0 \dots a_n]}{y[a_0 \dots a_n]} = a_0 + \frac{y[a_1 \dots a_n]}{x[a_1 \dots a_n]} = \frac{y[a_1 \dots a_n] + a_0 x[a_1 \dots a_n]}{x[a_1 \dots a_n]}</script><p>由于这些都是最简分数，所以：  </p>
+Ans = \sum_{i = 1}^{n}\sum_{j = 1}^{m}[(i, j) = 1][(j, k) = 1]\\\\
+ = \sum_{j = 1}^{m}[(j, k) = 1]\sum_{i = 1}^{n}[(i, j) = 1]\\\\
+ = \sum_{j = 1}^{m}[(j, k) = 1]\sum_{i = 1}^{n}\sum_{d | (i, j)}\mu(d)\\\\
+ = \sum_{j = 1}^{m}[(j, k) = 1]\sum_{d | j}\mu(d)\lfloor \frac{n}{d} \rfloor\\\\
+ = \sum_{d = 1}^{\min(n, m)}\mu(d)\lfloor\frac{n}{d}\rfloor[(d, k) = 1]\sum_{j = 1}^{\lfloor \frac{m}{d} \rfloor} [(j, k) = 1]\\\\
+ = \sum_{d = 1}^{\min(n, m)}\mu(d)\lfloor\frac{n}{d}\rfloor[(d, k) = 1]\sum_{j = 1}^{\lfloor \frac{m}{d} \rfloor} \sum_{i | (j, k)} \mu(i)\\\\
+ = \sum_{d = 1}^{\min(n, m)}\mu(d)\lfloor\frac{n}{d}\rfloor[(d, k) = 1]\sum_{i| k} \lfloor \frac{m}{id} \rfloor .\\\\
+f(n) = \sum_{i| k} \lfloor \frac{m}{i} \rfloor ,\\\\
+Ans = \sum_{d = 1}^{\min(n, m)}\mu(d)\lfloor\frac{n}{d}\rfloor[(d, k) = 1] f(\lfloor \frac{m}{d} \rfloor)</script><p>$ f(n) $ 可以枚举 $ k $ 的因数（$ k $ 很小）。<br>其中 $ \lfloor\frac{m}{d}\rfloor $ 和 $ \lfloor\frac{n}{d}\rfloor $ 可以整除分块。  </p>
 <script type="math/tex; mode=display">
-x[a_0 \dots a_n] = y[a_1 \dots a_n] + a_0x[a_1 \dots a_n]\\\\
-y[a_0 \dots a_n] = x[a_1 \dots a_n]</script><p>可以得到：  </p>
-<script type="math/tex; mode=display">
-x[a_0 \dots a_n] = x[a_2 \dots a_n] + a_0x[a_1 \dots a_n]\\\\
-y[a_0 \dots a_n] = y[a_2 \dots a_n] + a_0y[a_1 \dots a_n]</script><p>考虑在图上的意义。在一个由 $ n $ 个节点的有向图，$ i $ 向 $ i + 1 $ 连边权为 $ a_i $ 的边，向 $ i + 2 $ 连边权为 $ 1 $ 的边。最后的值为 $ 1 $ 到 $ n $ 的路径边权乘积之和。显然这些边可以反向。可以得到：  </p>
-<script type="math/tex; mode=display">
-x[a_0 \dots a_n] = a_nx[a_0 \dots a_{n-1}] + x[a_0 \dots a_{n - 2}]\\\\
-y[a_0 \dots a_n] = a_ny[a_0 \dots a_{n-1}] + y[a_0 \dots a_{n - 2}]</script><p>然后这个东西可以矩阵转移。  </p>
-<script type="math/tex; mode=display">
-A_i = \left[
-\begin{matrix}
-a_i&1\\\\
-1&0
-\end{matrix}
-\right],
-inv_i = \left[
-\begin{matrix}
-0&1\\\\
-1&mod - a_i
-\end{matrix}
-\right]\\\\
-\left[
-\begin{matrix}
-ansx\\\\
-ansy
-\end{matrix}
-\right] = \prod_{i = l}^{r} A_i = (\prod_{i = 1}^{r}A_i) \times (\prod_{i = 1}^{l - 1}inv_i)</script><p>维护前缀积即可。<br>时间复杂度 $ O(n + m) $ （矩阵乘法常数堪比一个 $ \log $ ） 。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fst first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> snd second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000010</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, type, ansx, ansy;</span><br><span class="line"><span class="keyword">int</span> a[N], len;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x, <span class="keyword">const</span> <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x + y &lt; mod ? x + y : x + y - mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sub</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x, <span class="keyword">const</span> <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x - y &lt; <span class="number">0</span> ? x - y + mod : x - y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x, <span class="keyword">const</span> <span class="keyword">int</span> &amp;y)</span> </span>&#123; <span class="keyword">return</span> (<span class="keyword">int</span>)((ll)x * y % mod); &#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">mtrx</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">2</span>][<span class="number">2</span>]; mtrx() &#123; <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a)); &#125;</span><br><span class="line">	<span class="keyword">inline</span> mtrx <span class="keyword">operator</span>*(<span class="keyword">const</span> mtrx &amp;yy)<span class="keyword">const</span> &#123;</span><br><span class="line">		mtrx res = mtrx();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">				res.a[i][j] = add(res.a[i][j], mul(a[i][k], yy.a[k][j]));</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;; mtrx sum[N], inv[N], ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	++len; mtrx mu; mu.a[<span class="number">1</span>][<span class="number">0</span>] = mu.a[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	mu.a[<span class="number">0</span>][<span class="number">0</span>] = x, sum[len] = sum[len - <span class="number">1</span>] * mu;</span><br><span class="line">	mu.a[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>, mu.a[<span class="number">1</span>][<span class="number">1</span>] = sub(<span class="number">0</span>, x), inv[len] = mu * inv[len - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;type);</span><br><span class="line">	sum[<span class="number">0</span>].a[<span class="number">0</span>][<span class="number">0</span>] = sum[<span class="number">0</span>].a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	inv[<span class="number">0</span>].a[<span class="number">0</span>][<span class="number">0</span>] = inv[<span class="number">0</span>].a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, x; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x), insert(x);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> opt, x, y; m; --m) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;opt);</span><br><span class="line">		<span class="keyword">if</span>(opt == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x); <span class="keyword">if</span>(type) x = x ^ ansx ^ ansy;</span><br><span class="line">			insert(x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">			<span class="keyword">if</span>(type) x = x ^ ansx ^ ansy, y = y ^ ansx ^ ansy;</span><br><span class="line">			ans = inv[x - <span class="number">1</span>] * sum[y];</span><br><span class="line">			ansx = ans.a[<span class="number">0</span>][<span class="number">0</span>], ansy = ans.a[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, ansx, ansy);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+g(n, k) = \sum_{i = 1}^{n}\mu(i)[(i, k) = 1]\\\\
+ = \sum_{i = 1}^{n}\mu(i)\sum_{j | (i, k)}\mu(j)\\\\
+ = \sum_{i = 1}^{n}\sum_{j | (i, k)}\mu(i)\mu(j)\\\\
+ = \sum_{j | k}\mu(j)\sum_{i = 1}^{\lfloor\frac{n}{j}\rfloor}\mu(ij)\\\\
+ = \sum_{j | k}\mu(j)\sum_{i = 1}^{\lfloor\frac{n}{j}\rfloor}\mu(ij)[(i, j) = 1]\\\\
+ = \sum_{j | k}\mu^2(j)\sum_{i = 1}^{\lfloor\frac{n}{j}\rfloor}\mu(i)[(i, j) = 1]\\\\
+ = \sum_{j | k}\mu^2(j)g(\lfloor\frac{n}{j}\rfloor, j) .</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, b) for(int i = (a); i &lt;= (b); i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> per(i, a, b) for(int i = (a); i &gt;= (b); i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fst first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> snd second</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5000010</span>;</span><br><span class="line">ll n, m, k, d[N], ans = <span class="number">0</span>; <span class="keyword">int</span> ld = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; fac[<span class="number">2010</span>];</span><br><span class="line">ll mu[N], smu[N]; <span class="keyword">int</span> p[N], lp = <span class="number">0</span>; <span class="keyword">bool</span> pri[N];</span><br><span class="line"><span class="built_in">map</span>&lt;ll, ll&gt; Smu, F[<span class="number">2010</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">gi</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	x = <span class="number">0</span>; <span class="keyword">register</span> <span class="keyword">char</span> c = getchar(), pre = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(; c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span>; pre = c, c = getchar());</span><br><span class="line">	<span class="keyword">for</span>(; c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>; c = getchar()) x = x * <span class="number">10l</span>l + (c ^ <span class="number">48</span>);</span><br><span class="line">	<span class="keyword">if</span>(pre == <span class="string">'-'</span>) x = -x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">gcd</span><span class="params">(ll x, ll y)</span> </span>&#123; <span class="keyword">return</span> y ? gcd(y, x % y) : x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Sieve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	mu[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	rep(i, <span class="number">2</span>, N - <span class="number">10</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span>(!pri[i]) p[++lp] = i, mu[i] = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; p[j] * i &lt;= N - <span class="number">10</span>; ++j) &#123;</span><br><span class="line">			pri[p[j] * i] = <span class="number">1</span>; <span class="keyword">if</span>(i % p[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">			mu[p[j] * i] = -mu[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, N - <span class="number">10</span>) smu[i] = smu[i - <span class="number">1</span>] + mu[i];</span><br><span class="line">	rep(i, <span class="number">1</span>, k) <span class="keyword">if</span>(k % i == <span class="number">0</span>) d[++ld] = i;</span><br><span class="line">	rep(i, <span class="number">1</span>, <span class="number">2000</span>) rep(j, <span class="number">1</span>, i) <span class="keyword">if</span>(i % j == <span class="number">0</span>) fac[i].pb(j);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(ll x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x &lt;= N - <span class="number">10</span>) <span class="keyword">return</span> smu[x]; <span class="keyword">if</span>(Smu.count(x)) <span class="keyword">return</span> Smu[x];</span><br><span class="line">	ll sum = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll l = <span class="number">2</span>, r; l &lt;= x; l = r + <span class="number">1</span>) r = x / (x / l), sum -= (r - l + <span class="number">1</span>) * calc(x / l);</span><br><span class="line">	<span class="keyword">return</span> Smu[x] = sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x &lt; <span class="number">2</span>) <span class="keyword">return</span> x; <span class="keyword">if</span>(y == <span class="number">1</span>) <span class="keyword">return</span> calc(x);</span><br><span class="line">	<span class="keyword">if</span>(F[y].count(x)) <span class="keyword">return</span> F[y][x];</span><br><span class="line">	ll sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> v : fac[y]) <span class="keyword">if</span>(mu[v]) sum += f(x / v, v);</span><br><span class="line">	<span class="keyword">return</span> F[y][x] = sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	gi(n), gi(m), gi(k), Sieve();</span><br><span class="line">	<span class="keyword">for</span>(ll l = <span class="number">1</span>, r, sum; l &lt;= min(n, m); l = r + <span class="number">1</span>) &#123;</span><br><span class="line">		r = min(n / (n / l), m / (m / l)), sum = <span class="number">0</span>;</span><br><span class="line">		rep(j, <span class="number">1</span>, ld) sum += mu[d[j]] * (m / l / d[j]); sum *= (n / l);</span><br><span class="line">		ans += sum * (f(r, k) - f(l - <span class="number">1</span>, k));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -462,8 +449,8 @@ ansy
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/05/luogu-chong-fan-xian-shi/" rel="next" title="【Luogu】重返现世">
-                <i class="fa fa-chevron-left"></i> 【Luogu】重返现世
+              <a href="/2019/09/05/ZJOI2015-huan-xiang-xiang-zhan-lue-you-xi/" rel="next" title="「ZJOI2015」幻想乡战略游戏">
+                <i class="fa fa-chevron-left"></i> 「ZJOI2015」幻想乡战略游戏
               </a>
             
           </div>
@@ -471,10 +458,6 @@ ansy
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/09/SAM-lian-xi-ti/" rel="prev" title="SAM练习题">
-                SAM练习题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
