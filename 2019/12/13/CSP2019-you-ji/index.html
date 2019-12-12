@@ -96,25 +96,27 @@
 
 
 
-  <meta name="description" content="https://loj.ac/problem/2398">
-<meta name="keywords" content="交互,二分">
+  <meta name="description" content="倒数第二条命。。。">
+<meta name="keywords" content="游记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「JOISC 2017 Day 3」自然公园">
-<meta property="og:url" content="http://yoursite.com/2019/08/13/JOISC-2017-Day-3-zi-ran-gong-yuan/index.html">
+<meta property="og:title" content="CSP2019 游记">
+<meta property="og:url" content="http://yoursite.com/2019/12/13/CSP2019-you-ji/index.html">
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
-<meta property="og:description" content="https://loj.ac/problem/2398">
+<meta property="og:description" content="倒数第二条命。。。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-13T09:14:09.759Z">
+<meta property="og:image" content="c:/Users/ycl/Desktop/图片/连个屁都不算.png">
+<meta property="og:updated_time" content="2019-12-12T23:35:02.688Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「JOISC 2017 Day 3」自然公园">
-<meta name="twitter:description" content="https://loj.ac/problem/2398">
+<meta name="twitter:title" content="CSP2019 游记">
+<meta name="twitter:description" content="倒数第二条命。。。">
+<meta name="twitter:image" content="c:/Users/ycl/Desktop/图片/连个屁都不算.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/13/JOISC-2017-Day-3-zi-ran-gong-yuan/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/13/CSP2019-you-ji/">
 
 
 
@@ -124,7 +126,7 @@
   };
 </script>
 
-  <title>「JOISC 2017 Day 3」自然公园 | daniel14311531's blog</title>
+  <title>CSP2019 游记 | daniel14311531's blog</title>
   
 
 
@@ -310,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/JOISC-2017-Day-3-zi-ran-gong-yuan/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/13/CSP2019-you-ji/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daniel14311531">
@@ -327,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">「JOISC 2017 Day 3」自然公园
+          <h1 class="post-title" itemprop="name headline">CSP2019 游记
 
               
             
@@ -353,7 +355,7 @@
                 
               
 
-              <time title="创建时间：2019-08-13 13:04:03 / 修改时间：17:14:09" itemprop="dateCreated datePublished" datetime="2019-08-13T13:04:03+08:00">2019-08-13</time>
+              <time title="创建时间：2019-12-13 07:34:32 / 修改时间：07:35:02" itemprop="dateCreated datePublished" datetime="2019-12-13T07:34:32+08:00">2019-12-13</time>
             
 
             
@@ -377,7 +379,7 @@
           
 
           
-              <div class="post-description">https://loj.ac/problem/2398</div>
+              <div class="post-description">倒数第二条命。。。</div>
           
 
         </div>
@@ -394,9 +396,8 @@
 
       
         <a id="more"></a>  
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2398" target="_blank" rel="noopener">「JOISC 2017 Day 3」自然公园</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>考虑链的情况，我们维护一条链 $ l \dots r $ ，每加入一个点 $ x $ ，可以直接判断是 $ x \dots l \dots r $ 或 $ l \dots r \dots x $ ，然后判断 $ x $ 和端点有没有直接的连边，如果有，连上，返回；否则二分出路径上编号最小的点，继续做下去。<br>对于树的情况，要把整个集合和连进来的点判断。<br>对于图的情况，每次发现当前点相邻的时候要二分出每条与集合相连的边，由于点的度数不超过 $ 7 $ ，所以能过。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"park.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, b) for(int i = (a); i &lt;= (b); i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> per(i, a, b) for(int i = (a); i &gt;= (b); i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MXN = <span class="number">4010</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Answer</span><span class="params">(<span class="keyword">int</span> A, <span class="keyword">int</span> B)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Ask</span><span class="params">(<span class="keyword">int</span> A, <span class="keyword">int</span> B, <span class="keyword">int</span> Place[])</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Sub3 &#123;</span><br><span class="line">	<span class="keyword">int</span> g[MXN], vis[MXN], used[MXN]; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; hv, e[MXN];</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> S, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G)</span> </span>&#123;</span><br><span class="line">		rep(i, <span class="number">0</span>, n - <span class="number">1</span>) g[i] = <span class="number">0</span>; <span class="keyword">for</span>(<span class="keyword">auto</span> v : G) g[v] = <span class="number">1</span>;</span><br><span class="line">		g[S] = <span class="number">1</span>; <span class="keyword">return</span> Ask(min(G[<span class="number">0</span>], S), max(G[<span class="number">0</span>], S), g);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> l = <span class="number">1</span>, r = n - <span class="number">2</span>, res = n - <span class="number">1</span>, mid;</span><br><span class="line">		<span class="keyword">for</span>(; l &lt;= r;) &#123;</span><br><span class="line">			mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">			rep(i, <span class="number">0</span>, mid) g[i] = (vis[i] != <span class="number">2</span>); rep(i, mid + <span class="number">1</span>, n - <span class="number">1</span>) g[i] = (vis[i] == <span class="number">1</span>);</span><br><span class="line">			g[x] = <span class="number">1</span>; <span class="keyword">if</span>(Ask(<span class="number">0</span>, x, g)) res = mid, r = mid - <span class="number">1</span>; <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;G)</span> </span>&#123; G.pb(u), used[u] = <span class="number">0</span>; <span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(used[v]) dfs(v, G); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Finde</span><span class="params">(<span class="keyword">int</span> x, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!check(x, G)) &#123; <span class="keyword">for</span>(<span class="keyword">auto</span> v : G) used[v] = <span class="number">0</span>; <span class="keyword">return</span> ; &#125;</span><br><span class="line">		<span class="keyword">int</span> l = <span class="number">0</span>, r = G.size() - <span class="number">2</span>, res = G.size() - <span class="number">1</span>, mid;</span><br><span class="line">		<span class="keyword">for</span>(; l &lt;= r;) &#123;</span><br><span class="line">			mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">			rep(i, <span class="number">0</span>, n - <span class="number">1</span>) g[i] = <span class="number">0</span>; rep(i, <span class="number">0</span>, mid) g[G[i]] = <span class="number">1</span>;</span><br><span class="line">			g[x] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(Ask(min(G[<span class="number">0</span>], x), max(G[<span class="number">0</span>], x), g)) res = mid, r = mid - <span class="number">1</span>; <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> u = G[res]; <span class="keyword">for</span>(<span class="keyword">auto</span> i : G) used[i] = <span class="number">1</span>; used[u] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(used[v]) &#123; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp;  dfs(v, tmp), Finde(x, tmp); &#125;</span><br><span class="line">		Answer(min(u, x), max(u, x)), e[u].pb(x), e[x].pb(u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">		vis[x] = <span class="number">2</span>; <span class="keyword">for</span>(; !check(x, hv); solve(Find(x)));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> v : hv) used[v] = <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp; dfs(<span class="number">0</span>, tmp), Finde(x, tmp), vis[x] = <span class="number">1</span>, hv.pb(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">MAIN</span><span class="params">()</span> </span>&#123; hv.pb(<span class="number">0</span>), vis[<span class="number">0</span>] = <span class="number">1</span>; rep(i, <span class="number">1</span>, n - <span class="number">1</span>) <span class="keyword">if</span>(!vis[i]) solve(i); &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Detect</span><span class="params">(<span class="keyword">int</span> T, <span class="keyword">int</span> NN)</span> </span>&#123;</span><br><span class="line">	n = NN;</span><br><span class="line">	Sub3::MAIN(); <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是高中倒数第二年的机会，天已入秋，一片片枯黄的叶离开了它的大树，我的时间也不多了。<br>经过一年的磨练，总想着 Day1 AK。。。<br>时间一分一秒地流过，赶 T3 的手不停地抖动。。。<br>来不及了。<br>冷汗直逼颈部，耳中回荡着不停滞的时间滴答声和追求满分的欲望，眼前的屏幕字符变成一团团扭动的蛆虫。<br>我试图上厕所冷静一下，可是小脑发晕，跌倒在路障上，精神如同粉尘一般湮没在空气中。<br>啊啊啊，这便是我的绝望啊！<br>冥冥中仿佛回到了机位前，不知谁的声音在呼唤。<br>“就这样放弃吗？”<br>“不。我还要写题。”<br>“那再给你最后一次机会吧。”<br>待我醒转过来，已经过了 5 分钟。<br>知道比赛结束，我最后一题一分未得，第二题还面临被卡常的风险。<br>真是不长记性啊。。。<br>时至今日，我经常在梦中看到自己FST，猛然惊醒，然而天未亮。<br>能够在黑暗中给予我安慰的，恐怕只有我自己了吧。<br><img src="C:\Users\ycl\Desktop\图片\连个屁都不算.png" alt="photo">  </p>
+
       
     </div>
 
@@ -419,9 +420,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/交互/" rel="tag"># 交互</a>
-          
-            <a href="/tags/二分/" rel="tag"># 二分</a>
+            <a href="/tags/游记/" rel="tag"># 游记</a>
           
         </div>
       
@@ -434,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/" rel="next" title="「JOISC 2017 Day 1」港口设施">
-                <i class="fa fa-chevron-left"></i> 「JOISC 2017 Day 1」港口设施
+              <a href="/2019/10/15/er-ci-sheng-yu/" rel="next" title="二次剩余">
+                <i class="fa fa-chevron-left"></i> 二次剩余
               </a>
             
           </div>
@@ -443,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/13/huang-jin-ping-tu/" rel="prev" title="黄金体验">
-                黄金体验 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -491,17 +486,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -610,23 +596,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#做法"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
