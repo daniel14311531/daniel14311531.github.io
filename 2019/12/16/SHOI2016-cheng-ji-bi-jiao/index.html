@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="https://loj.ac/problem/2257">
-<meta name="keywords" content="DP">
+  <meta name="description" content="https://loj.ac/problem/2026">
+<meta name="keywords" content="DP,插值">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「SNOI2017」遗失的答案">
-<meta property="og:url" content="http://yoursite.com/2019/09/03/SNOI2017-yi-shi-de-da-an/index.html">
+<meta property="og:title" content="「SHOI2016」成绩比较">
+<meta property="og:url" content="http://yoursite.com/2019/12/16/SHOI2016-cheng-ji-bi-jiao/index.html">
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
-<meta property="og:description" content="https://loj.ac/problem/2257">
+<meta property="og:description" content="https://loj.ac/problem/2026">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-03T12:51:45.167Z">
+<meta property="og:updated_time" content="2019-12-16T11:54:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「SNOI2017」遗失的答案">
-<meta name="twitter:description" content="https://loj.ac/problem/2257">
+<meta name="twitter:title" content="「SHOI2016」成绩比较">
+<meta name="twitter:description" content="https://loj.ac/problem/2026">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/03/SNOI2017-yi-shi-de-da-an/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/16/SHOI2016-cheng-ji-bi-jiao/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>「SNOI2017」遗失的答案 | daniel14311531's blog</title>
+  <title>「SHOI2016」成绩比较 | daniel14311531's blog</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/SNOI2017-yi-shi-de-da-an/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/SHOI2016-cheng-ji-bi-jiao/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daniel14311531">
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">「SNOI2017」遗失的答案
+          <h1 class="post-title" itemprop="name headline">「SHOI2016」成绩比较
 
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2019-09-03 20:37:42 / 修改时间：20:51:45" itemprop="dateCreated datePublished" datetime="2019-09-03T20:37:42+08:00">2019-09-03</time>
+              <time title="创建时间：2019-12-16 19:55:16 / 修改时间：19:54:36" itemprop="dateCreated datePublished" datetime="2019-12-16T19:55:16+08:00">2019-12-16</time>
             
 
             
@@ -377,7 +377,7 @@
           
 
           
-              <div class="post-description">https://loj.ac/problem/2257</div>
+              <div class="post-description">https://loj.ac/problem/2026</div>
           
 
         </div>
@@ -394,9 +394,13 @@
 
       
         <a id="more"></a>  
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2257" target="_blank" rel="noopener">「SNOI2017」遗失的答案</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>先判断有无解（ $ L \mod G = 0 $ ），然后将 $ n /= G, L /= G $ 。<br>由于 $ n \leq 1e8 $ ，所以每个数最多有 $ 8 $ 个不同的质因数。<br>令 $ L = p_{1}^{a_1}p_{2}^{a_2} \dots p_{t}^{a_t} $ ，则素数 $ p_i $ 的指数上界为 $ a_i $ 。<br>由题意得对于每个质因数所选的数既有恰好达到上界，由于恰好为下界的。由于状态数为 $ 16 $ ，所以可以状压。<br>可以通过 $ dfs $ 处理出所有 $ x $ 使得 $ x \leq n $ 且 $ x = p_{1}^{b_1}p_{2}^{b_2} \dots p_{t}^{b_t} (b_i \leq a_i) $ ，然后将 $ x $ 分类统计。<br>于是问题转化为给出一个集合，求或为全集的方案数。<br>设 $ f_s $ 表示或为 $ s $ 的方案数。<br>设 $ g_s = \sum_{i \in s} f_i = 2^{cnt_s} - 1 $ 表示或为 $ s $ 子集的方案数。<br>容斥得 $ f_s = \sum_{i \in s} (-1)^{|s| - |i|} g_i $ 。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, b) for(int i = (a); i &lt;= (b); i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> per(i, a, b) for(int i = (a); i &gt;= (b); i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000010</span>;</span><br><span class="line"><span class="keyword">int</span> n, L, G, m, mx;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">20</span>], lp, cnt[<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> ba[N], g[N], sz[N];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x, <span class="keyword">const</span> <span class="keyword">int</span> &amp;y)</span> </span>&#123; <span class="keyword">return</span> x + y &lt; mod ? x + y : x + y - mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sub</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x, <span class="keyword">const</span> <span class="keyword">int</span> &amp;y)</span> </span>&#123; <span class="keyword">return</span> x - y &lt; <span class="number">0</span> ? x - y + mod : x - y; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;x, <span class="keyword">const</span> <span class="keyword">int</span> &amp;y)</span> </span>&#123; <span class="keyword">return</span> (ll)x * y % mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> state, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(w &gt; n) <span class="keyword">return</span> ; <span class="keyword">if</span>(u &gt; lp) &#123; ++g[state]; <span class="keyword">return</span> ; &#125;</span><br><span class="line">	dfs(u + <span class="number">1</span>, state | (<span class="number">1</span> &lt;&lt; u - <span class="number">1</span>), w);</span><br><span class="line">	rep(i, <span class="number">1</span>, cnt[u] - <span class="number">1</span>) w *= p[u], dfs(u + <span class="number">1</span>, state, w);</span><br><span class="line">	dfs(u + <span class="number">1</span>, state | (<span class="number">1</span> &lt;&lt; u + lp - <span class="number">1</span>), w * p[u]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	rep(i, <span class="number">0</span>, mx) &#123;</span><br><span class="line">		<span class="keyword">if</span>((state &amp; i) != state) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(sz[i] &amp; <span class="number">1</span>) res = sub(res, ba[g[i] - <span class="number">1</span>]);</span><br><span class="line">		<span class="keyword">else</span> res = add(res, ba[g[i] - <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;n, &amp;G, &amp;L, &amp;m);</span><br><span class="line">	<span class="keyword">if</span>(L % G) &#123; <span class="keyword">for</span>(; m; --m, <span class="built_in">puts</span>(<span class="string">"0"</span>)); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">	L /= G, n /= G; ll tt = L;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i * i &lt;= tt; i++) <span class="keyword">if</span>(tt % i == <span class="number">0</span>) &#123;</span><br><span class="line">		p[++lp] = i; <span class="keyword">for</span>(; tt % i == <span class="number">0</span>; tt /= i) ++cnt[lp];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(tt &gt; <span class="number">1</span>) p[++lp] = tt, ++cnt[lp];</span><br><span class="line">	mx = (<span class="number">1</span> &lt;&lt; lp + lp) - <span class="number">1</span>, dfs(<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">	rep(i, <span class="number">1</span>, lp + lp) rep(j, <span class="number">0</span>, mx)</span><br><span class="line">		<span class="keyword">if</span>(j &amp; (<span class="number">1</span> &lt;&lt; i - <span class="number">1</span>)) g[j] += g[j ^ (<span class="number">1</span> &lt;&lt; i - <span class="number">1</span>)];</span><br><span class="line">	ba[<span class="number">0</span>] = <span class="number">1</span>; rep(i, <span class="number">1</span>, g[mx]) ba[i] = add(ba[i - <span class="number">1</span>], ba[i - <span class="number">1</span>]);</span><br><span class="line">	rep(i, <span class="number">1</span>, mx) sz[i] = sz[i &gt;&gt; <span class="number">1</span>] + (i &amp; <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> x; m; --m) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x); <span class="keyword">if</span>(x % G) &#123; <span class="built_in">puts</span>(<span class="string">"0"</span>); <span class="keyword">continue</span>; &#125;</span><br><span class="line">		x /= G; <span class="keyword">if</span>(L % x || x &gt; n) &#123; <span class="built_in">puts</span>(<span class="string">"0"</span>); <span class="keyword">continue</span>; &#125;</span><br><span class="line">		<span class="keyword">if</span>(ans.find(x) != ans.end()) &#123; <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans[x]); <span class="keyword">continue</span>; &#125;</span><br><span class="line">		<span class="keyword">int</span> state = <span class="number">0</span>, t = <span class="number">0</span>, tmp = x;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lp; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(; x % p[i] == <span class="number">0</span>; x /= p[i], ++t);</span><br><span class="line">			<span class="keyword">if</span>(!t) state |= (<span class="number">1</span> &lt;&lt; i - <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span>(t == cnt[i]) state |= (<span class="number">1</span> &lt;&lt; i + lp - <span class="number">1</span>);</span><br><span class="line">			t = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans[tmp] = calc(state));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2026" target="_blank" rel="noopener">「SHOI2016」成绩比较</a>  </p>
+<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>设 $ val_i $ 表示第 $ i $ 门课分数分配的方案数。<br>$ f_{i, j} $ 表示前 i 门课 B神 吊打 j 人的方案数。  </p>
+<p>$$<br>f_{i, j} = \sum_{i = j}^{n} f_{i - 1, k} \binom{k}{j}\binom{n - k - 1}{rank_i - 1 - (k - j)}val_i<br>$$</p>
+<p>即从原来吊打 k 个人减为 j 个人（k 里选 j 个），再从剩下的人中选一些排在他前面。  </p>
+<p>$$<br>val_i = \sum_{j = 1}^{mx_i} j^{n - rank_i}(mx_i - j)^{rank_i - 1}<br>$$</p>
+<p><del>感性理解</del>发现这个式子可以被描述成关于 $ mx_i $ 的 n 次多项式。<br>拉格朗日插值即可。  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, b) for(int i = (a); i &lt;= (b); i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> per(i, a, b) for(int i = (a); i &gt;= (b); i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">210</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, k, mx[N], rnk[N], pw[N][N];</span><br><span class="line"><span class="keyword">int</span> f[N][N], c[N][N];</span><br><span class="line"><span class="keyword">int</span> val[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> (x &lt; <span class="number">0</span> || y &lt; <span class="number">0</span> || x &lt; y) ? <span class="number">0</span> : c[x][y]; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ksm</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y = mod - <span class="number">2</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> w = <span class="number">1</span>; <span class="keyword">for</span>(; y; y &gt;&gt;= <span class="number">1</span>, x = <span class="number">1l</span>l * x * x % mod) <span class="keyword">if</span>(y &amp; <span class="number">1</span>) w = <span class="number">1l</span>l * x * w % mod; <span class="keyword">return</span> w;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(mx[x] &lt;= <span class="number">100</span>) &#123;</span><br><span class="line">		rep(i, <span class="number">1</span>, mx[x]) res = (res + <span class="number">1l</span>l * pw[i][n - rnk[x]] * pw[mx[x] - i][rnk[x] - <span class="number">1</span>]) % mod;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, n + <span class="number">1</span>) &#123;</span><br><span class="line">		val[i] = <span class="number">0</span>;</span><br><span class="line">		rep(j, <span class="number">1</span>, i) val[i] = (val[i] + <span class="number">1l</span>l * pw[j][n - rnk[x]] * pw[i - j][rnk[x] - <span class="number">1</span>]) % mod;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, n + <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">int</span> mu1 = <span class="number">1</span>, mu2 = <span class="number">1</span>;</span><br><span class="line">		rep(j, <span class="number">1</span>, n + <span class="number">1</span>) <span class="keyword">if</span>(j != i) &#123;</span><br><span class="line">			mu1 = <span class="number">1l</span>l * mu1 * (mod + mx[x] - j) % mod;</span><br><span class="line">			mu2 = <span class="number">1l</span>l * mu2 * (mod + i - j) % mod;</span><br><span class="line">		&#125;</span><br><span class="line">		res = (res + <span class="number">1l</span>l * mu1 * ksm(mu2) % mod * val[i]) % mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	c[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	rep(i, <span class="number">1</span>, <span class="number">200</span>) &#123; c[i][<span class="number">0</span>] = <span class="number">1</span>; rep(j, <span class="number">1</span>, i) c[i][j] = (c[i - <span class="number">1</span>][j - <span class="number">1</span>] + c[i - <span class="number">1</span>][j]) % mod; &#125;</span><br><span class="line">	rep(i, <span class="number">0</span>, <span class="number">200</span>) &#123; pw[i][<span class="number">0</span>] = <span class="number">1</span>; rep(j, <span class="number">1</span>, <span class="number">200</span>) pw[i][j] = <span class="number">1l</span>l * pw[i][j - <span class="number">1</span>] * i % mod; &#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;k);</span><br><span class="line">	rep(i, <span class="number">1</span>, m) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;mx[i]);</span><br><span class="line">	rep(i, <span class="number">1</span>, m) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;rnk[i]);</span><br><span class="line">	f[<span class="number">0</span>][n - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	rep(i, <span class="number">1</span>, m) &#123;</span><br><span class="line">		<span class="keyword">int</span> mu = solve(i);</span><br><span class="line">		rep(j, k, n - <span class="number">1</span>) rep(k, j, n - <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">int</span> w = <span class="number">1l</span>l * C(k, j) * C(n - k - <span class="number">1</span>, rnk[i] - <span class="number">1</span> - (k - j)) % mod * f[i - <span class="number">1</span>][k] % mod;</span><br><span class="line">			f[i][j] = (f[i][j] + <span class="number">1l</span>l * mu * w) % mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, f[m][k]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -421,6 +425,8 @@
           
             <a href="/tags/DP/" rel="tag"># DP</a>
           
+            <a href="/tags/插值/" rel="tag"># 插值</a>
+          
         </div>
       
 
@@ -432,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/21/CTSC2018-bao-li-xie-gua/" rel="next" title="「CTSC2018」暴力写挂">
-                <i class="fa fa-chevron-left"></i> 「CTSC2018」暴力写挂
+              <a href="/2019/12/13/CSP2019-you-ji/" rel="next" title="CSP2019 游记">
+                <i class="fa fa-chevron-left"></i> CSP2019 游记
               </a>
             
           </div>
@@ -441,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/03/HNOI2017-dan-xuan/" rel="prev" title="「HNOI2017」单旋">
-                「HNOI2017」单旋 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
