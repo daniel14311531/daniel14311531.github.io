@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="https://loj.ac/problem/2391">
-<meta name="keywords" content="DP">
+  <meta name="description" content="又是不会的科技">
+<meta name="keywords" content="图论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「JOISC 2017 Day 1」港口设施">
-<meta property="og:url" content="http://yoursite.com/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/index.html">
+<meta property="og:title" content="三（四）元环计数">
+<meta property="og:url" content="http://yoursite.com/2023/01/03/san-si-yuan-huan-ji-shu/index.html">
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
-<meta property="og:description" content="https://loj.ac/problem/2391">
+<meta property="og:description" content="又是不会的科技">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-11T05:59:04.000Z">
+<meta property="og:updated_time" content="2023-01-03T14:09:49.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="「JOISC 2017 Day 1」港口设施">
-<meta name="twitter:description" content="https://loj.ac/problem/2391">
+<meta name="twitter:title" content="三（四）元环计数">
+<meta name="twitter:description" content="又是不会的科技">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/">
+  <link rel="canonical" href="http://yoursite.com/2023/01/03/san-si-yuan-huan-ji-shu/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>「JOISC 2017 Day 1」港口设施 | daniel14311531's blog</title>
+  <title>三（四）元环计数 | daniel14311531's blog</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/11/JOISC-2017-Day-1-gang-kou-she-shi/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/03/san-si-yuan-huan-ji-shu/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daniel14311531">
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">「JOISC 2017 Day 1」港口设施
+          <h1 class="post-title" itemprop="name headline">三（四）元环计数
 
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="创建时间：2019-08-11 13:59:28 / 修改时间：13:59:04" itemprop="dateCreated datePublished" datetime="2019-08-11T13:59:28+08:00">2019-08-11</time>
+              <time title="创建时间：2023-01-03 22:12:55 / 修改时间：22:09:49" itemprop="dateCreated datePublished" datetime="2023-01-03T22:12:55+08:00">2023-01-03</time>
             
 
             
@@ -377,7 +377,7 @@
           
 
           
-              <div class="post-description">https://loj.ac/problem/2391</div>
+              <div class="post-description">又是不会的科技</div>
           
 
         </div>
@@ -394,9 +394,18 @@
 
       
         <a id="more"></a>  
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2391" target="_blank" rel="noopener">「JOISC 2017 Day 1」港口设施</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>考虑两个箱子如果进出栈时间呈<strong>嵌套关系</strong>，则这两个箱子就<strong>不能</strong>在同一个栈中。<br>考虑对于这种嵌套关系的两个箱子连一条边，最后的图中的二分图的方案数即总方案数。<br>如果暴力连边，那么边数可达 $ n^2 $ 个，显然过不去。<br>观察我们目前的连边方案：对于一个物品 $ u $ ，它会和之前物品序列中一段连续的物品 $ v1, v2, \dots, vk $ 连边。此时 $ v1, v2, \dots, vk $ 都是<strong>连通且同色</strong>的。<br>那么如果下一轮的连边的范围和 $ v1, v2, \dots, vk $ 有交，那么由连通性，这些边其实只连一条就够了。<br>具体地，对于每个左端点，我们对其维护一个 $ nxt $ ，表示如果现在再对它进行连边，应该跳到哪里。这样连边的数量就会减少很多，且不改变二分性和连通性。<br>最后 $ dfs $ 染色即可。时间复杂度 $ O(n \log n) $ 。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, b) for(int i = (a); i &lt;= (b); i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> per(i, a, b) for(int i = (a); i &gt;= (b); i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2000010</span>;</span><br><span class="line"><span class="keyword">int</span> n, a[N], b[N], ar[N], ans = <span class="number">1</span>, fa1[N], fa2[N], nxt[N];</span><br><span class="line"><span class="keyword">int</span> clr[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; e[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> *fa, <span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> fa[x] == x ? x : fa[x] = find(fa, fa[x]); &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) &#123;</span><br><span class="line">		<span class="keyword">if</span>(clr[v] == <span class="number">-1</span>) clr[v] = clr[u] ^ <span class="number">1</span>, dfs(v);</span><br><span class="line">		<span class="keyword">if</span>(clr[v] == clr[u]) &#123; <span class="built_in">puts</span>(<span class="string">"0"</span>); <span class="built_in">exit</span>(<span class="number">0</span>); &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n), ans = <span class="number">1</span>;</span><br><span class="line">	rep(i, <span class="number">1</span>, n + n + <span class="number">1</span>) fa1[i] = fa2[i] = i;</span><br><span class="line">	rep(i, <span class="number">1</span>, n) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a[i], &amp;b[i]), clr[i] = <span class="number">-1</span>;</span><br><span class="line">		ar[a[i]] = ar[b[i]] = i, fa1[b[i]] = b[i] + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, n + n) <span class="keyword">if</span>(b[ar[i]] == i) &#123;</span><br><span class="line">		<span class="keyword">int</span> lst = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = find(fa1, a[ar[i]] + <span class="number">1</span>); j &lt;= i; j = find(fa1, j + <span class="number">1</span>)) &#123;</span><br><span class="line">			j = find(fa2, j), e[ar[i]].pb(ar[j]), e[ar[j]].pb(ar[i]);</span><br><span class="line">			<span class="keyword">if</span>(lst) fa2[lst] = j; lst = j;</span><br><span class="line">		&#125;</span><br><span class="line">		fa1[a[ar[i]]] = a[ar[i]] + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i, <span class="number">1</span>, n) <span class="keyword">if</span>(clr[i] == <span class="number">-1</span>) clr[i] = <span class="number">0</span>, dfs(i), ans = ans * <span class="number">2</span> % mod;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="无向图三元环计数"><a href="#无向图三元环计数" class="headerlink" title="无向图三元环计数"></a>无向图三元环计数</h3><p>将边定向，度数少的点连向度数多的点，度数相同时编号小的连向编号大的。这样保证一个点它的出度不会超过 $ O(\sqrt{m}) $ （因为原本度数大于 $ \sqrt{m} $ 的点不会超过 $ \sqrt{m} $ 个）。<br>然后暴力。对于每个$u$，找$ v \in e[u] $, $ w \in e[v] $ ,若 $ w \in e[u] $ 那么找到三元环。一个个数就行。  </p>
+<h3 id="无向图四元环计数"><a href="#无向图四元环计数" class="headerlink" title="无向图四元环计数"></a>无向图四元环计数</h3><p>和无向图三元环计数一样将边定向，不同的是计数方式会麻烦一点。<br>定向后四元环会出现两种情况：  </p>
+<script type="math/tex; mode=display">
+1 \rightarrow 2, 2 \rightarrow 3, 3 \rightarrow 4, 1 \rightarrow 4\\
+1 \rightarrow 2, 2 \rightarrow 3, 1 \rightarrow 4, 4 \rightarrow 3</script><p>考虑通过对角$2, 4$ 计数。先将点按照定向后的图拓扑排序。先对于每一个$2$，找$ 1 \in ee[2] $, $ 3 \in ee[2] $, $ 4 \in e[1] $, $ 4 \in e[1] $, $ 4 $的拓扑序在$2$后，其中ee代表的是原图的边，e代表的是定向后的边。开个数组统计。  </p>
+<p>时间复杂度都是 $ O(m \sqrt{m}) $ 。  </p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">10</span>, M = <span class="number">5e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, d[N], id[N], rnk[N];</span><br><span class="line"><span class="keyword">int</span> ex[M], ey[M];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; e[N], ee[N];</span><br><span class="line"><span class="keyword">int</span> cnt3 = <span class="number">0</span>, cnt4 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">bool</span> vis[N]; <span class="keyword">int</span> num[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		e[i].clear(), ee[i].clear();</span><br><span class="line">		vis[i] = <span class="number">0</span>, num[i] = <span class="number">0</span>;</span><br><span class="line">		cnt3 = cnt4 = <span class="number">0</span>;</span><br><span class="line">		d[i] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;ex[i], &amp;ey[i]);</span><br><span class="line">		++d[ex[i]], ++d[ey[i]];</span><br><span class="line">		ee[ex[i]].pb(ey[i]), ee[ey[i]].pb(ex[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> x = ex[i], y = ey[i];</span><br><span class="line">		<span class="keyword">if</span>(d[x] &gt; d[y] || (d[x] == d[y] &amp;&amp; x &gt; y)) swap(x, y);</span><br><span class="line">		e[x].pb(y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[i]) vis[v] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> u : e[i]) <span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(vis[v]) ++cnt3;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> v : e[i]) vis[v] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) id[i] = i;</span><br><span class="line">	sort(id + <span class="number">1</span>, id + n + <span class="number">1</span>, [&amp;](<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123; <span class="keyword">return</span> d[x] != d[y] ? d[x] &lt; d[y] : x &lt; y; &#125;);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) rnk[id[i]] = i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> u : ee[i]) <span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(rnk[v] &gt; rnk[i])</span><br><span class="line">			cnt4 = (cnt4 + num[v]) % mod, num[v]++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> u : ee[i]) <span class="keyword">for</span>(<span class="keyword">auto</span> v : e[u]) <span class="keyword">if</span>(rnk[v] &gt; rnk[i]) num[v] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, cnt3, cnt4);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T; <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">	<span class="keyword">for</span>(; T; --T) solve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="有向图三（四）元环计数"><a href="#有向图三（四）元环计数" class="headerlink" title="有向图三（四）元环计数"></a>有向图三（四）元环计数</h3><p>先将边看作无向边，枚举（统计）环的时候再判断方向即可。  </p>
+<h3 id="竞赛图找三元环"><a href="#竞赛图找三元环" class="headerlink" title="竞赛图找三元环"></a>竞赛图找三元环</h3><p>只要不是拓扑图就有三元环。  </p>
+<h3 id="竞赛图三元环计数"><a href="#竞赛图三元环计数" class="headerlink" title="竞赛图三元环计数"></a>竞赛图三元环计数</h3><p>容斥。  </p>
+<script type="math/tex; mode=display">
+Ans = C(n, 3) - \sum_{i=1}^{n}C(d_i, 2) \space d_i表示i点的出度</script>
       
     </div>
 
@@ -419,7 +428,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DP/" rel="tag"># DP</a>
+            <a href="/tags/图论/" rel="tag"># 图论</a>
           
         </div>
       
@@ -432,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/09/APIO2019-qiao-liang/" rel="next" title="【APIO2019】桥梁">
-                <i class="fa fa-chevron-left"></i> 【APIO2019】桥梁
+              <a href="/2022/11/13/tui-yi-hou-de-ri-zi/" rel="next" title="退役后的日子">
+                <i class="fa fa-chevron-left"></i> 退役后的日子
               </a>
             
           </div>
@@ -441,10 +450,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/13/JOISC-2017-Day-3-zi-ran-gong-yuan/" rel="prev" title="「JOISC 2017 Day 3」自然公园">
-                「JOISC 2017 Day 3」自然公园 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -621,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#做法"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#无向图三元环计数"><span class="nav-number">1.</span> <span class="nav-text">无向图三元环计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无向图四元环计数"><span class="nav-number">2.</span> <span class="nav-text">无向图四元环计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有向图三（四）元环计数"><span class="nav-number">4.</span> <span class="nav-text">有向图三（四）元环计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#竞赛图找三元环"><span class="nav-number">5.</span> <span class="nav-text">竞赛图找三元环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#竞赛图三元环计数"><span class="nav-number">6.</span> <span class="nav-text">竞赛图三元环计数</span></a></li></ol></div>
             
 
           </div>
