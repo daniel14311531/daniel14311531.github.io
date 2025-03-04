@@ -406,17 +406,11 @@
 
       
         <a id="more"></a>  
-<h3 id="勒让德符号"><a href="#勒让德符号" class="headerlink" title="勒让德符号"></a>勒让德符号</h3><script type="math/tex; mode=display">
-\large{ \left( \frac{n}{p} \right) = 
-\begin{cases}
-1, &n \text{在模 $ p $ 意义下的二次剩余}\\\\
--1, &n \text{在模 $ p $ 意义下的非二次剩余}\\\\
-0, &n \equiv 0 (\bmod p)
-\end{cases} }</script><p>即：  </p>
-<script type="math/tex; mode=display">
-\large{ \left( \frac{n}{p} \right) \equiv n^{\frac{p - 1}{2}} (\bmod p) }</script><h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><script type="math/tex; mode=display">
-\large{ n^2 \equiv (p - n)^2 } \\\\
-\large{ \text{$ p $ 的二次剩余和二次非剩余的个数均为 $ \frac{p - 1}{2} $ （除 $ 0 $）} }</script><h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<h3 id="勒让德符号"><a href="#勒让德符号" class="headerlink" title="勒让德符号"></a>勒让德符号</h3><p>$$<br>\large{ \left( \frac{n}{p} \right) =<br>\begin{cases}<br>1, &amp;n \text{在模 $ p $ 意义下的二次剩余}\\<br>-1, &amp;n \text{在模 $ p $ 意义下的非二次剩余}\\<br>0, &amp;n \equiv 0 (\bmod p)<br>\end{cases} }<br>$$</p>
+<p>即：  </p>
+<p>$$<br>\large{ \left( \frac{n}{p} \right) \equiv n^{\frac{p - 1}{2}} (\bmod p) }<br>$$</p>
+<h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>$$<br>\large{ n^2 \equiv (p - n)^2 } \\<br>\large{ \text{$ p $ 的二次剩余和二次非剩余的个数均为 $ \frac{p - 1}{2} $ （除 $ 0 $）} }<br>$$</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
 <li>随机找一个 $ \left( \frac{a^2 - n}{p} \right) = -1 $ ，令 $ \omega = \sqrt{a^2 - n} $ 。  </li>
 <li>合法解 $ x \equiv (a + \omega)^{\frac{p + 1}{2}} (\bmod p) $ 。  </li>
 </ol>
