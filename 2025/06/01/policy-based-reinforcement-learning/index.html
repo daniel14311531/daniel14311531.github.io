@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="daniel14311531&#39;s blog">
 <meta property="og:description" content="基于策略的强化学习">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2025-06-01T14:44:02.957Z">
+<meta property="og:updated_time" content="2025-06-02T05:56:54.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于策略的强化学习">
 <meta name="twitter:description" content="基于策略的强化学习">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="创建时间：2025-06-01 22:46:45 / 修改时间：22:44:02" itemprop="dateCreated datePublished" datetime="2025-06-01T22:46:45+08:00">2025-06-01</time>
+              <time title="创建时间：2025-06-01 22:46:45" itemprop="dateCreated datePublished" datetime="2025-06-01T22:46:45+08:00">2025-06-01</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-02 13:56:54" itemprop="dateModified" datetime="2025-06-02T13:56:54+08:00">2025-06-02</time>
               
             
           </span>
@@ -402,23 +414,23 @@
 <p>其中，轨迹$\tau$在策略$\pi_{\theta}(a | s)$下发生的概率为：</p>
 <p>$$<br>P(\tau; \theta) = \left[ \prod_{t = 0}^T P(s_{t + 1} | s_t, a_t) \cdot \pi_{\theta} (a_t | s_t) \right]<br>$$</p>
 <p>实际枚举所有可能的轨迹是很困难的，基本都需要通过大量采样得到样本求期望值近似。</p>
-<h2 id="策略梯度"><a href="#策略梯度" class="headerlink" title="策略梯度"></a>策略梯度</h2><p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;= \sum_{\tau} \nabla_{\theta} P(\tau; \theta) \cdot R(\tau) \<br>&amp;= \sum_{\tau} P(\tau; \theta) \frac{\nabla_{\theta} P(\tau; \theta)}{P(\tau; \theta)} R(\tau) \<br>&amp;= \sum_{\tau} P(\tau; \theta) \cdot \nabla_{\theta} \log P(\tau; \theta) \cdot R(\tau)<br>\end{aligned}<br>$$</p>
+<h2 id="策略梯度"><a href="#策略梯度" class="headerlink" title="策略梯度"></a>策略梯度</h2><p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;= \sum_{\tau} \nabla_{\theta} P(\tau; \theta) \cdot R(\tau) \\<br>&amp;= \sum_{\tau} P(\tau; \theta) \frac{\nabla_{\theta} P(\tau; \theta)}{P(\tau; \theta)} R(\tau) \\<br>&amp;= \sum_{\tau} P(\tau; \theta) \cdot \nabla_{\theta} \log P(\tau; \theta) \cdot R(\tau)<br>\end{aligned}<br>$$</p>
 <p>根据$P(\tau; \theta)$可得：</p>
-<p>$$<br>\begin{aligned}<br>\nabla_{\theta} \log P(\tau; \theta) &amp;= \nabla_{\theta} \left[ \sum_{t = 0}^T \log P(s_{t + 1} | s_t, a_t) + \sum_{t = 0}^T \log \pi_{\theta} (a_t | s_t) \right] \<br>&amp;= \sum_{t = 0}^T \nabla_{\theta} \log \pi_{\theta} (a_t | s_t)<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta} \log P(\tau; \theta) &amp;= \nabla_{\theta} \left[ \sum_{t = 0}^T \log P(s_{t + 1} | s_t, a_t) + \sum_{t = 0}^T \log \pi_{\theta} (a_t | s_t) \right] \\<br>&amp;= \sum_{t = 0}^T \nabla_{\theta} \log \pi_{\theta} (a_t | s_t)<br>\end{aligned}<br>$$</p>
 <p>假设当前有$m$条轨迹的样本：</p>
-<p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;\approx \frac{1}{m} \sum_{i = 1}^{m} \nabla_{\theta} \log P(\tau^{(i)}; \theta) \cdot R(\tau^{(i)}) \<br>&amp;= \frac{1}{m} \sum_{i = 1}^{m} \left[ \sum_{t^{(i)} = 0}^{T^{(i)}} \nabla_{\theta} \log \pi_{\theta} (a_{t^{(i)}} | s_{t^{(i)}}) \right] \cdot R(\tau^{(i)}) \<br>&amp;= \frac{1}{n} \sum_{i = 1}^{n} \nabla_{\theta} \log \pi_{\theta} (a_i | s_i) \cdot R(\tau_i) \quad \left( n = \sum_{i = 1}^{m} (T^{(i)} + 1) \right)<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;\approx \frac{1}{m} \sum_{i = 1}^{m} \nabla_{\theta} \log P(\tau^{(i)}; \theta) \cdot R(\tau^{(i)}) \\<br>&amp;= \frac{1}{m} \sum_{i = 1}^{m} \left[ \sum_{t^{(i)} = 0}^{T^{(i)}} \nabla_{\theta} \log \pi_{\theta} (a_{t^{(i)}} | s_{t^{(i)}}) \right] \cdot R(\tau^{(i)}) \\<br>&amp;= \frac{1}{n} \sum_{i = 1}^{n} \nabla_{\theta} \log \pi_{\theta} (a_i | s_i) \cdot R(\tau_i) \quad \left( n = \sum_{i = 1}^{m} (T^{(i)} + 1) \right)<br>\end{aligned}<br>$$</p>
 <p>策略梯度的更新规则：</p>
 <p>$$<br>\theta \leftarrow \theta + \alpha \cdot \nabla_{\theta} J(\theta)<br>$$</p>
 <h3 id="Softmax策略"><a href="#Softmax策略" class="headerlink" title="Softmax策略"></a>Softmax策略</h3><p>对于离散动作空间：</p>
 <p>$$<br>\pi_{\theta}(a | s) = \frac{e^{\phi(s, a)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}}<br>$$</p>
 <p>对应的策略梯度：</p>
-<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \<br>&amp;= \nabla_{\theta} \left(\phi(s, a)^T \theta -  \log \sum_{a’ \in A} e^{\phi(s, a’)^T \theta} \right) \<br>&amp;= \phi(s, a) - \frac{\sum_{a’ \in A} \phi(s, a’) \cdot e^{\phi(s, a’)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}} \<br>&amp;= \phi(s, a) - \sum_{a’ \in A} \phi(s, a’) \cdot \pi_{\theta}(a’ | s)<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\<br>&amp;= \nabla_{\theta} \left(\phi(s, a)^T \theta -  \log \sum_{a’ \in A} e^{\phi(s, a’)^T \theta} \right) \\<br>&amp;= \phi(s, a) - \frac{\sum_{a’ \in A} \phi(s, a’) \cdot e^{\phi(s, a’)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}} \\<br>&amp;= \phi(s, a) - \sum_{a’ \in A} \phi(s, a’) \cdot \pi_{\theta}(a’ | s)<br>\end{aligned}<br>$$</p>
 <p>如果奖励信号很高并且观察到的向量与平均向量相差很大，就会有增加该动作概率的强烈趋势。</p>
 <h3 id="高斯策略"><a href="#高斯策略" class="headerlink" title="高斯策略"></a>高斯策略</h3><p>对于连续动作空间：</p>
 <p>$$<br>\pi_{\theta}(a | s) = \frac{1}{\sqrt{2 \pi} \sigma_{\theta}} e^{- \frac{(a - \mu_{\theta})^2}{2 \sigma_{\theta}^2}}<br>$$</p>
 <p>其中正态分布的均值$\mu_{\theta} = \phi(s, a)^T \theta$。</p>
 <p>对应的策略梯度：</p>
-<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \<br>&amp;= \nabla_{\theta} \left(-\frac{1}{2} \cdot \log (2 \pi \sigma_{\theta}^2) - \frac{(a -\mu_{\theta})^2}{2 \sigma_{\theta}^2} \right) \<br>&amp;= \frac{(a - \mu_{\theta})\phi(s, a)}{\sigma_{\theta}^2}<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\<br>&amp;= \nabla_{\theta} \left(-\frac{1}{2} \cdot \log (2 \pi \sigma_{\theta}^2) - \frac{(a -\mu_{\theta})^2}{2 \sigma_{\theta}^2} \right) \\<br>&amp;= \frac{(a - \mu_{\theta})\phi(s, a)}{\sigma_{\theta}^2}<br>\end{aligned}<br>$$</p>
 <p>在高回报的情况下，远离均值的动作会触发强烈的更新信号。</p>
 <p>在实际任务中，我们没有必要手动计算偏导数，使用深度学习框架的自动求导。定义损失函数：</p>
 <p>$$<br>\mathcal{L}(a, s, r) = -\log(\pi_\theta(a | s)) r<br>$$</p>
@@ -439,10 +451,10 @@
 <p>首先，我们使用拉格朗日松弛将原表达式的发散约束转化为惩罚项，得到一个更容易求解的表达式：</p>
 <p>$$<br>\Delta \theta^{*} = \argmax_{\Delta \theta} J(\theta + \Delta \theta) - \lambda(\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) - \epsilon)<br>$$</p>
 <p>用近似方法来化简。通过泰勒展开：</p>
-<p>$$<br>\begin{aligned}<br>\Delta \theta^{*} &amp;\approx \argmax_{\Delta \theta} J(\theta) + \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) + \lambda \epsilon \<br>&amp;\approx \argmax_{\Delta \theta} \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) \<br>F(\theta) &amp;= \mathbb{E}<em>{\theta} [ \nabla</em>{\theta} \log \pi_{\theta}(x) \nabla_{\theta} \log \pi_{\theta}(x)^{T} ]<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\Delta \theta^{*} &amp;\approx \argmax_{\Delta \theta} J(\theta) + \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) + \lambda \epsilon \\<br>&amp;\approx \argmax_{\Delta \theta} \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) \\<br>F(\theta) &amp;= \mathbb{E}<em>{\theta} [ \nabla</em>{\theta} \log \pi_{\theta}(x) \nabla_{\theta} \log \pi_{\theta}(x)^{T} ]<br>\end{aligned}<br>$$</p>
 <p>KL散度近似于二阶泰勒展开。用费舍尔信息矩阵代替二阶导数，除了符号紧凑性外，还可以大大减少计算开销。</p>
 <h2 id="解决KL约束问题"><a href="#解决KL约束问题" class="headerlink" title="解决KL约束问题"></a>解决KL约束问题</h2><p>对于近似简化后的表达式，可以通过将关于$\Delta \theta$的梯度设置为0，来找到最优的权重更新$\Delta \theta$：</p>
-<p>$$<br>\begin{aligned}<br>0 &amp;= \frac{\partial}{\partial \Delta \theta} \left( \nabla_{\theta} J(\theta) \Delta \theta - \frac{1}{2} \lambda \Delta \theta^{T} F(\theta) \Delta \theta \right) \<br>&amp;= \nabla_{\theta} J(\theta) - \frac{1}{2} \lambda F(\theta) \Delta \theta \<br>\Delta \theta &amp;= - \frac{2}{\lambda} F(\theta)^{-1} \nabla_{\theta} J(\theta)<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>0 &amp;= \frac{\partial}{\partial \Delta \theta} \left( \nabla_{\theta} J(\theta) \Delta \theta - \frac{1}{2} \lambda \Delta \theta^{T} F(\theta) \Delta \theta \right) \\<br>&amp;= \nabla_{\theta} J(\theta) - \frac{1}{2} \lambda F(\theta) \Delta \theta \\<br>\Delta \theta &amp;= - \frac{2}{\lambda} F(\theta)^{-1} \nabla_{\theta} J(\theta)<br>\end{aligned}<br>$$</p>
 <p>其中，$\lambda$是一个常数，可以吸收到学习率$\alpha$中。根据$\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon$，我们可以推出动态学习率：</p>
 <p>$$<br>\alpha = \sqrt{\frac{2 \epsilon}{\nabla J(\theta)^T} F(\theta)^{-1} \nabla J(\theta)}<br>$$</p>
 <p>可以确保每次更新的KL散度（近似）等于$\epsilon$。</p>
@@ -466,9 +478,13 @@
 <p>$$<br>J(\pi_{\theta + \Delta \theta}) = J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)<br>$$</p>
 <p>引入近似误差，使用当前策略近似：</p>
 <p>$$<br>J(\pi_{\theta + \Delta \theta}) \approx J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)<br>$$</p>
-<p>将状态分布求和替换为期望，方便实际计算时使用蒙特卡洛模拟进行采样，同时将动作求和替换为重要性采样。通过重要性采样，可以有效利用当前策略的行动期望，并针对新策略下的概率进行了修正：</p>
-<p>$$</p>
-<p>$$</p>
+<p>将状态分布求和替换为期望，方便实际计算时使用蒙特卡洛模拟进行采样，同时将动作求和替换为<a href="https://zhuanlan.zhihu.com/p/41217212" target="_blank" rel="noopener">重要性采样</a>。通过重要性采样，可以有效利用当前策略的行动期望，并针对新策略下的概率进行了修正：</p>
+<p>$$<br>\begin{aligned}<br>J(\pi_{\theta + \Delta \theta}) &amp;= J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\<br>&amp;= J(\pi_{\theta}) + \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta + \Delta \theta}}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\<br>&amp;\approx J(\pi_{\theta}) + \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a)<br>\end{aligned}<br>$$</p>
+<p>描述更新策略相对于原策略的预期优势称为替代优势：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \approx \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a) = \mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta})<br>$$</p>
+<p>之前产生的近似误差可以用两种策略之间最坏情况的KL散度表示：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \ge \mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta}) - C \mathcal{D}<em>{KL}^{\max} (\pi</em>{\theta} || \pi_{\theta + \Delta \theta})<br>$$</p>
+<p>论文中推导出$C$的值以及目标函数改进的下限。如果我们改进右侧，可以保证左侧也得到改进。本质上，如果替代优势$\mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta})$超过最坏情况下的近似误差$C \mathcal{D}<em>{KL}^{\max} (\pi</em>{\theta} || \pi_{\theta + \Delta \theta})$，我们一定会改进目标。</p>
 <h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><p>咕咕咕</p>
 <h1 id="近端策略优化算法（PPO）"><a href="#近端策略优化算法（PPO）" class="headerlink" title="近端策略优化算法（PPO）"></a>近端策略优化算法（PPO）</h1><h2 id="TRPO算法的缺陷"><a href="#TRPO算法的缺陷" class="headerlink" title="TRPO算法的缺陷"></a>TRPO算法的缺陷</h2><ul>
 <li>无法处理大参数矩阵</li>
