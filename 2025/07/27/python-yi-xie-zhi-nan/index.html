@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一些指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关python环境的一些指南">
+<meta property="og:url" content="http://yoursite.com/2025/07/27/python-yi-xie-zhi-nan/index.html">
+<meta property="og:site_name" content="daniel14311531&#39;s blog">
+<meta property="og:description" content="一些指南">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-27T08:46:28.372Z">
+<meta property="article:modified_time" content="2025-03-04T03:28:37.423Z">
+<meta property="article:author" content="daniel14311531">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2025/07/27/python-yi-xie-zhi-nan/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>有关python环境的一些指南 | daniel14311531's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">daniel14311531's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">To love and win is the best thing. To love and lose is the next best thing.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2025/07/27/python-yi-xie-zhi-nan/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daniel14311531"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="daniel14311531's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">有关python环境的一些指南
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2025-07-27 16:46:28" itemprop="dateCreated datePublished" datetime="2025-07-27T16:46:28+08:00">2025-07-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-03-04 11:28:37" itemprop="dateModified" datetime="2025-03-04T11:28:37+08:00">2025-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 分钟</span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">一些指南</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <span id="more"></span>
+
+<p><a href="https://pytorch.org/">&gt; PyTorch &lt;</a></p>
+<p>[TOC]</p>
+<h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n <span class="variable">$&#123;environment_name&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate <span class="variable">$&#123;environment_name&#125;</span></span><br><span class="line"><span class="comment"># conda deactivate $&#123;environment_name&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="选择python版本"><a href="#选择python版本" class="headerlink" title="选择python版本"></a>选择python版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install python=<span class="variable">$&#123;python_version&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h2><p><a href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu">&gt; official website &lt;</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install cudatoolkit==<span class="variable">$&#123;cuda_version&#125;</span> -c nvidia</span><br><span class="line">conda install cuda -c nvidia/label/cuda-<span class="variable">$&#123;cuda_version&#125;</span></span><br><span class="line">conda install nvidia::cuda-nvcc <span class="comment"># an alternative way</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装PyTorch"><a href="#安装PyTorch" class="headerlink" title="安装PyTorch"></a>安装PyTorch</h2><p><a href="https://pytorch.org/">&gt; PyTorch &lt;</a></p>
+<h2 id="This-transaction-has-incompatible-packages-due-to-a-shared-path"><a href="#This-transaction-has-incompatible-packages-due-to-a-shared-path" class="headerlink" title="This transaction has incompatible packages due to a shared path."></a>This transaction has incompatible packages due to a shared path.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装torch-scatter"><a href="#安装torch-scatter" class="headerlink" title="安装torch-scatter"></a>安装torch-scatter</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch-scatter -c pyg</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询cuda-memory"><a href="#查询cuda-memory" class="headerlink" title="查询cuda memory"></a>查询cuda memory</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi --query-gpu=memory.total,memory.used --format=csv</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查当前GPU内存占用情况"><a href="#检查当前GPU内存占用情况" class="headerlink" title="检查当前GPU内存占用情况"></a>检查当前GPU内存占用情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi --query-compute-apps=pid,name,gpu_bus_id,used_memory --format=csv</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ nvidia-smi --help-query-compute-apps</span><br><span class="line"></span><br><span class="line">List of valid properties to query <span class="keyword">for</span> the switch <span class="string">&quot;--query-compute-apps&quot;</span>:</span><br><span class="line"></span><br><span class="line">Section about Active Compute Processes properties</span><br><span class="line">List of processes having compute context on the device.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;timestamp&quot;</span></span><br><span class="line">The timestamp of when the query was made <span class="keyword">in</span> format <span class="string">&quot;YYYY/MM/DD HH:MM:SS.msec&quot;</span>.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_name&quot;</span></span><br><span class="line">The official product name of the GPU. This is an alphanumeric string. For all products.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_bus_id&quot;</span></span><br><span class="line">PCI bus <span class="built_in">id</span> as <span class="string">&quot;domain:bus:device.function&quot;</span>, <span class="keyword">in</span> hex.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_serial&quot;</span></span><br><span class="line">This number matches the serial number physically printed on each board. It is a globally unique immutable alphanumeric value.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_uuid&quot;</span></span><br><span class="line">This value is the globally unique immutable alphanumeric identifier of the GPU. It does not correspond to any physical label on the board.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;pid&quot;</span></span><br><span class="line">Process ID of the compute application</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;process_name&quot;</span> or <span class="string">&quot;name&quot;</span></span><br><span class="line">Process Name</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;used_gpu_memory&quot;</span> or <span class="string">&quot;used_memory&quot;</span></span><br><span class="line">Amount memory used on the device by the context. Not available on Windows when running <span class="keyword">in</span> WDDM mode because Windows KMD manages all the memory not NVIDIA driver.</span><br></pre></td></tr></table></figure>
+
+<h1 id="orin安装pytorch"><a href="#orin安装pytorch" class="headerlink" title="orin安装pytorch"></a>orin安装pytorch</h1><h2 id="error-‘class-torch-Library’-has-no-member-named-‘set-python-module’-22"><a href="#error-‘class-torch-Library’-has-no-member-named-‘set-python-module’-22" class="headerlink" title="error: ‘class torch::Library’ has no member named ‘set_python_module’ 22"></a>error: ‘class torch::Library’ has no member named ‘set_python_module’ 22</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pytorch/vision torchvision</span><br><span class="line"><span class="built_in">cd</span> torchvision</span><br><span class="line">git checkout v0.16.0</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装timm"><a href="#安装timm" class="headerlink" title="安装timm"></a>安装timm</h2><p><a href="https://blog.csdn.net/zlbbme/article/details/128647059">&gt; link &lt;</a></p>
+<p><a href="https://pypi.tuna.tsinghua.edu.cn/simple/timm/">&gt; package &lt;</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget &lt;package&gt;.whl</span><br><span class="line">pip install &lt;package&gt;.whl</span><br></pre></td></tr></table></figure>
+
+<h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><h2 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h2><h3 id="用-wget-下载-KITTI-上的数据"><a href="#用-wget-下载-KITTI-上的数据" class="headerlink" title="用 wget 下载 KITTI 上的数据"></a>用 wget 下载 KITTI 上的数据</h3><p>先开代理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -b &lt;<span class="built_in">link</span>&gt;.zip</span><br></pre></td></tr></table></figure>
+
+<p>查看进度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f wget-log</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip &lt;name&gt;.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="从drive-google下载"><a href="#从drive-google下载" class="headerlink" title="从drive google下载"></a>从drive google下载</h3><p><a href="https://blog.csdn.net/qq_43235540/article/details/135976536">&gt; link &lt;</a></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="一文解决-RuntimeError-CUDA-out-of-memory-全网最全"><a href="#一文解决-RuntimeError-CUDA-out-of-memory-全网最全" class="headerlink" title="一文解决 RuntimeError: CUDA out of memory. 全网最全"></a>一文解决 RuntimeError: CUDA out of memory. 全网最全</h2><p><a href="https://blog.csdn.net/m0_50502579/article/details/126059178">&gt; link &lt;</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    depth_pred = model(rgb)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Linux的一些操作"><a href="#Linux的一些操作" class="headerlink" title="Linux的一些操作"></a>Linux的一些操作</h1><h2 id="读取当前路径下的文件总大小"><a href="#读取当前路径下的文件总大小" class="headerlink" title="读取当前路径下的文件总大小"></a>读取当前路径下的文件总大小</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -sh</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/07/27/PT07D%20-%20Let%20us%20count%201%202%203/" rel="next" title="PT07D - Let us count 1 2 3">
+                <i class="fa fa-chevron-left"></i> PT07D - Let us count 1 2 3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2025/07/27/pytorch-checkpoints/" rel="prev" title="pytorch-checkpoints相关">
+                pytorch-checkpoints相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="daniel14311531"/>
+            
+              <p class="site-author-name" itemprop="name">daniel14311531</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/daniel14311531" title="GitHub &rarr; https:&#x2F;&#x2F;github.com&#x2F;daniel14311531" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-github&quot;&gt;&lt;&#x2F;i&gt;GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:daniel14311531@qq.com" title="E-Mail &rarr; mailto:daniel14311531@qq.com" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-envelope&quot;&gt;&lt;&#x2F;i&gt;E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">创建虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">激活虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9python%E7%89%88%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">选择python版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85cuda"><span class="nav-number">4.</span> <span class="nav-text">安装cuda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85PyTorch"><span class="nav-number">5.</span> <span class="nav-text">安装PyTorch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-transaction-has-incompatible-packages-due-to-a-shared-path"><span class="nav-number">6.</span> <span class="nav-text">This transaction has incompatible packages due to a shared path.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85torch-scatter"><span class="nav-number">7.</span> <span class="nav-text">安装torch-scatter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2cuda-memory"><span class="nav-number">8.</span> <span class="nav-text">查询cuda memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8DGPU%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">9.</span> <span class="nav-text">检查当前GPU内存占用情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#orin%E5%AE%89%E8%A3%85pytorch"><span class="nav-number"></span> <span class="nav-text">orin安装pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#error-%E2%80%98class-torch-Library%E2%80%99-has-no-member-named-%E2%80%98set-python-module%E2%80%99-22"><span class="nav-number">1.</span> <span class="nav-text">error: ‘class torch::Library’ has no member named ‘set_python_module’ 22</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85timm"><span class="nav-number">2.</span> <span class="nav-text">安装timm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number"></span> <span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">下载数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-wget-%E4%B8%8B%E8%BD%BD-KITTI-%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.</span> <span class="nav-text">用 wget 下载 KITTI 上的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8Edrive-google%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">从drive google下载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number"></span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%96%87%E8%A7%A3%E5%86%B3-RuntimeError-CUDA-out-of-memory-%E5%85%A8%E7%BD%91%E6%9C%80%E5%85%A8"><span class="nav-number">1.</span> <span class="nav-text">一文解决 RuntimeError: CUDA out of memory. 全网最全</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E7%9A%84%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C"><span class="nav-number"></span> <span class="nav-text">Linux的一些操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%80%BB%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.</span> <span class="nav-text">读取当前路径下的文件总大小</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">daniel14311531</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">266k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">4:02</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v7.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

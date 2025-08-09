@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="基于策略的强化学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于策略的强化学习">
+<meta property="og:url" content="http://yoursite.com/2025/07/27/policy-based-reinforcement-learning/index.html">
+<meta property="og:site_name" content="daniel14311531&#39;s blog">
+<meta property="og:description" content="基于策略的强化学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-27T08:46:28.309Z">
+<meta property="article:modified_time" content="2025-06-08T17:46:42.397Z">
+<meta property="article:author" content="daniel14311531">
+<meta property="article:tag" content="reinforcement learning">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2025/07/27/policy-based-reinforcement-learning/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>基于策略的强化学习 | daniel14311531's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">daniel14311531's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">To love and win is the best thing. To love and lose is the next best thing.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2025/07/27/policy-based-reinforcement-learning/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daniel14311531"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="daniel14311531's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于策略的强化学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2025-07-27 16:46:28" itemprop="dateCreated datePublished" datetime="2025-07-27T16:46:28+08:00">2025-07-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-06-09 01:46:42" itemprop="dateModified" datetime="2025-06-09T01:46:42+08:00">2025-06-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">16k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">14 分钟</span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">基于策略的强化学习</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考资料：<a href="https://zhuanlan.zhihu.com/p/614115887">Proximal Policy Optimization (PPO) 算法理解：从策略梯度开始</a></p>
+<p>如果LaTeX挂了：</p>
+<div class="pdf-container">
+  <iframe src="/pdfjs/web/viewer.html?file=/assets/policy-based-reinforcement-learning/policy-based-reinforcement-learning.pdf" width="100%" height="800px"></iframe>
+</div>
+
+<hr>
+<h1 id="传统策略梯度算法"><a href="#传统策略梯度算法" class="headerlink" title="传统策略梯度算法"></a>传统策略梯度算法</h1><h2 id="策略近似"><a href="#策略近似" class="headerlink" title="策略近似"></a>策略近似</h2><p>设$\theta$为神经网络参数，基于策略的强化学习用参数化概率分布$\pi_{\theta}(a | s) &#x3D; P(a | s; \theta)$确定策略，在返回的动作概率列表中对不同的动作进行抽样选择。</p>
+<h2 id="定义目标函数"><a href="#定义目标函数" class="headerlink" title="定义目标函数"></a>定义目标函数</h2><p>目标就是找到那些可能获得更多奖励期望值的动作，使它们对应的概率更大，从而策略就更有可能选择这些动作。</p>
+<p>定义的最大化目标函数：</p>
+<p>$$<br>\max_{\theta} J(\theta) &#x3D; \max_{\theta} E_{\tau \sim \pi_{\theta} } (R(\tau)) &#x3D; \max_{\theta} \sum_{\tau} P(\tau; \theta) R(\tau)<br>$$</p>
+<p>其中$\tau$是agent与环境交互产生的状态-动作轨迹$\tau &#x3D; (s_1, a_1, \dots, s_T, a_T)$。我们的目标是通过调整$\theta$，使得获得更大奖励期望的轨迹出现的概率更高。</p>
+<p>其中，轨迹$\tau$在策略$\pi_{\theta}(a | s)$下发生的概率为：</p>
+<p>$$<br>P(\tau; \theta) &#x3D; \left[ \prod_{t &#x3D; 0}^T P(s_{t + 1} | s_t, a_t) \cdot \pi_{\theta} (a_t | s_t) \right]<br>$$</p>
+<p>实际枚举所有可能的轨迹是很困难的，基本都需要通过大量采样得到样本求期望值近似。</p>
+<h2 id="策略梯度"><a href="#策略梯度" class="headerlink" title="策略梯度"></a>策略梯度</h2><p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;&#x3D; \sum_{\tau} \nabla_{\theta} P(\tau; \theta) \cdot R(\tau) \\<br>&amp;&#x3D; \sum_{\tau} P(\tau; \theta) \frac{\nabla_{\theta} P(\tau; \theta)}{P(\tau; \theta)} R(\tau) \\<br>&amp;&#x3D; \sum_{\tau} P(\tau; \theta) \cdot \nabla_{\theta} \log P(\tau; \theta) \cdot R(\tau)<br>\end{aligned}<br>$$</p>
+<p>根据$P(\tau; \theta)$可得：</p>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta} \log P(\tau; \theta) &amp;&#x3D; \nabla_{\theta} \left[ \sum_{t &#x3D; 0}^T \log P(s_{t + 1} | s_t, a_t) + \sum_{t &#x3D; 0}^T \log \pi_{\theta} (a_t | s_t) \right] \\<br>&amp;&#x3D; \sum_{t &#x3D; 0}^T \nabla_{\theta} \log \pi_{\theta} (a_t | s_t)<br>\end{aligned}<br>$$</p>
+<p>假设当前有$m$条轨迹的样本：</p>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;\approx \frac{1}{m} \sum_{i &#x3D; 1}^{m} \nabla_{\theta} \log P(\tau^{(i)}; \theta) \cdot R(\tau^{(i)}) \\<br>&amp;&#x3D; \frac{1}{m} \sum_{i &#x3D; 1}^{m} \left[ \sum_{t^{(i)} &#x3D; 0}^{T^{(i)}} \nabla_{\theta} \log \pi_{\theta} (a_{t^{(i)}} | s_{t^{(i)}}) \right] \cdot R(\tau^{(i)}) \\<br>&amp;&#x3D; \frac{1}{n} \sum_{i &#x3D; 1}^{n} \nabla_{\theta} \log \pi_{\theta} (a_i | s_i) \cdot R(\tau_i) \quad \left( n &#x3D; \sum_{i &#x3D; 1}^{m} (T^{(i)} + 1) \right)<br>\end{aligned}<br>$$</p>
+<p>策略梯度的更新规则：</p>
+<p>$$<br>\theta \leftarrow \theta + \alpha \cdot \nabla_{\theta} J(\theta)<br>$$</p>
+<h3 id="Softmax策略"><a href="#Softmax策略" class="headerlink" title="Softmax策略"></a>Softmax策略</h3><p>对于离散动作空间：</p>
+<p>$$<br>\pi_{\theta}(a | s) &#x3D; \frac{e^{\phi(s, a)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}}<br>$$</p>
+<p>对应的策略梯度：</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\<br>&amp;&#x3D; \nabla_{\theta} \left(\phi(s, a)^T \theta -  \log \sum_{a’ \in A} e^{\phi(s, a’)^T \theta} \right) \\<br>&amp;&#x3D; \phi(s, a) - \frac{\sum_{a’ \in A} \phi(s, a’) \cdot e^{\phi(s, a’)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}} \\<br>&amp;&#x3D; \phi(s, a) - \sum_{a’ \in A} \phi(s, a’) \cdot \pi_{\theta}(a’ | s)<br>\end{aligned}<br>$$</p>
+<p>如果奖励信号很高并且观察到的向量与平均向量相差很大，就会有增加该动作概率的强烈趋势。</p>
+<h3 id="高斯策略"><a href="#高斯策略" class="headerlink" title="高斯策略"></a>高斯策略</h3><p>对于连续动作空间：</p>
+<p>$$<br>\pi_{\theta}(a | s) &#x3D; \frac{1}{\sqrt{2 \pi} \sigma_{\theta}} e^{- \frac{(a - \mu_{\theta})^2}{2 \sigma_{\theta}^2}}<br>$$</p>
+<p>其中正态分布的均值$\mu_{\theta} &#x3D; \phi(s, a)^T \theta$。</p>
+<p>对应的策略梯度：</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\<br>&amp;&#x3D; \nabla_{\theta} \left(-\frac{1}{2} \cdot \log (2 \pi \sigma_{\theta}^2) - \frac{(a -\mu_{\theta})^2}{2 \sigma_{\theta}^2} \right) \\<br>&amp;&#x3D; \frac{(a - \mu_{\theta})\phi(s, a)}{\sigma_{\theta}^2}<br>\end{aligned}<br>$$</p>
+<p>在高回报的情况下，远离均值的动作会触发强烈的更新信号。</p>
+<p>在实际任务中，我们没有必要手动计算偏导数，使用深度学习框架的自动求导。定义损失函数：</p>
+<p>$$<br>\mathcal{L}(a, s, r) &#x3D; -\log(\pi_\theta(a | s)) r<br>$$</p>
+<p>即可让计算机自动求导。</p>
+<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Network: theta := R^(|theta|)</span><br><span class="line">for n = 1 to N:</span><br><span class="line">    tau &lt;- pi(theta)</span><br><span class="line">    for t = 1 to T:</span><br><span class="line">        R(tau | t) = R[t] + R[t + 1] + ... + R[T]</span><br><span class="line">        theta &lt;- theta - alpha * R(tau | t) * grad(theta, pi(theta, a | s))</span><br></pre></td></tr></table></figure>
+
+<p>这里对于一条路径，将路径上每一个状态都进行了计算，对信息的利用最大化。</p>
+<h1 id="自然策略梯度算法"><a href="#自然策略梯度算法" class="headerlink" title="自然策略梯度算法"></a>自然策略梯度算法</h1><h2 id="传统策略梯度算法的缺陷"><a href="#传统策略梯度算法的缺陷" class="headerlink" title="传统策略梯度算法的缺陷"></a>传统策略梯度算法的缺陷</h2><p>在传统的策略梯度算法中，权重更新会遇到两个问题：</p>
+<ul>
+<li>过冲（Overshooting）: 更新错过了奖励峰值并落入了次优策略区域</li>
+<li>下冲（Undershooting）: 在梯度方向上采取过小的更新步长会导致收敛缓慢</li>
+</ul>
+<p>在监督学习问题中，overshooting不是什么问题，因为数据是固定的，我们可以在下一个epoch中重新纠正；但在强化学习问题中，如果因为overshooting陷入了一个较差的策略区域，则未来的样本批次可能不会提供太多有意义的信息，用较差的数据样本再去更新策略，从而陷入了糟糕的正反馈中无法恢复。较小的学习率可能会解决这个问题，但会导致收敛速度变慢的undershooting问题。</p>
+<h2 id="限制策略更新的差异"><a href="#限制策略更新的差异" class="headerlink" title="限制策略更新的差异"></a>限制策略更新的差异</h2><p>我们需要表示策略（分布）之间的差异，而不是参数本身的差异。计算两个概率分布之间的差异，最常见的是KL散度，也称为相对熵，描述了两个概率分布之间的距离：</p>
+<p>$$<br>\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) &#x3D; \sum_{x \in \Chi} \pi_{\theta}(x) \log \left( \frac{\pi_{\theta}(x)}{\pi_{\theta + \Delta \theta}(x)} \right)<br>$$</p>
+<p>调整后的策略更新限制为：</p>
+<p>$$<br>\Delta \theta^{*} &#x3D; \argmax_{\Delta \theta, \mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon} J(\theta + \Delta \theta)<br>$$</p>
+<p>然而，计算KL散度需要遍历所有的状态-动作对，因此我们需要一些化简来处理现实的RL问题。</p>
+<p>首先，我们使用拉格朗日松弛将原表达式的发散约束转化为惩罚项，得到一个更容易求解的表达式：</p>
+<p>$$<br>\Delta \theta^{*} &#x3D; \argmax_{\Delta \theta} J(\theta + \Delta \theta) - \lambda(\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) - \epsilon)<br>$$</p>
+<p>用近似方法来化简。通过泰勒展开：</p>
+<p>$$<br>\begin{aligned}<br>\Delta \theta^{*} &amp;\approx \argmax_{\Delta \theta} J(\theta) + \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) + \lambda \epsilon \\<br>&amp;\approx \argmax_{\Delta \theta} \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) \\<br>F(\theta) &amp;&#x3D; \mathbb{E}<em>{\theta} [ \nabla</em>{\theta} \log \pi_{\theta}(x) \nabla_{\theta} \log \pi_{\theta}(x)^{T} ]<br>\end{aligned}<br>$$</p>
+<p>KL散度近似于二阶泰勒展开。用Fisher信息矩阵代替二阶导数，除了符号紧凑性外，还可以大大减少计算开销。</p>
+<h2 id="解决KL约束问题"><a href="#解决KL约束问题" class="headerlink" title="解决KL约束问题"></a>解决KL约束问题</h2><p>对于近似简化后的表达式，可以通过将关于$\Delta \theta$的梯度设置为0，来找到最优的权重更新$\Delta \theta$：</p>
+<p>$$<br>\begin{aligned}<br>0 &amp;&#x3D; \frac{\partial}{\partial \Delta \theta} \left( \nabla_{\theta} J(\theta) \Delta \theta - \frac{1}{2} \lambda \Delta \theta^{T} F(\theta) \Delta \theta \right) \\<br>&amp;&#x3D; \nabla_{\theta} J(\theta) - \frac{1}{2} \lambda F(\theta) \Delta \theta \\<br>\Delta \theta &amp;&#x3D; - \frac{2}{\lambda} F(\theta)^{-1} \nabla_{\theta} J(\theta)<br>\end{aligned}<br>$$</p>
+<p>其中，$\lambda$是一个常数，可以吸收到学习率$\alpha$中。根据$\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon$，我们可以推出动态学习率：</p>
+<p>$$<br>\alpha &#x3D; \sqrt{\frac{2 \epsilon}{\nabla J(\theta)^T} F(\theta)^{-1} \nabla J(\theta)}<br>$$</p>
+<p>可以确保每次更新的KL散度（近似）等于$\epsilon$。</p>
+<p>自然策略梯度：</p>
+<p>$$<br>\tilde{\nabla} J(\theta) &#x3D; F(\theta)^{-1} \nabla J(\theta)<br>$$</p>
+<p>最终的权重更新方案为：</p>
+<p>$$<br>\Delta \theta &#x3D; \sqrt{\frac{2 \epsilon }{\nabla J(\theta)^T F(\theta)^{-1} \nabla J(\theta)}} \tilde{\nabla} J(\theta)<br>$$</p>
+<p>该方案的强大之处在于，无论分布的表示如何，它总是以相同的幅度改变策略。</p>
+<h1 id="信赖域策略优化算法（TRPO）"><a href="#信赖域策略优化算法（TRPO）" class="headerlink" title="信赖域策略优化算法（TRPO）"></a>信赖域策略优化算法（TRPO）</h1><h2 id="自然策略梯度算法的缺陷"><a href="#自然策略梯度算法的缺陷" class="headerlink" title="自然策略梯度算法的缺陷"></a>自然策略梯度算法的缺陷</h2><ul>
+<li>近似值可能会违反KL约束，从而导致分析得出的步长过大，超出限制要求</li>
+<li>矩阵$F$的计算时间太长，是$O(N^3)$复杂度的运算</li>
+<li>我们没有检查更新是否真的改进了策略。由于存在大量的近似过程，策略可能并没有优化</li>
+</ul>
+<h2 id="算法理论"><a href="#算法理论" class="headerlink" title="算法理论"></a>算法理论</h2><p>针对自然策略梯度算法的问题，我们希望可以对策略的优化进行量化，从而保证每次的更新一定是优化作用的。为此，我们需要计算两种策略之间预期回报的差异。这里采用的是原策略预期回报添加新策略预期优势的方式。该表达式在原策略下计算优势函数，无需重新采样：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) &#x3D; J(\pi_{\theta}) + \mathbb{E}<em>{\tau \sim \pi</em>{\theta + \Delta \theta}} \sum_{t &#x3D; 0}^{\infin} \gamma^{t} A^{\pi_{\theta}}(s_t, a_t)<br>$$</p>
+<p>其中优势函数的定义为：</p>
+<p>$$<br>A^{\pi_{\theta}}(s, a) &#x3D; \mathbb{E}(Q^{\pi_{\theta}}(s, a) - V^{\pi_{\theta}}(s))<br>$$</p>
+<p>由于时间范围是无限的，引入状态的折扣分布：</p>
+<p>$$<br>\rho_{\pi}(s) &#x3D; \sum_{k &#x3D; 0}^{\infin} \gamma^{k} P(s_k &#x3D; s)<br>$$</p>
+<p>原差异表达式可重新表示为：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) &#x3D; J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)<br>$$</p>
+<p>引入近似误差，使用当前策略近似：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) \approx J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)<br>$$</p>
+<p>将状态分布求和替换为期望，方便实际计算时使用蒙特卡洛模拟进行采样，同时将动作求和替换为<a href="https://zhuanlan.zhihu.com/p/41217212">重要性采样</a>。通过重要性采样，可以有效利用当前策略的行动期望，并针对新策略下的概率进行了修正：</p>
+<p>$$<br>\begin{aligned}<br>J(\pi_{\theta + \Delta \theta}) &amp;&#x3D; J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\<br>&amp;&#x3D; J(\pi_{\theta}) + \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta + \Delta \theta}}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\<br>&amp;\approx J(\pi_{\theta}) + \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a)<br>\end{aligned}<br>$$</p>
+<p>描述更新策略相对于原策略的预期优势称为替代优势：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \approx \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a) &#x3D; \mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta})<br>$$</p>
+<p>之前产生的近似误差可以用两种策略之间最坏情况的KL散度表示：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \ge \mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta}) - C \mathcal{D}<em>{KL}^{\max} (\pi</em>{\theta} || \pi_{\theta + \Delta \theta})<br>$$</p>
+<p>论文中推导出$C$的值以及目标函数改进的下限。如果我们改进右侧，可以保证左侧也得到改进。本质上，如果替代优势$\mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta})$超过最坏情况下的近似误差$C \mathcal{D}<em>{KL}^{\max} (\pi</em>{\theta} || \pi_{\theta + \Delta \theta})$，我们一定会改进目标。</p>
+<p>这就是<strong>单调改进定理</strong>。相应的过程是<strong>最小化最大化算法（MM）</strong>。即如果我们改进下限，我们也会将目标改进至少相同的量。</p>
+<h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><p>在实际的算法实现方面，TRPO和自然策略梯度算法没有太大的区别。TRPO的核心是利用单调改进定理，验证更新是否真正改进了我们的策略。</p>
+<p>咕咕咕</p>
+<!-- ### **共轭梯度法（conjugate gradient method）**
+
+在自然策略梯度算法中，计算逆Fisher矩阵是一个耗时且数值不稳定的过程，特别是对于神经网络，参数矩阵可以变得非常大，$O(\theta^3)$的时间复杂度将无法计算。
+
+好消息是，我们对逆矩阵本身并不感兴趣。观察自然策略梯度的方程式，如果我们可以直接得到乘积$F^{-1}\nabla \log \pi_{\theta}(x)$，就不再需要逆。
+
+引入共轭梯度法，这是一个近似上式乘积的数值过程，这样我们就可以避免计算逆矩阵。共轭梯度通常在$|\theta|$步内收敛，从而可以处理大矩阵。
+
+### 线搜索（line search）
+
+虽然自然梯度策略中提供了给定KL散度约束的最佳步长，但由于存在较多的近似值，实际上可能不满足该约束。
+
+TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新的大小，直到第一个不违反约束的更新。这个过程可以看作是不断缩小信任区域，即我们相信更新可以实际改进目标的区域。 -->
+
+<h1 id="近端策略优化算法（PPO）"><a href="#近端策略优化算法（PPO）" class="headerlink" title="近端策略优化算法（PPO）"></a>近端策略优化算法（PPO）</h1><h2 id="TRPO算法的缺陷"><a href="#TRPO算法的缺陷" class="headerlink" title="TRPO算法的缺陷"></a>TRPO算法的缺陷</h2><ul>
+<li>无法处理大参数矩阵</li>
+<li>二阶优化很慢</li>
+<li>TRPO 很复杂</li>
+</ul>
+<h2 id="PPO-Penalty"><a href="#PPO-Penalty" class="headerlink" title="PPO Penalty"></a>PPO Penalty</h2><p>TRPO在理论分析上推导出与KL散度相乘的惩罚项，但在实践中，这种惩罚往往过于严格，只产生非常小的更新。因此，问题是如何可靠地确定缩放参数$\beta$，同时避免overshooting：</p>
+<p>$$<br>\Delta \theta^* &#x3D; \argmax_{\Delta \theta} \mathcal{L}<em>{\theta + \Delta \theta}(\theta + \Delta \theta) - \beta \mathcal{D}</em>{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta})<br>$$</p>
+<p>PPO通过设置目标散度$\delta$的方式解决了这个问题，希望我们的每次更新都位于目标散度附近的某个地方。目标散度应该大到足以显著改变策略，但又应该小到足以使更新稳定。</p>
+<p>每次更新后，PPO都会检查更新的大小。如果最终更新的散度超过目标散度的1.5倍，则下一次迭代我们将加倍$\beta$来更加重惩罚。相反，如果更新太小，我们将$\beta$减半，从而有效地扩大信任区域。迭代更新的思路与TRPO线搜索有一些相似之处，但PPO搜索是在两个方向上都有效的，而TRPO是单向减小的。</p>
+<p>只是基于启发式确定的。根据经验，PPO对数值设置是非常不敏感的。总之，我们牺牲了一些数学上的严谨性来使实际的效果更好。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Input: initial policy parameters theta_0, initial KL penalty beta_0, target KL-divergence delta</span><br><span class="line">for k = 0, 1, 2, ... do</span><br><span class="line">    Collect set of partial trajectories D_k on policy pi_k = pi_&#123;theta_k&#125;</span><br><span class="line">    Estimate advantages A_t^&#123;pi_k&#125; using any advantage estimation algorithm</span><br><span class="line">    Compute policy update:</span><br><span class="line">        theta_&#123;k + 1&#125; = argmax(theta, L_&#123;theta_k&#125;(theta) - beta_k * D_&#123;KL&#125;(theta || theta_k))</span><br><span class="line">    by taking K steps of minibatch SGD (via Adam)</span><br><span class="line">    if D_&#123;KL&#125;(theta_&#123;k + 1&#125; || theta_k) &gt;= 1.5 delta then</span><br><span class="line">        beta_&#123;k + 1&#125; = beta_&#123;k&#125; * 2</span><br><span class="line">    else if D_&#123;KL&#125;(theta_&#123;k + 1&#125; || theta_k) &lt;= delta / 1.5 then</span><br><span class="line">        beta_&#123;k + 1&#125; = beta_&#123;k&#125; / 2</span><br><span class="line">    else</span><br><span class="line">        beta_&#123;k + 1&#125; = beta_k</span><br></pre></td></tr></table></figure>
+
+<h2 id="PPO-Clip"><a href="#PPO-Clip" class="headerlink" title="PPO Clip"></a>PPO Clip</h2><p>与其费心随着时间的推移改变惩罚，PPO Clip直接限制策略可以改变的范围。我们重新定义了替代优势：</p>
+<p>$$<br>\mathcal{L}<em>{\pi</em>{\theta}}^{CLIP}(\pi_{\theta_k}) \\<br>&#x3D; \mathbb{E}<em>{\tau \sim \pi</em>{\theta}} \left[ \sum_{t&#x3D;0}^T [\min \left( \rho_t(\pi_{\theta}, \pi_{\theta_k})A_{t}^{\pi_{\theta_k}}, clip(\rho_t(\pi_{\theta}, \pi_{\theta_k}), 1 - \epsilon, 1 + \epsilon)A_{t}^{\pi_{\theta_k}} \right)] \right]<br>$$</p>
+<p>$\rho_t$ 为重要性采样：</p>
+<p>$$<br>\rho_t(\theta) &#x3D; \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_k}(a_t | s_t)}<br>$$</p>
+<p>为了实现想要达到的效果，我们应该调整$\epsilon$，作为对KL散度的隐式限制。根据经验，$\epsilon&#x3D;0.1 or 0.2$是实际效果较好的值。</p>
+<h2 id="PPO2"><a href="#PPO2" class="headerlink" title="PPO2"></a>PPO2</h2><p>PPO2是Open AI发布的算法更新版本，是矢量化环境的PPO算法实现，针对 GPU 进行了优化，更好地支持并行训练。它与PPO也有许多实际实现的差异，例如优势被自动归一化、价值函数被裁剪等，但与本文概述的PPO具有相同的数学基础。如果需要直接使用OpenAI实现的PPO算法，则应该使用PPO2。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/reinforcement-learning/" rel="tag"># reinforcement learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/07/27/PKUWC2019-you-ji/" rel="next" title="PKUWC2019游记">
+                <i class="fa fa-chevron-left"></i> PKUWC2019游记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2025/07/27/PT07D%20-%20Let%20us%20count%201%202%203/" rel="prev" title="PT07D - Let us count 1 2 3">
+                PT07D - Let us count 1 2 3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="daniel14311531"/>
+            
+              <p class="site-author-name" itemprop="name">daniel14311531</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/daniel14311531" title="GitHub &rarr; https:&#x2F;&#x2F;github.com&#x2F;daniel14311531" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-github&quot;&gt;&lt;&#x2F;i&gt;GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:daniel14311531@qq.com" title="E-Mail &rarr; mailto:daniel14311531@qq.com" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-envelope&quot;&gt;&lt;&#x2F;i&gt;E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">传统策略梯度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E8%BF%91%E4%BC%BC"><span class="nav-number">1.1.</span> <span class="nav-text">策略近似</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">定义目标函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">策略梯度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.1.</span> <span class="nav-text">Softmax策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%96%AF%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.2.</span> <span class="nav-text">高斯策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">自然策略梯度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-number">2.1.</span> <span class="nav-text">传统策略梯度算法的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E7%AD%96%E7%95%A5%E6%9B%B4%E6%96%B0%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">2.2.</span> <span class="nav-text">限制策略更新的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3KL%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">解决KL约束问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E8%B5%96%E5%9F%9F%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%88TRPO%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">信赖域策略优化算法（TRPO）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-number">3.1.</span> <span class="nav-text">自然策略梯度算法的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA"><span class="nav-number">3.2.</span> <span class="nav-text">算法理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">3.3.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%91%E7%AB%AF%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%EF%BC%88PPO%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">近端策略优化算法（PPO）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TRPO%E7%AE%97%E6%B3%95%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-number">4.1.</span> <span class="nav-text">TRPO算法的缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PPO-Penalty"><span class="nav-number">4.2.</span> <span class="nav-text">PPO Penalty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PPO-Clip"><span class="nav-number">4.3.</span> <span class="nav-text">PPO Clip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PPO2"><span class="nav-number">4.4.</span> <span class="nav-text">PPO2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">daniel14311531</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">266k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">4:02</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v7.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

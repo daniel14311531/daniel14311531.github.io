@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="CS188人工智能课程翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS188人工智能课程翻译">
+<meta property="og:url" content="http://yoursite.com/2025/07/27/CS188/index.html">
+<meta property="og:site_name" content="daniel14311531&#39;s blog">
+<meta property="og:description" content="CS188人工智能课程翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2025/07/27/CS188/fig1.png">
+<meta property="og:image" content="http://yoursite.com/2025/07/27/CS188/fig2.png">
+<meta property="og:image" content="http://yoursite.com/2025/07/27/CS188/fig2.png">
+<meta property="og:image" content="http://yoursite.com/2025/07/27/CS188/fig3.png">
+<meta property="og:image" content="http://yoursite.com/2025/07/27/CS188/fig4.png">
+<meta property="article:published_time" content="2025-07-27T08:46:27.422Z">
+<meta property="article:modified_time" content="2025-05-14T13:41:57.476Z">
+<meta property="article:author" content="daniel14311531">
+<meta property="article:tag" content="人工智能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2025/07/27/CS188/fig1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2025/07/27/CS188/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CS188人工智能课程翻译 | daniel14311531's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">daniel14311531's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">To love and win is the best thing. To love and lose is the next best thing.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2025/07/27/CS188/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daniel14311531"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="daniel14311531's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS188人工智能课程翻译
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2025-07-27 16:46:27" itemprop="dateCreated datePublished" datetime="2025-07-27T16:46:27+08:00">2025-07-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-05-14 21:41:57" itemprop="dateModified" datetime="2025-05-14T21:41:57+08:00">2025-05-14</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">26k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">23 分钟</span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">CS188人工智能课程翻译</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.zhihu.com/column/c_1099720701925302272">前文内容</a>  </p>
+<p><a href="https://www.bilibili.com/video/BV1M24y1x7mM?p=56&vd_source=ae5e67f6772cc15652faf9cbf1b41d59">英文实在看不下去了</a></p>
+<p>[TOC]</p>
+<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note09.pdf">RL I notes</a>  </p>
+<p>在前面的笔记中，我们讨论了马尔可夫决策过程(Markov decision processes, MDP)，即通过值迭代(value iteration)和决策迭代(policy iteration)的方式去计算状态的最优价值(optimal value of states)并得到最优策略(optimal policy)。解决马尔可夫决策过程是 <strong>离线规划(offline planning)</strong> 的一个例子，此时 agent 知道每一处的转换函数(transition function)和奖励函数(reward function)，所有用来预处理最有价值的信息都不需要任何操作(action)来获取。在这节中，我们将讨论 <strong>在线规划(online planning)</strong> ，此时 agent 对任何一处的转换函数和奖励函数都一无所知。在在线规划中，agent 必须尝试 <strong>探索(exploration)</strong> ，在探索中它进行操作(actions)并在后继状态(successor states)得到反馈(feedbacks)并得到相应的奖励(rewards)。agent用反馈的信息去估计(estimate)最优策略，这个过程被称作 <strong>强化学习(reinforcement learning)</strong> ，再用估计过的最优策略去探索或者说使奖励最大化(reward maximization)。</p>
+<p>先从基本的术语开始。在在线规划的每一步，agent 从状态 $ s $ 出发，然后通过操作 $ a $ 最后到达后继状态 $ s’ $ ，获得奖励 $ r $ 。每一个多元组 $ (s, a, s’, r) $ 被称作 <strong>样本(sample)</strong> 。 agent 持续地进行操作并在后继状态收集样本直到到达结束状态(terminal state)。像这样的一组样本(a collection of sample)称作一个周期(episode)。agents会进行多个周期以得到足够的数据进行学习。</p>
+<p>有两种强化学习的类型——基于模型的学习(model-based learning)和不基于模型的学习(model-free learning)。基于模型的学习尝试用样本去估计转换和奖励函数，再用这些估计进行MDP（值迭代、策略迭代）。不基于模型的学习尝试去直接估计状态的 Q 值(Q-values of states)，而不用空间去构造MDP中转换函数和奖励函数的模型。</p>
+<h3 id="基于模型的学习"><a href="#基于模型的学习" class="headerlink" title="基于模型的学习"></a>基于模型的学习</h3><p>用某个策略 $ \pi_{explore} $ 探索。</p>
+<p>agent 生成转换函数的近似值 $ \hat{T}(s, a, s’) $ ，通过记录从 Q 状态 $ (s, a) $ 转换到状态 $ s’ $ 的次数，并规范化（即古典概率， $ \hat{T}(s, a, s’) &#x3D; \frac{count((s, a) \rightarrow s’)}{count((s, a))} $ ）。根据大数定律，收集的样本越多， $ \hat{T} $ 越接近真实值。</p>
+<p>agent 生成奖励函数 $ \hat{R} $ ，通过不断探索未知的多元组 $ (s, a, s’) $ 。</p>
+<p>当我们觉得合适的时候，我们结束 agent 的训练(training)，通过值迭代或者策略迭代在当前的模型（包含 $ \hat{T}, \hat{R} $ ）生成开发策略 $ \pi_{exploit} $ ，目标是使奖励最大化。我们将要讨论如何有效地在探索(exloration)和开发(exploitation)之间分配时间的方法。</p>
+<p>基于模型的学习简单易懂且高效，但是维护所有收集的多元组 $ (s, a, s’) $ 的成本昂贵（空间、时间），所以在下一节——不基于模型的学习，我们将开发一种方法，免于多元组 $ (s, a, s’) $ 的维护，避免基于模型学习的内存开销。</p>
+<h3 id="不基于模型的学习"><a href="#不基于模型的学习" class="headerlink" title="不基于模型的学习"></a>不基于模型的学习</h3><p>有很多不基于模型的学习算法，我们将讲以下三种：直接估值(direct evaluation)，时间差异学习(temporal difference learning)和 Q-learning 。直接估值和时间差异学习属于 <strong>被动强化学习(passive reinforcement learning)</strong> 的一类算法。在被动强化学习中，agent 遵循已知的策略操作并在过程中得到状态的值，这正是在 $ T $ 和 $ R $ 已知时 MDP 的策略评估所做的。 Q-learning 属于另一类不基于模型的学习—— <strong>主动强化学习(active reinforcement learning)</strong>，即agent在学习过程中可以通过反馈多次更新策略并最后经历足够多的探索后决定最优策略。</p>
+<h4 id="直接估值"><a href="#直接估值" class="headerlink" title="直接估值"></a>直接估值</h4><p>先确定一个策略 $ \pi $ ，然后让 agent 遵循策略 $ \pi $ 进行多个周期。在 agent 收集样本的同时也维护每个状态下得到的价值和(counts of the total utility)以及 agent 访问到每个状态的次数(the number of times it visited the state)。任何时候，我们可以计算任意状态 $ s $ 的价值（即期望收益）：状态 $ s $ 的价值和除以状态 $ s $ 的访问次数。</p>
+<p>例子：</p>
+<p>策略 $ \pi $ 如下，衰减系数 $ \gamma &#x3D; 1 $ ，每条边奖励函数为 $ -1 $ 。</p>
+<p><img src="/2025/07/27/CS188/fig1.png" alt="fig1.png"></p>
+<p>状态 C 有概率走向状态 A 和状态 D，在探索次数较少时，从状态 B 出发和从状态 E 出发可能导致计算出的期望收益不同。在探索次数增多后会收敛成同一个值，但是这将会花费大量的时间。这个问题可以通过另一个被动强化学习——时间差异学习(temporal difference learning)来减轻。</p>
+<h4 id="时间差异学习"><a href="#时间差异学习" class="headerlink" title="时间差异学习"></a>时间差异学习</h4><p>时间差异学习(temporal difference learning， TD learning)用了<code>从每一次经历中学习</code>的想法，而不是像直接估值那样先对状态价值和以及访问次数统计再做学习。在策略评估中，我们用固定的策略生成的方程组和 Bellman 方程组决定状态的值（或者迭代更新，像值迭代一样）。</p>
+<p>$$<br>V^{\pi}(s) &#x3D; \sum_{s’}T(s, \pi(s), s’)[R(s, \pi(s), s’) + \gamma V^{\pi}(s’)]<br>$$</p>
+<p>TD learning 尝试去解决如何在没有权重的情况下计算加权平均值的问题，用 <strong>指数滑动平均(exponential moving average)</strong> 的方式。</p>
+<p>步骤：</p>
+<ol>
+<li>初始化：</li>
+</ol>
+<p>$$<br>\forall s, V^{\pi}(s) &#x3D; 0<br>$$</p>
+<ol start="2">
+<li>对于每一步，agent 进行操作 $ \pi(s) $ ，从状态 $ s $ 转移到状态 $ s’ $ ，获得奖励 $ R(s, \pi(s), s’) $ 。我们可以得到样本值(sample value)：</li>
+</ol>
+<p>$$<br>sample &#x3D; R(s, \pi(s), s’) + \gamma V^{\pi}(s’)<br>$$</p>
+<p>$ \space \space \space \space \space \space $ 这是对 $ V^{\pi}(s) $ 的新的估计。</p>
+<ol start="3">
+<li>将样本值用指数滑动平均的方式纳入对 $ V^{\pi}(s) $ 的估计，对 $ V^{\pi}(s) $ 进行更新 ：</li>
+</ol>
+<p>$$<br>V^{\pi}(s) \leftarrow (1 - \alpha)V^{\pi}(s) + \alpha \cdot sample<br>$$</p>
+<p>$ \space \space \space \space \space \space $ 其中 $ \alpha (0 \leq \alpha \leq 1) $ 被称为 <strong>学习速率(learning rate)</strong> 。</p>
+<p>由这个更新规则可知，越旧的样本的权重指数级减小，这正是我们更新 $ V^{\pi}(s) $ 所需要的（因为越旧的样本往往意味着较劣的策略，也意味着错误）！这就是 TD learning 的美妙之处——用一个简单直接的更新规则，我们能够：</p>
+<ul>
+<li>在每一步学习，因此没得到状态的值的信息可以直接使用。</li>
+<li>给较旧的、不太准确的样本给予指数级减小的权重。</li>
+<li>相比于直接估值，可以在更少的周期内更快地向正确的状态的值收敛。</li>
+</ul>
+<h4 id="Q-learning"><a href="#Q-learning" class="headerlink" title="Q-learning"></a>Q-learning</h4><p>无论是直接估值还是 TD learning ，它们都会在所遵循的策略下得到真实的状态的值。但是，它们都有一个固有的问题——我们想要找一个最优的策略，这需要知道每个状态的 Q 值。为了计算 Q 值，我们需要转换函数和奖励函数并用 Bellman 方程表示。</p>
+<p>$$<br>Q^{<em>}(s, a) &#x3D; \sum_{s’}T(s, a, s’)[R(s, a, s’) + \gamma V^{</em>}(s’)]<br>$$</p>
+<p>因此，为了高效地更新 agent 的策略，TD learning 和直接估值通常与一些基于模型的学习一起使用，以获得 $ T $ 和 $ R $ 的估计。这种情况可以通过 Q-learning 的思想避免，即绕过对转换函数、奖励函数的需要，直接对 Q 值进行学习。因此，Q-learning 是完全不基于模型的。Q-learning 用了 Q 值迭代进行更新：</p>
+<p>$$<br>Q_{k + 1}(s, a) \leftarrow \sum_{s’}T(s, a, s’)[R(s, a, s’) + \gamma \max_{a’} Q(s’, a’)]<br>$$</p>
+<p>有了这个新的更新规则，和 TD learning 一样，用指数滑动平均：</p>
+<p>$$<br>sample &#x3D; R(s, a, s’) + \gamma \max_{a’} Q(s’, a’)\<br>Q(s, a) \leftarrow (1 - \alpha) Q(s, a) + \alpha \cdot sample<br>$$</p>
+<p>只要我们花足够多的时间去探索，并且用恰当的速率去减小 $ \alpha $ ，Q-learning 会对每个 Q 状态得到最优的 Q 值。这使得 Q-learning 具有革命性的意义——当 TD learning 和直接估值在某个策略下得到状态的值再用其他技巧决定最优策略时，Q-learning 可以直接得到最优策略，即使做出的次优或者随机的操作。这就是所谓的 <strong>离线策略学习(off-policy learning)</strong> （相较于直接估值和 TD learning 作为 <strong>在线策略学习(on-policy learning)</strong> 的例子）。</p>
+<h4 id="Approximate-Q-learning"><a href="#Approximate-Q-learning" class="headerlink" title="Approximate Q-learning"></a>Approximate Q-learning</h4><p>Q-learning 还有进步的空间。Q-learning 将所有的状态以表格的形式存储，当状态数很多时，Q-learning 的效率并不高。这意味着我们不能访问所有状态并且不能存储所有的 Q 值，因为空间不够。</p>
+<p>假如一个局势下 Q-learning 判断出是不利的，那么对于类似的情况 Q-learning 无法判断也是不利的。Approximate Q-learning 尝试去学习一些一般的情况并外推到许多类似的情况来解释这一点。生成学习经验的关键是对状态的 <strong>基于特征的表示(feature-based representation)</strong> ，即用一个 <strong>特征向量(feature vector)</strong> 来表示状态。例如，吃豆人的特征向量可以编码为：</p>
+<ul>
+<li>距离最近的幽灵的距离</li>
+<li>距离最近的食物的距离</li>
+<li>幽灵的个数</li>
+<li>吃豆人是否被困(True&#x2F;False)</li>
+</ul>
+<p>使用特征向量，我们可以将状态的值和 Q 值视为线性函数：</p>
+<p>$$<br>\begin{aligned}<br>    V(s) &amp;&#x3D; \sum_{k &#x3D; 1}^{n} w_{k} \cdot f_{k}(s) &#x3D; \vec{w} \cdot \vec{f}(s)\<br>    Q(s, a) &amp;&#x3D; \vec{w} \cdot \vec{f}(s, a)<br>\end{aligned}<br>$$</p>
+<p>其中 $ \vec{f}(s) $ 表示状态的特征向量，$ \vec{f}(s, a) $ 表示 Q-状态 $ (s, a) $ 的特征向量，$ \vec{w} $ 表示权重向量。定义偏差(difference)为：</p>
+<p>$$<br>difference &#x3D; [R(s, a, s’) + \gamma \max_{a’} Q(s’, a’)] - Q(s, a)<br>$$</p>
+<p>Approximate Q-learning 的更新规则和 Q-learning 完全一致（实际上是最小二乘，不知道为什么笔记里写的是和 Q-learning 更新方式一致的）：</p>
+<p>$$<br>w_{k} \leftarrow w_{k} + \alpha \cdot difference \cdot f_{k}(s, a)<br>$$</p>
+<p>放弃对每个状态的 Q 值存储，使用 Approximate Q-learning 我们只需要存储一个权重向量就可以计算需要的 Q 值。因此，这不仅给了我们一个更泛用的 Q-learning 版本，并且显著提升了存储效率。</p>
+<p>用偏差来重写 Q-learning 的更新规则：</p>
+<p>$$<br>Q(s, a) \leftarrow Q(s, a) + \alpha \cdot difference<br>$$</p>
+<p>这个更新规则和 $ w_{k} \leftarrow w_{k} + \alpha \cdot difference \cdot f_{k}(s, a) $ 略有不同但同样具有价值：它计算估计值和当前值的偏差，然后往估计值方向趋近，幅度和偏差值成正比。</p>
+<h4 id="策略搜索-policy-search"><a href="#策略搜索-policy-search" class="headerlink" title="策略搜索(policy search)"></a>策略搜索(policy search)</h4><p>（note 里没写，PPT 里讲地不清楚，视频里一笔带过，以下内容疑似 PPT 内容的机翻）</p>
+<p>问题：通常，运行良好的基于特征的策略（能赢，最大化得分）不是去选 V 值或者 Q 值最好的策略。</p>
+<p>解决方案：学习奖励最大化的策略，而不是预测的值。</p>
+<p>策略搜索：从一个不错的策略开始（例如：Q-learning 生成的策略），然后（在特征权重(feature weights)上）用爬山微调。</p>
+<p>最简单的策略搜索：</p>
+<ul>
+<li>从线性的初始状态值或者 Q 值开始。</li>
+<li>稍稍增加或者减小每个特征的权重，然后观察策略是否更优。</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>我们怎样认为这个策略更好？</li>
+<li>这需要运行很多次样例的周期！</li>
+<li>当特征很多时，这种方法就显得不实用。</li>
+</ul>
+<p>更好的方法利用前瞻性结构(lookahead structure)，聪明地取样，改变多个参数等等。</p>
+<p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note10.pdf">RL II notes</a></p>
+<p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec10.pdf">RL II slides</a></p>
+<h3 id="探索和开发-exploration-and-exploitation"><a href="#探索和开发-exploration-and-exploitation" class="headerlink" title="探索和开发(exploration and exploitation)"></a>探索和开发(exploration and exploitation)</h3><h4 id="如何去探索？"><a href="#如何去探索？" class="headerlink" title="如何去探索？"></a>如何去探索？</h4><p>最简单的方式：随机操作( $ \varepsilon $ - greedy)</p>
+<ul>
+<li>每一步，进行两种选择。</li>
+<li>一个较小的概率 $ \varepsilon $ ，随机操作。</li>
+<li>一个较大的概率 $ 1 - \varepsilon $ ，按当前策略操作。</li>
+</ul>
+<p>随机操作的问题：</p>
+<ul>
+<li>最终会探索整个空间，但一旦完成了学习，就会到处乱走。</li>
+<li>一个解决方法： $ \varepsilon $ 随时间减小。</li>
+<li>另一个解决办法：用探索函数(exploration functions)。</li>
+</ul>
+<h4 id="探索函数-exploration-functions"><a href="#探索函数-exploration-functions" class="headerlink" title="探索函数(exploration functions)"></a>探索函数(exploration functions)</h4><p>对于随机操作，可以探索一定次数后结束。</p>
+<p>更好的想法是，去探索访问次数少的点，最后停止探索(explore areas whose badness is not (yet) established, eventually stop exlporing)。</p>
+<p>用估计的值 $ u $ 和访问次数 $ n $ 来定义探索函数，返回一个乐观的估计，例如 $ f(u, n) &#x3D; u + k &#x2F; n $ 。</p>
+<p>对 Q 值更新规则进行修改：</p>
+<p>$$<br>\begin{aligned}<br>    sample &amp;&#x3D; R(s, a, s’) + \gamma \max_{a’}f(Q(s’, a’), N(s’, a’))\<br>    Q(s, a) &amp;\leftarrow (1 - \alpha) Q(s, a) + \alpha \cdot sample<br>\end{aligned}<br>$$</p>
+<h4 id="反悔-regret"><a href="#反悔-regret" class="headerlink" title="反悔(regret)"></a>反悔(regret)</h4><p>即使你能找到最优策略，在过程中你依旧可能会犯错误。</p>
+<p>反悔值是你衡量错误成本的指标：最优（期望）的奖励和你（期望）的奖励（包括早期的次优选）的差。</p>
+<p>最大限度地减少反悔不仅仅是为了得到最优策略，它还需要最优化学习以达到最优策略。</p>
+<p>例如：随机探索和用探索函数探索都能得到最优策略，但是随机探索有更高的反悔值。</p>
+<h2 id="概率"><a href="#概率" class="headerlink" title="概率"></a>概率</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec11.pdf">Probability slides</a></p>
+<p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note11.pdf">Probability notes</a></p>
+<p>条件独立：事件A，B关于事件C条件独立（只要C事件发生，A、B相互独立），当且仅当：</p>
+<p>$$<br>P(A | BC) &#x3D; P(A | C)\<br>or \<br>P(AB | C) &#x3D; P(A | C)P(B | C)<br>$$</p>
+<p>记作：</p>
+<p>$$<br>A \perp B \vert {C}<br>$$</p>
+<p>推导：</p>
+<p>$$<br>\begin{aligned}<br>    P(A | BC) &amp;&#x3D; \frac{P(ABC)}{P(BC)} \<br>    &amp;&#x3D; \frac{P(ABC)}{P(C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; \underline{P(AB | C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; \underline{P(A | C) P(B | C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; P(A | C) \frac{P(BC)}{P(C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; P(A | C)<br>\end{aligned}<br>$$</p>
+<h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec12.pdf">BN: Representation slides</a></p>
+<p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note12.pdf">BN: Representation notes</a></p>
+<h3 id="贝叶斯网络表达-Bayesian-Network-Representation"><a href="#贝叶斯网络表达-Bayesian-Network-Representation" class="headerlink" title="贝叶斯网络表达(Bayesian Network Representation)"></a>贝叶斯网络表达(Bayesian Network Representation)</h3><p>虽然枚举可以计算我们所有想要知道的概率，在计算机中用内存存储所有的联合分布(joint distribution)对于实际问题是不切实际的——假如有 n 个变量，每个变量有 d 个取值，那联合分布表会有 d^n^ 个条目，呈指数级。</p>
+<p>贝叶斯网络通过条件概率(conditional probility)避免了这个问题。概率被存储在一些小的条件概率表并用有向无环图(directed acyclic graph, DAG)描述变量之间的关系。本地的概率表和DAG一起将信息存储，并足以计算任何条件概率分布。</p>
+<p>我们定义贝叶斯网络包含：</p>
+<ul>
+<li>一个DAG，一个节点表示一个变量 $ X $ 。</li>
+<li>对于每个节点有一个条件概率分布 $ P(X | A_1 \dots A_n) $ ，其中 $ A_i $ 表示 $ X $ 的第 $ i $ 个父亲，用条件概率表(conditional probability table, CPT)存储。每个CPT含有 $ n + 2 $ 列：$ n $ 个父亲，一个 $ X $ ，还有一个条件概率。</li>
+</ul>
+<p>贝叶斯网络的结构对不同节点间条件独立关系进行编码。这些条件独立性使我们可以存储多个小表，而非一个大表。</p>
+<p>很重要的一点是贝叶斯网络节点之间的边并非表示两者之间存在相关性，不是因果关系。</p>
+<p>例如，假设有一个模型，包含5个二进制随机变量：</p>
+<ul>
+<li>B：发生盗窃</li>
+<li>A：警报响起</li>
+<li>E：发生地震</li>
+<li>J：John报警</li>
+<li>M：Mary报警</li>
+</ul>
+<p>它们的关系可以用下图表示。</p>
+<p><img src="/2025/07/27/CS188/fig2.png" alt="fig2.png"></p>
+<p>在贝叶斯网络里，我们存储概率表 $ P(B), P(E), P(A | BE), P(J | A), P(M | A) $ 。</p>
+<p>我们可以计算概率：</p>
+<p>$$<br>P(X_1 X_1 \dots X_n) &#x3D; \prod_{i &#x3D; 1}^{n} P(X_i | parents(X_i))<br>$$</p>
+<p>例如：</p>
+<p>$$<br>P(-b, -e, +a, +j, -m) &#x3D; P(-b) \cdot P(-e) \cdot P(+a | -b, -e) \cdot P(+j | +a) \cdot P(-m | +a)<br>$$</p>
+<h3 id="贝叶斯网络结构-Structure-of-Bayes-Nets"><a href="#贝叶斯网络结构-Structure-of-Bayes-Nets" class="headerlink" title="贝叶斯网络结构(Structure of Bayes Nets)"></a>贝叶斯网络结构(Structure of Bayes Nets)</h3><p>$$<br>P(x_i | x_1 x_2 \dots x_{i - 1}) &#x3D; P(x_i | parents(x_i))\<br>\Rightarrow P(x_1 x_2 \dots x_{i - 1}) &#x3D; \prod_{i &#x3D; 1}^{n} P(x_i | parents(x_i))<br>$$</p>
+<p>即 $ x_i $ 与 $ x_1, x_2, \dots x_{i - 1} &#x2F; parents(x_i) $ 在 $ parents(x_i) $ 下条件独立。</p>
+<p>例如：</p>
+<p><img src="/2025/07/27/CS188/fig2.png" alt="fig2.png"></p>
+<p>$$<br>\begin{aligned}<br>    P(BEAJM) &amp;&#x3D; P(B) P(B | E)P(A | BE) P(J | BEA) P(M | BEAJ) \<br>    &amp;&#x3D; P(B) P(E) P(A | BE) P(J | A) P(M | A)<br>\end{aligned}<br>$$</p>
+<p>一一对应可得条件独立关系。</p>
+<p>每个节点与其马尔可夫覆盖(Markov blanket)之外的点条件独立。</p>
+<p>一个变量的马尔可夫覆盖包含它的父亲、儿子和儿子的其他父亲（因为是DAG）。</p>
+<h3 id="D分离-D-Seperation"><a href="#D分离-D-Seperation" class="headerlink" title="D分离(D-Seperation)"></a>D分离(D-Seperation)</h3><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note13.pdf">Slides</a></p>
+<p>D分离（D-Separation）又被称作有向分离，是一种用来判断变量是否条件独立的图形化方法。相比于非图形化方法，D-Separation更加直观且计算简单。对于一个DAG（有向无环图），D-Separation方法可以快速的判断出两个节点之间是否是条件独立的。</p>
+<p>查询：$ x_i \perp x_j \vert {x_{k_1}, x_{k_2}, \dots x_{k_n}} $</p>
+<p>检查所有连接 $ x_i $ 和 $ x_j $ 的路径。如果一条或者多条路径是 <strong>激活</strong> 的，那么，条件独立性不成立。</p>
+<p>否则，条件独立性成立： $ x_i \perp x_j \vert {x_{k_1}, x_{k_2}, \dots x_{k_n}} $ 。</p>
+<p>如果路径中所有的三元组都是 <strong>激活</strong> 的，则该路径是 <strong>激活</strong> 的。</p>
+<p>三元组的三种形式（又或者没有证据变量）：</p>
+<ul>
+<li>因果链条</li>
+</ul>
+<blockquote>
+<p>A(0) -&gt; B(1) -&gt; C(0)</p>
+</blockquote>
+<p>$$<br>P(ABC) &#x3D; P(A)P(B | A)P(C | B) \<br>A \perp C ? \space (P(AC) &#x3D; P(A)P(C) ?) \<br>No. \<br>A \perp C | B ? \space (P(AC | B) &#x3D; P(A | B)P(C | B) ? )\<br>Yes. \<br>P(AC | B) &#x3D; \frac{P(ABC)}{P(B)}\<br>&#x3D; \frac{P(A)P(B|A)P(C|B)}{P(B)}<br>\&#x3D; \frac{P(AB)}{P(A)} \times P(C|B)\<br>&#x3D; P(A|B)P(C|B)<br>$$</p>
+<p>链上的中间变量可以阻隔影响传播。</p>
+<ul>
+<li>共同原因<blockquote>
+<p>A(0) &lt;- B(1) -&gt; C(0)</p>
+</blockquote>
+</li>
+</ul>
+<p>$$<br>P(ABC) &#x3D; P(B)P(A|B)P(C|B) \<br>A \perp C ? \space (P(AC) &#x3D; P(A)P(C) ?) \<br>No. \<br>A \perp C | B ? \space (P(AC | B) &#x3D; P(A | B)P(C | B) ? )\<br>Yes. \<br>P(AC|B) &#x3D; \frac{P(ABC)}{P(B)}\<br>&#x3D; \frac{P(B)P(A|B)P(C|B)}{P(B)}\<br>&#x3D; P(A|B)P(C|B)<br>$$</p>
+<ul>
+<li>共同结果<blockquote>
+<p>A(0) -&gt; B(1) &lt;- C(0)</p>
+</blockquote>
+</li>
+</ul>
+<p>$$<br>P(ABC) &#x3D; P(A)P(C)P(B|AC)\<br>P(A)P(C) &#x3D; P(AC)\<br>A \perp C | B ? \space (P(AC | B) &#x3D; P(A | B)P(C | B) ? )\<br>No. \<br>P(A) &#x3D; P(C) &#x3D; \frac{1}{2}\<br>P(B) &#x3D; A \space or \space C\<br>P(AC|B) &#x3D; \frac{1}{3}\<br>P(A|B) &#x3D; P(C|B) &#x3D; \frac{2}{3}<br>$$</p>
+<p>如果路径中某三元组是非激活的，那么这条路径就是非激活的。</p>
+<h4 id="贝叶斯网络独立性问题的形式化定义"><a href="#贝叶斯网络独立性问题的形式化定义" class="headerlink" title="贝叶斯网络独立性问题的形式化定义"></a>贝叶斯网络独立性问题的形式化定义</h4><ul>
+<li><p>问题：给定证据变量(evidence variables) $ {Z} $ ， $ X $ 是否条件独立于 $ Y $ ?</p>
+</li>
+<li><p>D-分离：在贝叶斯网络中寻找关联路径，并基于路径作独立性判断。</p>
+</li>
+</ul>
+<ol>
+<li>列出所有连接 $ X $ 和 $ Y $ 的路径。</li>
+<li>没有激活路径 &#x3D; 独立性，有激活路径 &#x3D; 独立性不成立。</li>
+</ol>
+<ul>
+<li>路径的独立性判断：将路径拆解为多个三元组，检查三元组的独立性。</li>
+</ul>
+<h4 id="激活-非激活路径"><a href="#激活-非激活路径" class="headerlink" title="激活 &#x2F; 非激活路径"></a>激活 &#x2F; 非激活路径</h4><p>如果每个三元组都是激活的，那这条路径就是激活的。</p>
+<ul>
+<li>因果链条：若 $ B $ 未被观察， $ A $ 和 $ C $ 不相互独立；否则相互独立。</li>
+<li>共同原因：若 $ B $ 未被观察， $ A $ 和 $ C $ 不相互独立；否则相互独立。</li>
+<li>共同结果：若 $ B $ 或者其子孙节点未被观察， $ A $ 和 $ C $ 相互独立；否则不相互独立。</li>
+</ul>
+<p>出现不独立的情况，这个三元组就被激活。</p>
+<p>如果任一三元组不激活，这条路径就不激活。</p>
+<h4 id="贝叶斯网络中的条件独立性"><a href="#贝叶斯网络中的条件独立性" class="headerlink" title="贝叶斯网络中的条件独立性"></a>贝叶斯网络中的条件独立性</h4><p>给定贝叶斯网络，运用 D-分离 方法，可以得到所有形式的条件独立性。</p>
+<p>$$<br>x_i \perp x_j | {x_{k_1}, \dots, x_{k_n}}<br>$$</p>
+<p>基于得到的条件独立列表，可以确定贝叶斯网络能够表达的所有概率分布。</p>
+<h3 id="贝叶斯网络的独立性隐含关系"><a href="#贝叶斯网络的独立性隐含关系" class="headerlink" title="贝叶斯网络的独立性隐含关系"></a>贝叶斯网络的独立性隐含关系</h3><p>给定贝叶斯网络，只有特定的联合分布能够被表达。</p>
+<p>贝叶斯网络中的某些（条件）独立性，确立了能被表达的联合分布。</p>
+<p>表达扩充：在贝叶斯网络中增加边，可以扩充能表达的分布范围。</p>
+<p>极端情况：节点不存在独立性，能表达任意分布。</p>
+<h3 id="概率推断"><a href="#概率推断" class="headerlink" title="概率推断"></a>概率推断</h3><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec14.pdf">Slides</a></p>
+<p>询问</p>
+<p>$$<br>P(Q | e_1 e_2 \dots e_k)<br>$$</p>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>通常情况：</p>
+<ul>
+<li>证据变量： $ e_1, e_2, \dots , e_k $</li>
+<li>询问变量： $ Q $</li>
+<li>隐藏变量： $ H_1, \dots , H_r $</li>
+</ul>
+<p>步骤：</p>
+<ol>
+<li>选出包含证据变量的条件概率表的条目。</li>
+<li>将 $ H $ 相加：</li>
+</ol>
+<p>$$<br>P(Q \space e_1 \dots e_k) &#x3D; \sum_{h_1, h_2, \dots , h_r} P(Q \space h_1 \dots h_r \space e_1 \dots e_k)<br>$$</p>
+<ol start="3">
+<li>规范化</li>
+</ol>
+<p>$$<br>Z &#x3D; \sum_{q} P(Q \space e_1 \dots e_k) \<br>P(Q | e_1 \dots e_k) &#x3D; \frac{P(Q \space e_1 \dots e_k)}{Z}<br>$$</p>
+<p>时间复杂度是指数级的，能够得到准确的答案。</p>
+<h4 id="消元法"><a href="#消元法" class="headerlink" title="消元法"></a>消元法</h4><p>联合分布 $ P(x y) $ 的和为 $ 1 $ 。</p>
+<p>选定几个节点固定： $ P(x Y) $ 。这是联合分布的一部分，其和为 $ P(x) $ 。</p>
+<p>大写字母（未确定变量）的个数即概率表的维数。</p>
+<p>单个条件概率： $ P(Y | x) $ 。</p>
+<ul>
+<li>包含所有 $ P(y | x) $ 的固定 $ x $ 的条目。</li>
+<li>和为 $ 1 $ 。</li>
+</ul>
+<p>条件概率组： $ P(Y | X) $ ：</p>
+<ul>
+<li>包含所有 $ P(y | x) $ 的所有条目。</li>
+<li>和为 $ X $ 的集合大小 $ |X| $ 。</li>
+</ul>
+<h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><p>一个一个消除隐藏变量。要消除隐藏变量 $ X $ ，我们要：</p>
+<ol>
+<li>将包含 $ X $ 的因子(factor)乘起来。</li>
+<li>加起来消除 $ X $ 。</li>
+</ol>
+<p>一个因子定义为未被规范化的概率。在变量消除期间的所有时候，每个因子都将与其对应的概率成正比，但每个因子的基础分布不一定像概率分布那样总和 $ 1 $ 。伪代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">elimination</span>(<span class="params">X, e, bn</span>): <span class="comment"># returns a distribution of X</span></span><br><span class="line">    <span class="comment"># X : query variable.</span></span><br><span class="line">    <span class="comment"># e : observed values for variables E(evidence variables).</span></span><br><span class="line">    <span class="comment"># bn : a Bayesian network specifying joint distribution</span></span><br><span class="line">    <span class="comment"># P(x1, ..., xn).</span></span><br><span class="line">    factors = []</span><br><span class="line">    <span class="keyword">for</span> var <span class="keyword">in</span> ORDER(var, e):</span><br><span class="line">        factors = [MAKE_FACTOR(var, e) | factors]</span><br><span class="line">        <span class="keyword">if</span> var <span class="keyword">is</span> hidden variable:</span><br><span class="line">            factors = SUM_OUT(var, factors)</span><br><span class="line">    <span class="keyword">return</span> NORMALIZE(POINTWISE_PRODUCT(factors))</span><br></pre></td></tr></table></figure>
+
+<p>（CS188 Notes 里写得和天书一样）</p>
+<p>举个例子：</p>
+<p><img src="/2025/07/27/CS188/fig3.png" alt="fig3.png"></p>
+<p>这个贝叶斯网络给定了 $ P(C), P(C | T), P(S | T), P(E | CS) $ 的联合分布。</p>
+<p>假设我们要求 $ P(T | +e) $ 。假如用枚举的方法我们需要 16 行的概率分布函数 $ P(T, C, S, E) $ ，选择包含 $ +e $ 的行，对 $ C, S $ 求和最后规范化。</p>
+<p>用消元法就先将 $ C $ 消掉，再把 $ S $ 消掉。</p>
+<ol>
+<li>将包含 $ C $ 的因子乘起来， $  f_1(C, +e, T, S) &#x3D; P(C | T) \cdot P(+e | C, S)  $ ，也写作 $ P(C, +e | T, S) $ 。</li>
+<li>在这个新的因子里将 $ C $ 求和，得到新的因子 $ f_2(+e, T, S) $ ，也写作 $ P(+e | T, S) $ 。</li>
+<li>将包含 $ S $ 的因子乘起来， $  f_3(+e, T, S) &#x3D; P(S | T) \cdot f_2(+e, T, S) $ ，也写作 $ P(+e, S | T) $ 。</li>
+<li>将 $ S $ 求和，得到新的因子 $ f_4(+e, T) $ ，也写作 $ P(+e | T) $ 。</li>
+<li>将剩下的因子乘起来，$ f_5(+e, T) &#x3D; f_4(+e, T) \cdot P(T) $ 。</li>
+</ol>
+<p>消元的顺序也会影响复杂度。如图：</p>
+<p><img src="/2025/07/27/CS188/fig4.png" alt="fig4.png"></p>
+<p>我们在进行变量消除的过程中，会进行多次乘法，这就可能会产生各种尺寸的因子，如果最大的因子中有 $ w $ 个变量，那么，单次消元的代码复杂度为 $ O(2^w) $ 。我们把 $ w $ 这个数字称为消除顺序 (Elimination Order) 的宽度 (Width)，这是衡量一个消除顺序的重要指标，我们希望能找到一个具备最小宽度的消除顺序，也就是希望最大因子的尺寸尽可能小。</p>
+<h3 id="概率推断是-NPC-问题"><a href="#概率推断是-NPC-问题" class="headerlink" title="概率推断是 NPC 问题"></a>概率推断是 NPC 问题</h3><p>Slides 提到了一种用贝爷斯网络构造 3-sat 问题的方法。众所周知 3-sat 是无法在多项式时间复杂度内解决的问题，所以概率推断是 np-hard 的。</p>
+<h3 id="取样-sampling"><a href="#取样-sampling" class="headerlink" title="取样(sampling)"></a>取样(sampling)</h3><h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><ul>
+<li>从分布 S 中取 N 个样本。</li>
+<li>计算后验概率。</li>
+<li>体现这个概率收敛于真实概率 P 。</li>
+</ul>
+<h4 id="先验采样-Prior-Sampling"><a href="#先验采样-Prior-Sampling" class="headerlink" title="先验采样(Prior Sampling)"></a>先验采样(Prior Sampling)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">For i = 1, 2, ..., n</span><br><span class="line">    Sample x_i from P(X_i | Parents(X_i))</span><br><span class="line">return (x_1, x_2, ..., x_n)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这个过程生成样本，其中有 $ P(x_1, \dots, x_n) $ 的概率生成样本 $ (x_1, \dots, x_n) $ 。</li>
+<li>令一个事件的样本数量为 $ N_{PS}(x_1, \dots, x_n) $ 。</li>
+<li></li>
+</ul>
+<p>$$<br>\begin{aligned}<br>    \lim_{N \rightarrow \infin} \hat{P}(x_1, \dots, x_n) &amp;&#x3D; \lim_{N \rightarrow \infin} N_{PS}(x_1, \dots, x_n) &#x2F; N \<br>    &amp;&#x3D; P(x_1, \dots, x_n)<br>\end{aligned}<br>$$</p>
+<h4 id="拒绝采样-Rejection-Sampling"><a href="#拒绝采样-Rejection-Sampling" class="headerlink" title="拒绝采样(Rejection Sampling)"></a>拒绝采样(Rejection Sampling)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: evidence instantiation</span><br><span class="line">For i = 1, 2, ..., n</span><br><span class="line">    Sample x_i from P(X_i | Parents(X_i))</span><br><span class="line">    if x_i not consistent with evidence</span><br><span class="line">        return: reject this sample</span><br><span class="line">return (x_1, x_2, ..., x_n)</span><br></pre></td></tr></table></figure>
+
+<p>在 Prior Sampling 的基础上把不符合条件（不满足证据变量条件）的样本直接在采样的时候删去。</p>
+<h4 id="Likelihood-Weighting"><a href="#Likelihood-Weighting" class="headerlink" title="Likelihood Weighting"></a>Likelihood Weighting</h4><ul>
+<li>rejection sampling 的问题：当证据变量的概率很小时，会拒绝很多样本。</li>
+<li>Idea：直接固定证据变量(要赋予一定的权重，大小为得到证据变量的条件概率)。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input: evidence instantiation</span><br><span class="line">w = 1.0</span><br><span class="line">For i = 1, 2, ..., n</span><br><span class="line">    if x_i is an evidence variable</span><br><span class="line">        X_i = observation x_i for X_i</span><br><span class="line">        set w = w * P(x_i | Parents(X_i))</span><br><span class="line">    else</span><br><span class="line">        sample x_i from P(x_i | Parents(X_i))</span><br><span class="line">return (x_1, x_2, ..., x_n), w</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Likelihood Weighting 的问题：Evidence influences the choice of downstream variables, but not upstream ones (C isn’t more<br>likely to get a value matching the evidence) （没看懂，大概是拓扑序前面的节点会影响后面的节点，但是后面的节点不会对前面的节点有影响，但这怎么成了问题）（哦，大概是条件概率表不构成拓扑关系，这时候就不能用之前的方式）</li>
+</ul>
+<h4 id="吉布斯采样-Gibbs-Sampling"><a href="#吉布斯采样-Gibbs-Sampling" class="headerlink" title="吉布斯采样(Gibbs Sampling)"></a>吉布斯采样(Gibbs Sampling)</h4><p>假设有一随机向量 $ (x_1,x_2,\dots,x_n) $ ，每一维是一随机变量。</p>
+<p>显然想要从多元分布的联合概率分布中直接抽样是相当困难的。</p>
+<p>先从任意一个初始状态 $ (x_1^{(0)}, \dots, x_n^{(0)}) $ 开始，每一维度单独采样，迭代多次。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for t = 1, 2, ..., T</span><br><span class="line">    for i = 1, 2, ..., n</span><br><span class="line">        if x_i is not an evident variable</span><br><span class="line">            sample x_i^&#123;(t)&#125; from P(x_i | (x_1^&#123;(t - 1)&#125;, ..., x_n^&#123;(t - 1)&#125;) \ x_i^&#123;(t - 1)&#125;)</span><br><span class="line">        else</span><br><span class="line">            x_i^&#123;(t)&#125; = x_i^&#123;(t - 1)&#125; (remain the evident value)</span><br><span class="line">    cnt[(x_1^&#123;(T)&#125;, ..., x_n^&#123;(T)&#125;)] += 1</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/07/27/codeplus-2018-4-yue-sai-zu-he-shu-wen-ti-2/" rel="next" title="【CodePlus 2018 4 月赛】组合数问题 2">
+                <i class="fa fa-chevron-left"></i> 【CodePlus 2018 4 月赛】组合数问题 2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2025/07/27/CSP2019-you-ji/" rel="prev" title="CSP2019 游记">
+                CSP2019 游记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="daniel14311531"/>
+            
+              <p class="site-author-name" itemprop="name">daniel14311531</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/daniel14311531" title="GitHub &rarr; https:&#x2F;&#x2F;github.com&#x2F;daniel14311531" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-github&quot;&gt;&lt;&#x2F;i&gt;GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:daniel14311531@qq.com" title="E-Mail &rarr; mailto:daniel14311531@qq.com" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-envelope&quot;&gt;&lt;&#x2F;i&gt;E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.1.</span> <span class="nav-text">基于模型的学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.</span> <span class="nav-text">不基于模型的学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BC%B0%E5%80%BC"><span class="nav-number">1.2.1.</span> <span class="nav-text">直接估值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%B7%AE%E5%BC%82%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.2.</span> <span class="nav-text">时间差异学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q-learning"><span class="nav-number">1.2.3.</span> <span class="nav-text">Q-learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Approximate-Q-learning"><span class="nav-number">1.2.4.</span> <span class="nav-text">Approximate Q-learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%90%9C%E7%B4%A2-policy-search"><span class="nav-number">1.2.5.</span> <span class="nav-text">策略搜索(policy search)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E5%92%8C%E5%BC%80%E5%8F%91-exploration-and-exploitation"><span class="nav-number">1.3.</span> <span class="nav-text">探索和开发(exploration and exploitation)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%8E%BB%E6%8E%A2%E7%B4%A2%EF%BC%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">如何去探索？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E5%87%BD%E6%95%B0-exploration-functions"><span class="nav-number">1.3.2.</span> <span class="nav-text">探索函数(exploration functions)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E6%82%94-regret"><span class="nav-number">1.3.3.</span> <span class="nav-text">反悔(regret)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="nav-number">3.</span> <span class="nav-text">贝叶斯网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C%E8%A1%A8%E8%BE%BE-Bayesian-Network-Representation"><span class="nav-number">3.1.</span> <span class="nav-text">贝叶斯网络表达(Bayesian Network Representation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84-Structure-of-Bayes-Nets"><span class="nav-number">3.2.</span> <span class="nav-text">贝叶斯网络结构(Structure of Bayes Nets)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D%E5%88%86%E7%A6%BB-D-Seperation"><span class="nav-number">3.3.</span> <span class="nav-text">D分离(D-Seperation)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C%E7%8B%AC%E7%AB%8B%E6%80%A7%E9%97%AE%E9%A2%98%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">贝叶斯网络独立性问题的形式化定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB-%E9%9D%9E%E6%BF%80%E6%B4%BB%E8%B7%AF%E5%BE%84"><span class="nav-number">3.3.2.</span> <span class="nav-text">激活 &#x2F; 非激活路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">3.3.3.</span> <span class="nav-text">贝叶斯网络中的条件独立性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%80%A7%E9%9A%90%E5%90%AB%E5%85%B3%E7%B3%BB"><span class="nav-number">3.4.</span> <span class="nav-text">贝叶斯网络的独立性隐含关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E6%8E%A8%E6%96%AD"><span class="nav-number">3.5.</span> <span class="nav-text">概率推断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE"><span class="nav-number">3.5.1.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E5%85%83%E6%B3%95"><span class="nav-number">3.5.2.</span> <span class="nav-text">消元法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E6%8E%A8%E6%96%AD%E6%98%AF-NPC-%E9%97%AE%E9%A2%98"><span class="nav-number">3.6.</span> <span class="nav-text">概率推断是 NPC 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E6%A0%B7-sampling"><span class="nav-number">3.7.</span> <span class="nav-text">取样(sampling)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">3.7.1.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%88%E9%AA%8C%E9%87%87%E6%A0%B7-Prior-Sampling"><span class="nav-number">3.7.2.</span> <span class="nav-text">先验采样(Prior Sampling)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7-Rejection-Sampling"><span class="nav-number">3.7.3.</span> <span class="nav-text">拒绝采样(Rejection Sampling)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Likelihood-Weighting"><span class="nav-number">3.7.4.</span> <span class="nav-text">Likelihood Weighting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7-Gibbs-Sampling"><span class="nav-number">3.7.5.</span> <span class="nav-text">吉布斯采样(Gibbs Sampling)</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">daniel14311531</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">266k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">4:02</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v7.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

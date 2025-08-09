@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="经典SAM题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SAM练习题">
+<meta property="og:url" content="http://yoursite.com/2025/07/27/SAM-lian-xi-ti/index.html">
+<meta property="og:site_name" content="daniel14311531&#39;s blog">
+<meta property="og:description" content="经典SAM题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-27T08:46:28.436Z">
+<meta property="article:modified_time" content="2025-03-04T03:36:35.054Z">
+<meta property="article:author" content="daniel14311531">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="SAM">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2025/07/27/SAM-lian-xi-ti/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SAM练习题 | daniel14311531's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">daniel14311531's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">To love and win is the best thing. To love and lose is the next best thing.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-tags&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2025/07/27/SAM-lian-xi-ti/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daniel14311531"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="daniel14311531's blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SAM练习题
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2025-07-27 16:46:28" itemprop="dateCreated datePublished" datetime="2025-07-27T16:46:28+08:00">2025-07-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2025-03-04 11:36:35" itemprop="dateModified" datetime="2025-03-04T11:36:35+08:00">2025-03-04</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">10k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">经典SAM题</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <span id="more"></span>  
+
+<h3 id="常用结论："><a href="#常用结论：" class="headerlink" title="常用结论："></a>常用结论：</h3><ol>
+<li>字符串border排序后可以分成O(log|s|)段，每段是一个等差数列。  </li>
+<li>后缀树的 $ parent $ 树是原串反串的后缀树。</li>
+</ol>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SAM</span> &#123;</span><br><span class="line">	<span class="type">int</span> ch[<span class="number">26</span>][N + N], fa[N + N], len[N + N], lst, sz, f[N + N];</span><br><span class="line">	<span class="type">int</span> sa[N + N], tex[N + N];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) &#123;</span><br><span class="line">			fa[i] = len[i] = <span class="number">0</span>; <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">26</span>; j++) ch[j][i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		lst = sz = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">		<span class="type">int</span> p = lst, np = ++sz; lst = np, len[np] = len[p] + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(; !ch[c][p]; p = fa[p]) ch[c][p] = np;</span><br><span class="line">		<span class="keyword">if</span>(!p) fa[np] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> q = ch[c][p]; <span class="keyword">if</span>(len[q] == len[p] + <span class="number">1</span>) fa[np] = q;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="type">int</span> nq = ++sz;</span><br><span class="line">				len[nq] = len[p] + <span class="number">1</span>, fa[nq] = fa[q], fa[q] = fa[np] = nq;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) ch[i][nq] = ch[i][q];</span><br><span class="line">				<span class="keyword">for</span>(; ch[c][p] == q; p = fa[p]) ch[c][p] = nq;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Sort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) ++tex[len[i]];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) tex[i] += tex[i<span class="number">-1</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) sa[tex[len[i]]--] = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = sz, u; i; i--) u = sa[i], rt[fa[u]] = <span class="built_in">merge</span>(rt[fa[u]], rt[u]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h3><h4 id="模板-后缀自动机"><a href="#模板-后缀自动机" class="headerlink" title="模板 后缀自动机"></a>模板 后缀自动机</h4><p><a href="https://www.luogu.org/problemnew/show/P3804"> 模板 后缀自动机</a><br>题意：给定一个只包含小写字母的字符串 $ S $ , 请你求出 $ S $ 的所有出现次数不为 $ 1 $ 的子串的出现次数乘上该子串长度的最大值。<br>做法：建后缀自动机，定义每个节点 $ sz[i] &#x3D; 1 $，将所有串的拓扑序得到，从后往前枚举，每次 $ sz[fa[u]] +&#x3D; sz[u], ans &#x3D; Max(ans, len[u] * sz[u]) $。  </p>
+<hr>
+<h4 id="TJOI2015-弦论"><a href="#TJOI2015-弦论" class="headerlink" title="TJOI2015 弦论"></a>TJOI2015 弦论</h4><p><a href="https://www.luogu.org/problemnew/show/P3975">TJOI2015 弦论</a><br>题意：对于一个给定的长度为 $ n $ 的字符串,求出它的第k小子串是什么。<br>做法：建后缀自动机，定义每个节点 $ sz[i] &#x3D; 1 $，将所有串的拓扑序得到，从后往前枚举，每次 $ sz[fa[u]] +&#x3D; sz[u] (t &#x3D; 1), sz[u] &#x3D; 1 (t &#x3D; 0) $，再从前往后，每次 $ for (j; 0; 26) sum[u] +&#x3D; sum[ch[u][j]] $ ，从根节点按字典序 $ dfs $ ，得到答案。  </p>
+<hr>
+<h4 id="AHOI2013-差异"><a href="#AHOI2013-差异" class="headerlink" title="AHOI2013 差异"></a>AHOI2013 差异</h4><p><a href="https://www.luogu.org/problemnew/show/P4248">AHOI2013 差异</a><br>题意请看链接。<br>做法：求两个后缀的最长公共前缀，显然就是两个后缀的节点在 $ Parent $ 树上的 $ LCA $ 。以 $ p $ 为儿子的边的边权为 $ len[p]-len[fa[p]] $ ，我们考虑一条边对答案的贡献，显然就是有 $ sz[p] \times (n - sz[p] ) $ 条路径经过这条边，乘上边权加入答案即可。  </p>
+<hr>
+<h4 id="USACO17DEC-Standing-Out-from-the-Herd"><a href="#USACO17DEC-Standing-Out-from-the-Herd" class="headerlink" title="USACO17DEC Standing Out from the Herd"></a>USACO17DEC Standing Out from the Herd</h4><p><a href="https://www.luogu.org/problemnew/show/P4081">USACO17DEC Standing Out from the Herd</a><br>题意见链接。<br>做法：建出广义后缀自动机，再将每一个字符串每一个位置插入后缀自动机（节点权值加一），最后后缀自动机节点权值为一的点为独特点，它的贡献为它在 $ parent $ 树上的深度减去它的父亲在 $ parent $ 树上的深度。  </p>
+<hr>
+<h4 id="SCOI2012-喵星球上的点名"><a href="#SCOI2012-喵星球上的点名" class="headerlink" title="SCOI2012 喵星球上的点名"></a>SCOI2012 喵星球上的点名</h4><p><a href="https://www.luogu.org/problemnew/show/P2336">SCOI2012 喵星球上的点名</a><br>建出广义后缀自动机，建出 $ parent $ 树，显然一个串的贡献为它在 $ parent $ 树的子树大小。然后可以莫队处理。  </p>
+<hr>
+<h4 id="LCS-Longest-Common-Substring"><a href="#LCS-Longest-Common-Substring" class="headerlink" title="LCS - Longest Common Substring"></a>LCS - Longest Common Substring</h4><p><a href="https://www.luogu.org/problemnew/show/SP1811">LCS - Longest Common Substring</a><br>题意：给定两个字符串，求出它们的最长公共子串。<br>做法：给其中一个串建后缀自动机，另一个串分别与其匹配，再过程中对 $ len[u] $ 取 $ Max $ 即可。  </p>
+<hr>
+<h4 id="ZJOI2015-诸神眷顾的幻想乡"><a href="#ZJOI2015-诸神眷顾的幻想乡" class="headerlink" title="ZJOI2015 诸神眷顾的幻想乡"></a>ZJOI2015 诸神眷顾的幻想乡</h4><p><a href="https://www.luogu.org/problemnew/show/P3346"> ZJOI2015 诸神眷顾的幻想乡</a><br>题意：给出一个字母树，任何一条从叶子开始的有向路径为一个字符串，询问不同的字符串个数。<br>做法：将每个叶子节点定位根 $ dfs $ ，建广义后缀自动机，对于每个节点，对答案的贡献为 $ len[u] - len[fa[u]] $。  </p>
+<hr>
+<h4 id="CF235C-Cyclical-Quest"><a href="#CF235C-Cyclical-Quest" class="headerlink" title="CF235C Cyclical Quest"></a>CF235C Cyclical Quest</h4><p><a href="http://codeforces.com/problemset/problem/235/C">CF235C Cyclical Quest</a><br>题意：给一个主串和多个询问串，求询问串的所有样子不同的周期同构出现次数和。<br>做法：给主串建后缀自动机，拓扑排序计算主串的某个子串出现次数。对于每个询问，将询问串倍长（最后一个串不复制），然后在自动机上跑，若匹配长度大于等于原询问串长度且是为访问过的状态，则答案加上该子串出现次数。  </p>
+<hr>
+<h4 id="LCS2-Longest-Common-Substring-II"><a href="#LCS2-Longest-Common-Substring-II" class="headerlink" title="LCS2 - Longest Common Substring II"></a>LCS2 - Longest Common Substring II</h4><p><a href="https://www.spoj.com/problems/LCS2/">LCS2 - Longest Common Substring II</a><br>题意：给定一些字符串，求出它们的最长公共子串。<br>做法：给其中一个串建后缀自动机，其他串分别与其匹配，记录自动机上每个节点能匹配的最长长度，取 $ Max $ 即可。  </p>
+<hr>
+<h4 id="SDOI2016-生成魔咒"><a href="#SDOI2016-生成魔咒" class="headerlink" title="SDOI2016 生成魔咒"></a>SDOI2016 生成魔咒</h4><p><a href="https://www.luogu.org/problemnew/show/P4070"> SDOI2016 生成魔咒</a><br>题意：每次再字符串末尾新加入一个字符（数字），并求当前字符串中本质不同的字串的的个数。<br>做法：考虑建 $ SAM $ 的过程是在线的，每次增加的贡献为 $len[np] - len[fa[np]]$。  </p>
+<hr>
+<h4 id="NOI2015-品酒大会"><a href="#NOI2015-品酒大会" class="headerlink" title="NOI2015 品酒大会"></a>NOI2015 品酒大会</h4><p><a href="https://www.luogu.org/problemnew/show/P2178"> NOI2015 品酒大会</a><br><a href="http://uoj.ac/problem/131">强力的HACK数据</a>  </p>
+<p>题意： $ \forall i \in [0, n) $ ，求有多少对后缀满足 $ len(lcp) \geq i $ ， 并求出两个后缀的权值乘积的最大值。<br>做法：将串倒着建后缀自动机，使 $ lcs $ 变成 $ lcp $ ，然后构造 $ parent $ 树，便可以从孩子里得到信息，计数问题转移显然。由于数据存在负数，所以可能负负得正得到最优解。记录一个节点子树中最大值、最小值、次大值、次小值，然后转移。当然还有许多细节（交UOJ就知道了）。  </p>
+<hr>
+<h4 id="「雅礼集训-2017-Day7」事情的相似度"><a href="#「雅礼集训-2017-Day7」事情的相似度" class="headerlink" title="「雅礼集训 2017 Day7」事情的相似度"></a>「雅礼集训 2017 Day7」事情的相似度</h4><p><a href="https://loj.ac/problem/6041">「雅礼集训 2017 Day7」事情的相似度</a><br>题意：给你一个长度为 $ n $ 的01串，$ m $ 次询问，每次询问给出 $ l $ 、$ r $ ，求从 $ [l,r] $ 中选出两个不同的前缀的最长公共后缀长度的最大值。 $ n,m \leq 10^5 $<br>做法：建后缀自动机，那么任意两个前缀的最长公共后缀即为parent树上的LCA深度。将询问离线，按右端点排序，每次加入一个前缀，就将他们在parent树上到根节点的路径打上他们的标记。access时，若遇到了以前打的标记，则该节点为旧标记与新标记的lca。将贡献计入树状数组（维护前缀最大值）并将旧覆盖。  </p>
+<hr>
+<h4 id="「雅礼集训-2017-Day1」字符串"><a href="#「雅礼集训-2017-Day1」字符串" class="headerlink" title="「雅礼集训 2017 Day1」字符串"></a>「雅礼集训 2017 Day1」字符串</h4><p><a href="https://loj.ac/problem/6031">「雅礼集训 2017 Day1」字符串</a><br>题意：先给你一个模式串，然后再给出若干个询问区间（即接下来询问的子串位置）。接着有q次询问，给出若干个相同长度的字符串以及l, r，让你分别求出第l个询问区间到第r个询问区间在模式串中出现次数之和（下标从0开始计算）。<br>做法：<br>显然的暴力做法是将模式串建后缀自动机后询问无脑匹配。<br>然后这道题很奇怪的一点是询问次数乘上询问串长度不大于100000。<br>假如询问串长度比较小，就用一个二维动态数组存储询问串下标确定时有哪些询问区间编号。每次询问枚举询问串左右下标在自动机上跑判断是否合法，然后在用lower_bound找出用到的询问区间个数，然后询问串长度不大于 $ \sqrt {100000} $ 的就过了，实测至少60分。<br>假如询问很少，我们就对每个询问串，在自动机上跑，预处理每个节点在parent树上的位置及能往前匹配的最长长度，然后暴力枚举用到的询问区间，先判断合法，然后在倍增到这个询问区间的长度，然后就过了。<br>话说这道题可以拆成两部分的性质真的不太明显。</p>
+<hr>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"># 字符串</a>
+          
+            <a href="/tags/SAM/" rel="tag"># SAM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/07/27/pytorch-checkpoints/" rel="next" title="pytorch-checkpoints相关">
+                <i class="fa fa-chevron-left"></i> pytorch-checkpoints相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2025/07/27/san-si-yuan-huan-ji-shu/" rel="prev" title="三（四）元环计数">
+                三（四）元环计数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="daniel14311531"/>
+            
+              <p class="site-author-name" itemprop="name">daniel14311531</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/daniel14311531" title="GitHub &rarr; https:&#x2F;&#x2F;github.com&#x2F;daniel14311531" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-github&quot;&gt;&lt;&#x2F;i&gt;GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:daniel14311531@qq.com" title="E-Mail &rarr; mailto:daniel14311531@qq.com" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-envelope&quot;&gt;&lt;&#x2F;i&gt;E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%93%E8%AE%BA%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">常用结论：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">例题：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF-%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.</span> <span class="nav-text">模板 后缀自动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TJOI2015-%E5%BC%A6%E8%AE%BA"><span class="nav-number">3.2.</span> <span class="nav-text">TJOI2015 弦论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AHOI2013-%E5%B7%AE%E5%BC%82"><span class="nav-number">3.3.</span> <span class="nav-text">AHOI2013 差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#USACO17DEC-Standing-Out-from-the-Herd"><span class="nav-number">3.4.</span> <span class="nav-text">USACO17DEC Standing Out from the Herd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SCOI2012-%E5%96%B5%E6%98%9F%E7%90%83%E4%B8%8A%E7%9A%84%E7%82%B9%E5%90%8D"><span class="nav-number">3.5.</span> <span class="nav-text">SCOI2012 喵星球上的点名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LCS-Longest-Common-Substring"><span class="nav-number">3.6.</span> <span class="nav-text">LCS - Longest Common Substring</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZJOI2015-%E8%AF%B8%E7%A5%9E%E7%9C%B7%E9%A1%BE%E7%9A%84%E5%B9%BB%E6%83%B3%E4%B9%A1"><span class="nav-number">3.7.</span> <span class="nav-text">ZJOI2015 诸神眷顾的幻想乡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CF235C-Cyclical-Quest"><span class="nav-number">3.8.</span> <span class="nav-text">CF235C Cyclical Quest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LCS2-Longest-Common-Substring-II"><span class="nav-number">3.9.</span> <span class="nav-text">LCS2 - Longest Common Substring II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SDOI2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92"><span class="nav-number">3.10.</span> <span class="nav-text">SDOI2016 生成魔咒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NOI2015-%E5%93%81%E9%85%92%E5%A4%A7%E4%BC%9A"><span class="nav-number">3.11.</span> <span class="nav-text">NOI2015 品酒大会</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E3%80%8C%E9%9B%85%E7%A4%BC%E9%9B%86%E8%AE%AD-2017-Day7%E3%80%8D%E4%BA%8B%E6%83%85%E7%9A%84%E7%9B%B8%E4%BC%BC%E5%BA%A6"><span class="nav-number">3.12.</span> <span class="nav-text">「雅礼集训 2017 Day7」事情的相似度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E3%80%8C%E9%9B%85%E7%A4%BC%E9%9B%86%E8%AE%AD-2017-Day1%E3%80%8D%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.13.</span> <span class="nav-text">「雅礼集训 2017 Day1」字符串</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">daniel14311531</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">266k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">4:02</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v7.3.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
