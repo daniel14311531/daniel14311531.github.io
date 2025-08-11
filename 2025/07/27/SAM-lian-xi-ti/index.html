@@ -171,7 +171,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -262,7 +262,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
+      <span>3.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -281,14 +281,16 @@
     
     
     <div class="post-body" itemprop="articleBody"><span id="more"></span>  
+
 <h3 id="常用结论："><a href="#常用结论：" class="headerlink" title="常用结论："></a>常用结论：</h3><ol>
 <li>字符串border排序后可以分成O(log|s|)段，每段是一个等差数列。  </li>
-<li>后缀树的 $ parent $ 树是原串反串的后缀树。  </li>
+<li>后缀树的 $ parent $ 树是原串反串的后缀树。</li>
 </ol>
 <h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SAM</span> &#123;</span><br><span class="line">	<span class="type">int</span> ch[<span class="number">26</span>][N + N], fa[N + N], len[N + N], lst, sz, f[N + N];</span><br><span class="line">	<span class="type">int</span> sa[N + N], tex[N + N];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) &#123;</span><br><span class="line">			fa[i] = len[i] = <span class="number">0</span>; <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="number">26</span>; j++) ch[j][i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		lst = sz = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> c)</span> </span>&#123;</span><br><span class="line">		<span class="type">int</span> p = lst, np = ++sz; lst = np, len[np] = len[p] + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(; !ch[c][p]; p = fa[p]) ch[c][p] = np;</span><br><span class="line">		<span class="keyword">if</span>(!p) fa[np] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> q = ch[c][p]; <span class="keyword">if</span>(len[q] == len[p] + <span class="number">1</span>) fa[np] = q;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="type">int</span> nq = ++sz;</span><br><span class="line">				len[nq] = len[p] + <span class="number">1</span>, fa[nq] = fa[q], fa[q] = fa[np] = nq;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) ch[i][nq] = ch[i][q];</span><br><span class="line">				<span class="keyword">for</span>(; ch[c][p] == q; p = fa[p]) ch[c][p] = nq;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Sort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) ++tex[len[i]];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) tex[i] += tex[i<span class="number">-1</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= sz; i++) sa[tex[len[i]]--] = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = sz, u; i; i--) u = sa[i], rt[fa[u]] = <span class="built_in">merge</span>(rt[fa[u]], rt[u]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h3><h4 id="模板-后缀自动机"><a href="#模板-后缀自动机" class="headerlink" title="模板 后缀自动机"></a>模板 后缀自动机</h4><p><a href="https://www.luogu.org/problemnew/show/P3804"> 模板 后缀自动机</a><br>题意：给定一个只包含小写字母的字符串 $ S $ , 请你求出 $ S $ 的所有出现次数不为 $ 1 $ 的子串的出现次数乘上该子串长度的最大值。<br>做法：建后缀自动机，定义每个节点 $ sz[i] = 1 $，将所有串的拓扑序得到，从后往前枚举，每次 $ sz[fa[u]] += sz[u], ans = Max(ans, len[u] * sz[u]) $。  </p>
+
+<h3 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h3><h4 id="模板-后缀自动机"><a href="#模板-后缀自动机" class="headerlink" title="模板 后缀自动机"></a>模板 后缀自动机</h4><p><a href="https://www.luogu.org/problemnew/show/P3804"> 模板 后缀自动机</a><br>题意：给定一个只包含小写字母的字符串 $ S $ , 请你求出 $ S $ 的所有出现次数不为 $ 1 $ 的子串的出现次数乘上该子串长度的最大值。<br>做法：建后缀自动机，定义每个节点 $ sz[i] &#x3D; 1 $，将所有串的拓扑序得到，从后往前枚举，每次 $ sz[fa[u]] +&#x3D; sz[u], ans &#x3D; Max(ans, len[u] * sz[u]) $。  </p>
 <hr>
-<h4 id="TJOI2015-弦论"><a href="#TJOI2015-弦论" class="headerlink" title="TJOI2015 弦论"></a>TJOI2015 弦论</h4><p><a href="https://www.luogu.org/problemnew/show/P3975">TJOI2015 弦论</a><br>题意：对于一个给定的长度为 $ n $ 的字符串,求出它的第k小子串是什么。<br>做法：建后缀自动机，定义每个节点 $ sz[i] = 1 $，将所有串的拓扑序得到，从后往前枚举，每次 $ sz[fa[u]] += sz[u] (t = 1), sz[u] = 1 (t = 0) $，再从前往后，每次 $ for (j; 0; 26) sum[u] += sum[ch[u][j]] $ ，从根节点按字典序 $ dfs $ ，得到答案。  </p>
+<h4 id="TJOI2015-弦论"><a href="#TJOI2015-弦论" class="headerlink" title="TJOI2015 弦论"></a>TJOI2015 弦论</h4><p><a href="https://www.luogu.org/problemnew/show/P3975">TJOI2015 弦论</a><br>题意：对于一个给定的长度为 $ n $ 的字符串,求出它的第k小子串是什么。<br>做法：建后缀自动机，定义每个节点 $ sz[i] &#x3D; 1 $，将所有串的拓扑序得到，从后往前枚举，每次 $ sz[fa[u]] +&#x3D; sz[u] (t &#x3D; 1), sz[u] &#x3D; 1 (t &#x3D; 0) $，再从前往后，每次 $ for (j; 0; 26) sum[u] +&#x3D; sum[ch[u][j]] $ ，从根节点按字典序 $ dfs $ ，得到答案。  </p>
 <hr>
 <h4 id="AHOI2013-差异"><a href="#AHOI2013-差异" class="headerlink" title="AHOI2013 差异"></a>AHOI2013 差异</h4><p><a href="https://www.luogu.org/problemnew/show/P4248">AHOI2013 差异</a><br>题意请看链接。<br>做法：求两个后缀的最长公共前缀，显然就是两个后缀的节点在 $ Parent $ 树上的 $ LCA $ 。以 $ p $ 为儿子的边的边权为 $ len[p]-len[fa[p]] $ ，我们考虑一条边对答案的贡献，显然就是有 $ sz[p] \times (n - sz[p] ) $ 条路径经过这条边，乘上边权加入答案即可。  </p>
 <hr>
@@ -385,13 +387,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:25</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

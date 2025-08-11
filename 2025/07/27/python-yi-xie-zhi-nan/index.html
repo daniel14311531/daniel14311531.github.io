@@ -171,7 +171,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -281,33 +281,50 @@
     
     
     <div class="post-body" itemprop="articleBody"><span id="more"></span>
-<p><a href="https://pytorch.org">&gt; PyTorch &lt;</a></p>
+
+<p><a href="https://pytorch.org/">&gt; PyTorch &lt;</a></p>
 <p>[TOC]</p>
 <h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n <span class="variable">$&#123;environment_name&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate <span class="variable">$&#123;environment_name&#125;</span></span><br><span class="line"><span class="comment"># conda deactivate $&#123;environment_name&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="选择python版本"><a href="#选择python版本" class="headerlink" title="选择python版本"></a>选择python版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install python=<span class="variable">$&#123;python_version&#125;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h2><p><a href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#ubuntu">&gt; official website &lt;</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install cudatoolkit==<span class="variable">$&#123;cuda_version&#125;</span> -c nvidia</span><br><span class="line">conda install cuda -c nvidia/label/cuda-<span class="variable">$&#123;cuda_version&#125;</span></span><br><span class="line">conda install nvidia::cuda-nvcc <span class="comment"># an alternative way</span></span><br></pre></td></tr></table></figure>
-<h2 id="安装PyTorch"><a href="#安装PyTorch" class="headerlink" title="安装PyTorch"></a>安装PyTorch</h2><p><a href="https://pytorch.org">&gt; PyTorch &lt;</a></p>
+
+<h2 id="安装PyTorch"><a href="#安装PyTorch" class="headerlink" title="安装PyTorch"></a>安装PyTorch</h2><p><a href="https://pytorch.org/">&gt; PyTorch &lt;</a></p>
 <h2 id="This-transaction-has-incompatible-packages-due-to-a-shared-path"><a href="#This-transaction-has-incompatible-packages-due-to-a-shared-path" class="headerlink" title="This transaction has incompatible packages due to a shared path."></a>This transaction has incompatible packages due to a shared path.</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda clean --all</span><br></pre></td></tr></table></figure>
+
 <h2 id="安装torch-scatter"><a href="#安装torch-scatter" class="headerlink" title="安装torch-scatter"></a>安装torch-scatter</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch-scatter -c pyg</span><br></pre></td></tr></table></figure>
+
 <h2 id="查询cuda-memory"><a href="#查询cuda-memory" class="headerlink" title="查询cuda memory"></a>查询cuda memory</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi --query-gpu=memory.total,memory.used --format=csv</span><br></pre></td></tr></table></figure>
+
 <h2 id="检查当前GPU内存占用情况"><a href="#检查当前GPU内存占用情况" class="headerlink" title="检查当前GPU内存占用情况"></a>检查当前GPU内存占用情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi --query-compute-apps=pid,name,gpu_bus_id,used_memory --format=csv</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ nvidia-smi --help-query-compute-apps</span><br><span class="line"></span><br><span class="line">List of valid properties to query <span class="keyword">for</span> the switch <span class="string">&quot;--query-compute-apps&quot;</span>:</span><br><span class="line"></span><br><span class="line">Section about Active Compute Processes properties</span><br><span class="line">List of processes having compute context on the device.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;timestamp&quot;</span></span><br><span class="line">The timestamp of when the query was made <span class="keyword">in</span> format <span class="string">&quot;YYYY/MM/DD HH:MM:SS.msec&quot;</span>.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_name&quot;</span></span><br><span class="line">The official product name of the GPU. This is an alphanumeric string. For all products.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_bus_id&quot;</span></span><br><span class="line">PCI bus <span class="built_in">id</span> as <span class="string">&quot;domain:bus:device.function&quot;</span>, <span class="keyword">in</span> hex.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_serial&quot;</span></span><br><span class="line">This number matches the serial number physically printed on each board. It is a globally unique immutable alphanumeric value.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;gpu_uuid&quot;</span></span><br><span class="line">This value is the globally unique immutable alphanumeric identifier of the GPU. It does not correspond to any physical label on the board.</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;pid&quot;</span></span><br><span class="line">Process ID of the compute application</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;process_name&quot;</span> or <span class="string">&quot;name&quot;</span></span><br><span class="line">Process Name</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;used_gpu_memory&quot;</span> or <span class="string">&quot;used_memory&quot;</span></span><br><span class="line">Amount memory used on the device by the context. Not available on Windows when running <span class="keyword">in</span> WDDM mode because Windows KMD manages all the memory not NVIDIA driver.</span><br></pre></td></tr></table></figure>
+
 <h1 id="orin安装pytorch"><a href="#orin安装pytorch" class="headerlink" title="orin安装pytorch"></a>orin安装pytorch</h1><h2 id="error-‘class-torch-Library’-has-no-member-named-‘set-python-module’-22"><a href="#error-‘class-torch-Library’-has-no-member-named-‘set-python-module’-22" class="headerlink" title="error: ‘class torch::Library’ has no member named ‘set_python_module’ 22"></a>error: ‘class torch::Library’ has no member named ‘set_python_module’ 22</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pytorch/vision torchvision</span><br><span class="line"><span class="built_in">cd</span> torchvision</span><br><span class="line">git checkout v0.16.0</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
 <h2 id="安装timm"><a href="#安装timm" class="headerlink" title="安装timm"></a>安装timm</h2><p><a href="https://blog.csdn.net/zlbbme/article/details/128647059">&gt; link &lt;</a></p>
 <p><a href="https://pypi.tuna.tsinghua.edu.cn/simple/timm/">&gt; package &lt;</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget &lt;package&gt;.whl</span><br><span class="line">pip install &lt;package&gt;.whl</span><br></pre></td></tr></table></figure>
+
 <h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><h2 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h2><h3 id="用-wget-下载-KITTI-上的数据"><a href="#用-wget-下载-KITTI-上的数据" class="headerlink" title="用 wget 下载 KITTI 上的数据"></a>用 wget 下载 KITTI 上的数据</h3><p>先开代理。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -b &lt;<span class="built_in">link</span>&gt;.zip</span><br></pre></td></tr></table></figure>
+
 <p>查看进度</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f wget-log</span><br></pre></td></tr></table></figure>
+
 <p>解压</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip &lt;name&gt;.zip</span><br></pre></td></tr></table></figure>
+
 <h3 id="从drive-google下载"><a href="#从drive-google下载" class="headerlink" title="从drive google下载"></a>从drive google下载</h3><p><a href="https://blog.csdn.net/qq_43235540/article/details/135976536">&gt; link &lt;</a></p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="一文解决-RuntimeError-CUDA-out-of-memory-全网最全"><a href="#一文解决-RuntimeError-CUDA-out-of-memory-全网最全" class="headerlink" title="一文解决 RuntimeError: CUDA out of memory. 全网最全"></a>一文解决 RuntimeError: CUDA out of memory. 全网最全</h2><p><a href="https://blog.csdn.net/m0_50502579/article/details/126059178">&gt; link &lt;</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    depth_pred = model(rgb)</span><br></pre></td></tr></table></figure>
+
 <h1 id="Linux的一些操作"><a href="#Linux的一些操作" class="headerlink" title="Linux的一些操作"></a>Linux的一些操作</h1><h2 id="读取当前路径下的文件总大小"><a href="#读取当前路径下的文件总大小" class="headerlink" title="读取当前路径下的文件总大小"></a>读取当前路径下的文件总大小</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -sh</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -380,13 +397,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:25</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

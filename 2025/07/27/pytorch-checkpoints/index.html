@@ -171,7 +171,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -281,13 +281,20 @@
     
     
     <div class="post-body" itemprop="articleBody"><span id="more"></span>
+
 <p>[TOC]</p>
 <h2 id="checkpoints-导出"><a href="#checkpoints-导出" class="headerlink" title="checkpoints 导出"></a>checkpoints 导出</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(&#123;<span class="string">&#x27;model_state_dict&#x27;</span>: model.state_dict()&#125;, <span class="string">&#x27;/path/to/checkpoints&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
 <h2 id="checkpoints-导入"><a href="#checkpoints-导入" class="headerlink" title="checkpoints 导入"></a>checkpoints 导入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">state = torch.load(<span class="string">&#x27;/path/to/checkpoints&#x27;</span>)</span><br><span class="line">model.load_state_dict(state[<span class="string">&#x27;model_state_dict&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
 <h2 id="model-state-dict-描述"><a href="#model-state-dict-描述" class="headerlink" title="model.state_dict() 描述"></a>model.state_dict() 描述</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(method) <span class="keyword">def</span> <span class="title function_">state_dict</span>(<span class="params"></span></span><br><span class="line"><span class="params">    *,</span></span><br><span class="line"><span class="params">    prefix: <span class="built_in">str</span> = ...,</span></span><br><span class="line"><span class="params">    keep_vars: <span class="built_in">bool</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">Any</span>]</span><br></pre></td></tr></table></figure>
+
 <h2 id="model-state-dict-keys"><a href="#model-state-dict-keys" class="headerlink" title="model.state_dict().keys()"></a>model.state_dict().keys()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(model)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Sequential(</span><br><span class="line">  (0): Conv2d(3, 16, kernel_size=(11, 11), stride=(3, 3))</span><br><span class="line">  (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (2): ReLU(inplace=True)</span><br><span class="line">  (3): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  (4): Conv2d(16, 32, kernel_size=(5, 5), stride=(1, 1))</span><br><span class="line">  (5): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (6): ReLU(inplace=True)</span><br><span class="line">  (7): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  (8): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">  (9): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (10): ReLU(inplace=True)</span><br><span class="line">  (11): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1))</span><br><span class="line">  (12): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (13): ReLU(inplace=True)</span><br><span class="line">  (14): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  (15): Flatten(start_dim=1, end_dim=-1)</span><br><span class="line">  (16): Linear(in_features=3136, out_features=2048, bias=True)</span><br><span class="line">  (17): ReLU(inplace=True)</span><br><span class="line">  (18): Linear(in_features=2048, out_features=1, bias=True)</span><br><span class="line">  (19): Sigmoid()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(model.state_dict().keys())</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">odict_keys([&#x27;0.weight&#x27;, &#x27;0.bias&#x27;, &#x27;1.weight&#x27;, &#x27;1.bias&#x27;, &#x27;1.running_mean&#x27;, &#x27;1.running_var&#x27;, &#x27;1.num_batches_tracked&#x27;, &#x27;4.weight&#x27;, &#x27;4.bias&#x27;, &#x27;5.weight&#x27;, &#x27;5.bias&#x27;, &#x27;5.running_mean&#x27;, &#x27;5.running_var&#x27;, &#x27;5.num_batches_tracked&#x27;, &#x27;8.weight&#x27;, &#x27;8.bias&#x27;, &#x27;9.weight&#x27;, &#x27;9.bias&#x27;, &#x27;9.running_mean&#x27;, &#x27;9.running_var&#x27;, &#x27;9.num_batches_tracked&#x27;, &#x27;11.weight&#x27;, &#x27;11.bias&#x27;, &#x27;12.weight&#x27;, &#x27;12.bias&#x27;, &#x27;12.running_mean&#x27;, &#x27;12.running_var&#x27;, &#x27;12.num_batches_tracked&#x27;, &#x27;16.weight&#x27;, &#x27;16.bias&#x27;, &#x27;18.weight&#x27;, &#x27;18.bias&#x27;])</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -359,13 +366,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:25</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

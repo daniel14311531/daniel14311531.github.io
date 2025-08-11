@@ -171,7 +171,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -262,14 +262,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>9.3k</span>
+      <span>9.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -287,56 +287,37 @@
 </div>
 
 <hr>
-<h1 id="传统策略梯度算法"><a href="#传统策略梯度算法" class="headerlink" title="传统策略梯度算法"></a>传统策略梯度算法</h1><h2 id="策略近似"><a href="#策略近似" class="headerlink" title="策略近似"></a>策略近似</h2><p>设$\theta$为神经网络参数，基于策略的强化学习用参数化概率分布$\pi_{\theta}(a | s) = P(a | s; \theta)$确定策略，在返回的动作概率列表中对不同的动作进行抽样选择。</p>
+<h1 id="传统策略梯度算法"><a href="#传统策略梯度算法" class="headerlink" title="传统策略梯度算法"></a>传统策略梯度算法</h1><h2 id="策略近似"><a href="#策略近似" class="headerlink" title="策略近似"></a>策略近似</h2><p>设$\theta$为神经网络参数，基于策略的强化学习用参数化概率分布$\pi_{\theta}(a | s) &#x3D; P(a | s; \theta)$确定策略，在返回的动作概率列表中对不同的动作进行抽样选择。</p>
 <h2 id="定义目标函数"><a href="#定义目标函数" class="headerlink" title="定义目标函数"></a>定义目标函数</h2><p>目标就是找到那些可能获得更多奖励期望值的动作，使它们对应的概率更大，从而策略就更有可能选择这些动作。</p>
 <p>定义的最大化目标函数：</p>
-<script type="math/tex; mode=display">
-\max_{\theta} J(\theta) = \max_{\theta} E_{\tau \sim \pi_{\theta} } (R(\tau)) = \max_{\theta} \sum_{\tau} P(\tau; \theta) R(\tau)</script><p>其中$\tau$是agent与环境交互产生的状态-动作轨迹$\tau = (s_1, a_1, \dots, s_T, a_T)$。我们的目标是通过调整$\theta$，使得获得更大奖励期望的轨迹出现的概率更高。</p>
+<p>$$<br>\max_{\theta} J(\theta) &#x3D; \max_{\theta} E_{\tau \sim \pi_{\theta} } (R(\tau)) &#x3D; \max_{\theta} \sum_{\tau} P(\tau; \theta) R(\tau)<br>$$</p>
+<p>其中$\tau$是agent与环境交互产生的状态-动作轨迹$\tau &#x3D; (s_1, a_1, \dots, s_T, a_T)$。我们的目标是通过调整$\theta$，使得获得更大奖励期望的轨迹出现的概率更高。</p>
 <p>其中，轨迹$\tau$在策略$\pi_{\theta}(a | s)$下发生的概率为：</p>
-<script type="math/tex; mode=display">
-P(\tau; \theta) = \left[ \prod_{t = 0}^T P(s_{t + 1} | s_t, a_t) \cdot \pi_{\theta} (a_t | s_t) \right]</script><p>实际枚举所有可能的轨迹是很困难的，基本都需要通过大量采样得到样本求期望值近似。</p>
-<h2 id="策略梯度"><a href="#策略梯度" class="headerlink" title="策略梯度"></a>策略梯度</h2><script type="math/tex; mode=display">
-\begin{aligned}
-\nabla_{\theta} J(\theta) &= \sum_{\tau} \nabla_{\theta} P(\tau; \theta) \cdot R(\tau) \\\\
-&= \sum_{\tau} P(\tau; \theta) \frac{\nabla_{\theta} P(\tau; \theta)}{P(\tau; \theta)} R(\tau) \\\\
-&= \sum_{\tau} P(\tau; \theta) \cdot \nabla_{\theta} \log P(\tau; \theta) \cdot R(\tau)
-\end{aligned}</script><p>根据$P(\tau; \theta)$可得：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\nabla_{\theta} \log P(\tau; \theta) &= \nabla_{\theta} \left[ \sum_{t = 0}^T \log P(s_{t + 1} | s_t, a_t) + \sum_{t = 0}^T \log \pi_{\theta} (a_t | s_t) \right] \\\\
-&= \sum_{t = 0}^T \nabla_{\theta} \log \pi_{\theta} (a_t | s_t)
-\end{aligned}</script><p>假设当前有$m$条轨迹的样本：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\nabla_{\theta} J(\theta) &\approx \frac{1}{m} \sum_{i = 1}^{m} \nabla_{\theta} \log P(\tau^{(i)}; \theta) \cdot R(\tau^{(i)}) \\\\
-&= \frac{1}{m} \sum_{i = 1}^{m} \left[ \sum_{t^{(i)} = 0}^{T^{(i)}} \nabla_{\theta} \log \pi_{\theta} (a_{t^{(i)}} | s_{t^{(i)}}) \right] \cdot R(\tau^{(i)}) \\\\
-&= \frac{1}{n} \sum_{i = 1}^{n} \nabla_{\theta} \log \pi_{\theta} (a_i | s_i) \cdot R(\tau_i) \quad \left( n = \sum_{i = 1}^{m} (T^{(i)} + 1) \right)
-\end{aligned}</script><p>策略梯度的更新规则：</p>
-<script type="math/tex; mode=display">
-\theta \leftarrow \theta + \alpha \cdot \nabla_{\theta} J(\theta)</script><h3 id="Softmax策略"><a href="#Softmax策略" class="headerlink" title="Softmax策略"></a>Softmax策略</h3><p>对于离散动作空间：</p>
-<script type="math/tex; mode=display">
-\pi_{\theta}(a | s) = \frac{e^{\phi(s, a)^T \theta}}{\sum_{a' \in A} e^{\phi(s, a')^T \theta}}</script><p>对应的策略梯度：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\\\
-&= \nabla_{\theta} \left(\phi(s, a)^T \theta -  \log \sum_{a' \in A} e^{\phi(s, a')^T \theta} \right) \\\\
-&= \phi(s, a) - \frac{\sum_{a' \in A} \phi(s, a') \cdot e^{\phi(s, a')^T \theta}}{\sum_{a' \in A} e^{\phi(s, a')^T \theta}} \\\\
-&= \phi(s, a) - \sum_{a' \in A} \phi(s, a') \cdot \pi_{\theta}(a' | s)
-\end{aligned}</script><p>如果奖励信号很高并且观察到的向量与平均向量相差很大，就会有增加该动作概率的强烈趋势。</p>
-<h3 id="高斯策略"><a href="#高斯策略" class="headerlink" title="高斯策略"></a>高斯策略</h3><p>对于连续动作空间：</p>
-<script type="math/tex; mode=display">
-\pi_{\theta}(a | s) = \frac{1}{\sqrt{2 \pi} \sigma_{\theta}} e^{- \frac{(a - \mu_{\theta})^2}{2 \sigma_{\theta}^2}}</script><p>其中正态分布的均值$\mu_{\theta} = \phi(s, a)^T \theta$。</p>
+<p>$$<br>P(\tau; \theta) &#x3D; \left[ \prod_{t &#x3D; 0}^T P(s_{t + 1} | s_t, a_t) \cdot \pi_{\theta} (a_t | s_t) \right]<br>$$</p>
+<p>实际枚举所有可能的轨迹是很困难的，基本都需要通过大量采样得到样本求期望值近似。</p>
+<h2 id="策略梯度"><a href="#策略梯度" class="headerlink" title="策略梯度"></a>策略梯度</h2><p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;&#x3D; \sum_{\tau} \nabla_{\theta} P(\tau; \theta) \cdot R(\tau) \\<br>&amp;&#x3D; \sum_{\tau} P(\tau; \theta) \frac{\nabla_{\theta} P(\tau; \theta)}{P(\tau; \theta)} R(\tau) \\<br>&amp;&#x3D; \sum_{\tau} P(\tau; \theta) \cdot \nabla_{\theta} \log P(\tau; \theta) \cdot R(\tau)<br>\end{aligned}<br>$$</p>
+<p>根据$P(\tau; \theta)$可得：</p>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta} \log P(\tau; \theta) &amp;&#x3D; \nabla_{\theta} \left[ \sum_{t &#x3D; 0}^T \log P(s_{t + 1} | s_t, a_t) + \sum_{t &#x3D; 0}^T \log \pi_{\theta} (a_t | s_t) \right] \\<br>&amp;&#x3D; \sum_{t &#x3D; 0}^T \nabla_{\theta} \log \pi_{\theta} (a_t | s_t)<br>\end{aligned}<br>$$</p>
+<p>假设当前有$m$条轨迹的样本：</p>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta} J(\theta) &amp;\approx \frac{1}{m} \sum_{i &#x3D; 1}^{m} \nabla_{\theta} \log P(\tau^{(i)}; \theta) \cdot R(\tau^{(i)}) \\<br>&amp;&#x3D; \frac{1}{m} \sum_{i &#x3D; 1}^{m} \left[ \sum_{t^{(i)} &#x3D; 0}^{T^{(i)}} \nabla_{\theta} \log \pi_{\theta} (a_{t^{(i)}} | s_{t^{(i)}}) \right] \cdot R(\tau^{(i)}) \\<br>&amp;&#x3D; \frac{1}{n} \sum_{i &#x3D; 1}^{n} \nabla_{\theta} \log \pi_{\theta} (a_i | s_i) \cdot R(\tau_i) \quad \left( n &#x3D; \sum_{i &#x3D; 1}^{m} (T^{(i)} + 1) \right)<br>\end{aligned}<br>$$</p>
+<p>策略梯度的更新规则：</p>
+<p>$$<br>\theta \leftarrow \theta + \alpha \cdot \nabla_{\theta} J(\theta)<br>$$</p>
+<h3 id="Softmax策略"><a href="#Softmax策略" class="headerlink" title="Softmax策略"></a>Softmax策略</h3><p>对于离散动作空间：</p>
+<p>$$<br>\pi_{\theta}(a | s) &#x3D; \frac{e^{\phi(s, a)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}}<br>$$</p>
 <p>对应的策略梯度：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\\\
-&= \nabla_{\theta} \left(-\frac{1}{2} \cdot \log (2 \pi \sigma_{\theta}^2) - \frac{(a -\mu_{\theta})^2}{2 \sigma_{\theta}^2} \right) \\\\
-&= \frac{(a - \mu_{\theta})\phi(s, a)}{\sigma_{\theta}^2}
-\end{aligned}</script><p>在高回报的情况下，远离均值的动作会触发强烈的更新信号。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\<br>&amp;&#x3D; \nabla_{\theta} \left(\phi(s, a)^T \theta -  \log \sum_{a’ \in A} e^{\phi(s, a’)^T \theta} \right) \\<br>&amp;&#x3D; \phi(s, a) - \frac{\sum_{a’ \in A} \phi(s, a’) \cdot e^{\phi(s, a’)^T \theta}}{\sum_{a’ \in A} e^{\phi(s, a’)^T \theta}} \\<br>&amp;&#x3D; \phi(s, a) - \sum_{a’ \in A} \phi(s, a’) \cdot \pi_{\theta}(a’ | s)<br>\end{aligned}<br>$$</p>
+<p>如果奖励信号很高并且观察到的向量与平均向量相差很大，就会有增加该动作概率的强烈趋势。</p>
+<h3 id="高斯策略"><a href="#高斯策略" class="headerlink" title="高斯策略"></a>高斯策略</h3><p>对于连续动作空间：</p>
+<p>$$<br>\pi_{\theta}(a | s) &#x3D; \frac{1}{\sqrt{2 \pi} \sigma_{\theta}} e^{- \frac{(a - \mu_{\theta})^2}{2 \sigma_{\theta}^2}}<br>$$</p>
+<p>其中正态分布的均值$\mu_{\theta} &#x3D; \phi(s, a)^T \theta$。</p>
+<p>对应的策略梯度：</p>
+<p>$$<br>\begin{aligned}<br>&amp;\quad \nabla_{\theta} \log \pi_{\theta}(a | s) \\<br>&amp;&#x3D; \nabla_{\theta} \left(-\frac{1}{2} \cdot \log (2 \pi \sigma_{\theta}^2) - \frac{(a -\mu_{\theta})^2}{2 \sigma_{\theta}^2} \right) \\<br>&amp;&#x3D; \frac{(a - \mu_{\theta})\phi(s, a)}{\sigma_{\theta}^2}<br>\end{aligned}<br>$$</p>
+<p>在高回报的情况下，远离均值的动作会触发强烈的更新信号。</p>
 <p>在实际任务中，我们没有必要手动计算偏导数，使用深度学习框架的自动求导。定义损失函数：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}(a, s, r) = -\log(\pi_\theta(a | s)) r</script><p>即可让计算机自动求导。</p>
+<p>$$<br>\mathcal{L}(a, s, r) &#x3D; -\log(\pi_\theta(a | s)) r<br>$$</p>
+<p>即可让计算机自动求导。</p>
 <h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Network: theta := R^(|theta|)</span><br><span class="line">for n = 1 to N:</span><br><span class="line">    tau &lt;- pi(theta)</span><br><span class="line">    for t = 1 to T:</span><br><span class="line">        R(tau | t) = R[t] + R[t + 1] + ... + R[T]</span><br><span class="line">        theta &lt;- theta - alpha * R(tau | t) * grad(theta, pi(theta, a | s))</span><br></pre></td></tr></table></figure>
+
 <p>这里对于一条路径，将路径上每一个状态都进行了计算，对信息的利用最大化。</p>
 <h1 id="自然策略梯度算法"><a href="#自然策略梯度算法" class="headerlink" title="自然策略梯度算法"></a>自然策略梯度算法</h1><h2 id="传统策略梯度算法的缺陷"><a href="#传统策略梯度算法的缺陷" class="headerlink" title="传统策略梯度算法的缺陷"></a>传统策略梯度算法的缺陷</h2><p>在传统的策略梯度算法中，权重更新会遇到两个问题：</p>
 <ul>
@@ -345,59 +326,47 @@ P(\tau; \theta) = \left[ \prod_{t = 0}^T P(s_{t + 1} | s_t, a_t) \cdot \pi_{\the
 </ul>
 <p>在监督学习问题中，overshooting不是什么问题，因为数据是固定的，我们可以在下一个epoch中重新纠正；但在强化学习问题中，如果因为overshooting陷入了一个较差的策略区域，则未来的样本批次可能不会提供太多有意义的信息，用较差的数据样本再去更新策略，从而陷入了糟糕的正反馈中无法恢复。较小的学习率可能会解决这个问题，但会导致收敛速度变慢的undershooting问题。</p>
 <h2 id="限制策略更新的差异"><a href="#限制策略更新的差异" class="headerlink" title="限制策略更新的差异"></a>限制策略更新的差异</h2><p>我们需要表示策略（分布）之间的差异，而不是参数本身的差异。计算两个概率分布之间的差异，最常见的是KL散度，也称为相对熵，描述了两个概率分布之间的距离：</p>
-<script type="math/tex; mode=display">
-\mathcal{D}_{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta}) = \sum_{x \in \Chi} \pi_{\theta}(x) \log \left( \frac{\pi_{\theta}(x)}{\pi_{\theta + \Delta \theta}(x)} \right)</script><p>调整后的策略更新限制为：</p>
-<script type="math/tex; mode=display">
-\Delta \theta^{*} = \argmax_{\Delta \theta, \mathcal{D}_{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon} J(\theta + \Delta \theta)</script><p>然而，计算KL散度需要遍历所有的状态-动作对，因此我们需要一些化简来处理现实的RL问题。</p>
+<p>$$<br>\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) &#x3D; \sum_{x \in \Chi} \pi_{\theta}(x) \log \left( \frac{\pi_{\theta}(x)}{\pi_{\theta + \Delta \theta}(x)} \right)<br>$$</p>
+<p>调整后的策略更新限制为：</p>
+<p>$$<br>\Delta \theta^{*} &#x3D; \argmax_{\Delta \theta, \mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon} J(\theta + \Delta \theta)<br>$$</p>
+<p>然而，计算KL散度需要遍历所有的状态-动作对，因此我们需要一些化简来处理现实的RL问题。</p>
 <p>首先，我们使用拉格朗日松弛将原表达式的发散约束转化为惩罚项，得到一个更容易求解的表达式：</p>
-<script type="math/tex; mode=display">
-\Delta \theta^{*} = \argmax_{\Delta \theta} J(\theta + \Delta \theta) - \lambda(\mathcal{D}_{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta}) - \epsilon)</script><p>用近似方法来化简。通过泰勒展开：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\Delta \theta^{*} &\approx \argmax_{\Delta \theta} J(\theta) + \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) + \lambda \epsilon \\\\
-&\approx \argmax_{\Delta \theta} \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) \\\\
-F(\theta) &= \mathbb{E}_{\theta} [ \nabla_{\theta} \log \pi_{\theta}(x) \nabla_{\theta} \log \pi_{\theta}(x)^{T} ]
-\end{aligned}</script><p>KL散度近似于二阶泰勒展开。用Fisher信息矩阵代替二阶导数，除了符号紧凑性外，还可以大大减少计算开销。</p>
+<p>$$<br>\Delta \theta^{*} &#x3D; \argmax_{\Delta \theta} J(\theta + \Delta \theta) - \lambda(\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) - \epsilon)<br>$$</p>
+<p>用近似方法来化简。通过泰勒展开：</p>
+<p>$$<br>\begin{aligned}<br>\Delta \theta^{*} &amp;\approx \argmax_{\Delta \theta} J(\theta) + \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) + \lambda \epsilon \\<br>&amp;\approx \argmax_{\Delta \theta} \nabla_{\theta} J(\theta) \cdot \Delta \theta - \frac{1}{2} \lambda (\Delta \theta^{T} F(\theta) \Delta \theta) \\<br>F(\theta) &amp;&#x3D; \mathbb{E}<em>{\theta} [ \nabla</em>{\theta} \log \pi_{\theta}(x) \nabla_{\theta} \log \pi_{\theta}(x)^{T} ]<br>\end{aligned}<br>$$</p>
+<p>KL散度近似于二阶泰勒展开。用Fisher信息矩阵代替二阶导数，除了符号紧凑性外，还可以大大减少计算开销。</p>
 <h2 id="解决KL约束问题"><a href="#解决KL约束问题" class="headerlink" title="解决KL约束问题"></a>解决KL约束问题</h2><p>对于近似简化后的表达式，可以通过将关于$\Delta \theta$的梯度设置为0，来找到最优的权重更新$\Delta \theta$：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-0 &= \frac{\partial}{\partial \Delta \theta} \left( \nabla_{\theta} J(\theta) \Delta \theta - \frac{1}{2} \lambda \Delta \theta^{T} F(\theta) \Delta \theta \right) \\\\
-&= \nabla_{\theta} J(\theta) - \frac{1}{2} \lambda F(\theta) \Delta \theta \\\\
-\Delta \theta &= - \frac{2}{\lambda} F(\theta)^{-1} \nabla_{\theta} J(\theta)
-\end{aligned}</script><p>其中，$\lambda$是一个常数，可以吸收到学习率$\alpha$中。根据$\mathcal{D}_{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon$，我们可以推出动态学习率：</p>
-<script type="math/tex; mode=display">
-\alpha = \sqrt{\frac{2 \epsilon}{\nabla J(\theta)^T} F(\theta)^{-1} \nabla J(\theta)}</script><p>可以确保每次更新的KL散度（近似）等于$\epsilon$。</p>
+<p>$$<br>\begin{aligned}<br>0 &amp;&#x3D; \frac{\partial}{\partial \Delta \theta} \left( \nabla_{\theta} J(\theta) \Delta \theta - \frac{1}{2} \lambda \Delta \theta^{T} F(\theta) \Delta \theta \right) \\<br>&amp;&#x3D; \nabla_{\theta} J(\theta) - \frac{1}{2} \lambda F(\theta) \Delta \theta \\<br>\Delta \theta &amp;&#x3D; - \frac{2}{\lambda} F(\theta)^{-1} \nabla_{\theta} J(\theta)<br>\end{aligned}<br>$$</p>
+<p>其中，$\lambda$是一个常数，可以吸收到学习率$\alpha$中。根据$\mathcal{D}<em>{KL}(\pi</em>{\theta} || \pi_{\theta + \Delta \theta}) \le \epsilon$，我们可以推出动态学习率：</p>
+<p>$$<br>\alpha &#x3D; \sqrt{\frac{2 \epsilon}{\nabla J(\theta)^T} F(\theta)^{-1} \nabla J(\theta)}<br>$$</p>
+<p>可以确保每次更新的KL散度（近似）等于$\epsilon$。</p>
 <p>自然策略梯度：</p>
-<script type="math/tex; mode=display">
-\tilde{\nabla} J(\theta) = F(\theta)^{-1} \nabla J(\theta)</script><p>最终的权重更新方案为：</p>
-<script type="math/tex; mode=display">
-\Delta \theta = \sqrt{\frac{2 \epsilon }{\nabla J(\theta)^T F(\theta)^{-1} \nabla J(\theta)}} \tilde{\nabla} J(\theta)</script><p>该方案的强大之处在于，无论分布的表示如何，它总是以相同的幅度改变策略。</p>
+<p>$$<br>\tilde{\nabla} J(\theta) &#x3D; F(\theta)^{-1} \nabla J(\theta)<br>$$</p>
+<p>最终的权重更新方案为：</p>
+<p>$$<br>\Delta \theta &#x3D; \sqrt{\frac{2 \epsilon }{\nabla J(\theta)^T F(\theta)^{-1} \nabla J(\theta)}} \tilde{\nabla} J(\theta)<br>$$</p>
+<p>该方案的强大之处在于，无论分布的表示如何，它总是以相同的幅度改变策略。</p>
 <h1 id="信赖域策略优化算法（TRPO）"><a href="#信赖域策略优化算法（TRPO）" class="headerlink" title="信赖域策略优化算法（TRPO）"></a>信赖域策略优化算法（TRPO）</h1><h2 id="自然策略梯度算法的缺陷"><a href="#自然策略梯度算法的缺陷" class="headerlink" title="自然策略梯度算法的缺陷"></a>自然策略梯度算法的缺陷</h2><ul>
 <li>近似值可能会违反KL约束，从而导致分析得出的步长过大，超出限制要求</li>
 <li>矩阵$F$的计算时间太长，是$O(N^3)$复杂度的运算</li>
 <li>我们没有检查更新是否真的改进了策略。由于存在大量的近似过程，策略可能并没有优化</li>
 </ul>
 <h2 id="算法理论"><a href="#算法理论" class="headerlink" title="算法理论"></a>算法理论</h2><p>针对自然策略梯度算法的问题，我们希望可以对策略的优化进行量化，从而保证每次的更新一定是优化作用的。为此，我们需要计算两种策略之间预期回报的差异。这里采用的是原策略预期回报添加新策略预期优势的方式。该表达式在原策略下计算优势函数，无需重新采样：</p>
-<script type="math/tex; mode=display">
-J(\pi_{\theta + \Delta \theta}) = J(\pi_{\theta}) + \mathbb{E}_{\tau \sim \pi_{\theta + \Delta \theta}} \sum_{t = 0}^{\infin} \gamma^{t} A^{\pi_{\theta}}(s_t, a_t)</script><p>其中优势函数的定义为：</p>
-<script type="math/tex; mode=display">
-A^{\pi_{\theta}}(s, a) = \mathbb{E}(Q^{\pi_{\theta}}(s, a) - V^{\pi_{\theta}}(s))</script><p>由于时间范围是无限的，引入状态的折扣分布：</p>
-<script type="math/tex; mode=display">
-\rho_{\pi}(s) = \sum_{k = 0}^{\infin} \gamma^{k} P(s_k = s)</script><p>原差异表达式可重新表示为：</p>
-<script type="math/tex; mode=display">
-J(\pi_{\theta + \Delta \theta}) = J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)</script><p>引入近似误差，使用当前策略近似：</p>
-<script type="math/tex; mode=display">
-J(\pi_{\theta + \Delta \theta}) \approx J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)</script><p>将状态分布求和替换为期望，方便实际计算时使用蒙特卡洛模拟进行采样，同时将动作求和替换为<a href="https://zhuanlan.zhihu.com/p/41217212">重要性采样</a>。通过重要性采样，可以有效利用当前策略的行动期望，并针对新策略下的概率进行了修正：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-J(\pi_{\theta + \Delta \theta}) &= J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\\\
-&= J(\pi_{\theta}) + \mathbb{E}_{s \sim \rho_{\pi_{\theta + \Delta \theta}}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\\\
-&\approx J(\pi_{\theta}) + \mathbb{E}_{s \sim \rho_{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a)
-\end{aligned}</script><p>描述更新策略相对于原策略的预期优势称为替代优势：</p>
-<script type="math/tex; mode=display">
-J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \approx \mathbb{E}_{s \sim \rho_{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a) = \mathcal{L}_{\pi_{\theta}}(\pi_{\theta + \Delta \theta})</script><p>之前产生的近似误差可以用两种策略之间最坏情况的KL散度表示：</p>
-<script type="math/tex; mode=display">
-J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \ge \mathcal{L}_{\pi_{\theta}}(\pi_{\theta + \Delta \theta}) - C \mathcal{D}_{KL}^{\max} (\pi_{\theta} || \pi_{\theta + \Delta \theta})</script><p>论文中推导出$C$的值以及目标函数改进的下限。如果我们改进右侧，可以保证左侧也得到改进。本质上，如果替代优势$\mathcal{L}_{\pi_{\theta}}(\pi_{\theta + \Delta \theta})$超过最坏情况下的近似误差$C \mathcal{D}_{KL}^{\max} (\pi_{\theta} || \pi_{\theta + \Delta \theta})$，我们一定会改进目标。</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) &#x3D; J(\pi_{\theta}) + \mathbb{E}<em>{\tau \sim \pi</em>{\theta + \Delta \theta}} \sum_{t &#x3D; 0}^{\infin} \gamma^{t} A^{\pi_{\theta}}(s_t, a_t)<br>$$</p>
+<p>其中优势函数的定义为：</p>
+<p>$$<br>A^{\pi_{\theta}}(s, a) &#x3D; \mathbb{E}(Q^{\pi_{\theta}}(s, a) - V^{\pi_{\theta}}(s))<br>$$</p>
+<p>由于时间范围是无限的，引入状态的折扣分布：</p>
+<p>$$<br>\rho_{\pi}(s) &#x3D; \sum_{k &#x3D; 0}^{\infin} \gamma^{k} P(s_k &#x3D; s)<br>$$</p>
+<p>原差异表达式可重新表示为：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) &#x3D; J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)<br>$$</p>
+<p>引入近似误差，使用当前策略近似：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) \approx J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a)<br>$$</p>
+<p>将状态分布求和替换为期望，方便实际计算时使用蒙特卡洛模拟进行采样，同时将动作求和替换为<a href="https://zhuanlan.zhihu.com/p/41217212">重要性采样</a>。通过重要性采样，可以有效利用当前策略的行动期望，并针对新策略下的概率进行了修正：</p>
+<p>$$<br>\begin{aligned}<br>J(\pi_{\theta + \Delta \theta}) &amp;&#x3D; J(\pi_{\theta}) + \sum_{s \in \mathcal{S}} \rho_{\pi_{\theta + \Delta \theta}}(s) \sum_{a \in \mathcal{A}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\<br>&amp;&#x3D; J(\pi_{\theta}) + \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta + \Delta \theta}}} \pi_{\theta + \Delta \theta}(a | s) A^{\pi_{\theta}}(s, a) \\<br>&amp;\approx J(\pi_{\theta}) + \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a)<br>\end{aligned}<br>$$</p>
+<p>描述更新策略相对于原策略的预期优势称为替代优势：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \approx \mathbb{E}<em>{s \sim \rho</em>{\pi_{\theta}}} \frac{\pi_{\theta + \Delta \theta}(a | s)}{\pi_{\theta}(a | s)} A^{\pi_{\theta}}(s, a) &#x3D; \mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta})<br>$$</p>
+<p>之前产生的近似误差可以用两种策略之间最坏情况的KL散度表示：</p>
+<p>$$<br>J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \ge \mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta}) - C \mathcal{D}<em>{KL}^{\max} (\pi</em>{\theta} || \pi_{\theta + \Delta \theta})<br>$$</p>
+<p>论文中推导出$C$的值以及目标函数改进的下限。如果我们改进右侧，可以保证左侧也得到改进。本质上，如果替代优势$\mathcal{L}<em>{\pi</em>{\theta}}(\pi_{\theta + \Delta \theta})$超过最坏情况下的近似误差$C \mathcal{D}<em>{KL}^{\max} (\pi</em>{\theta} || \pi_{\theta + \Delta \theta})$，我们一定会改进目标。</p>
 <p>这就是<strong>单调改进定理</strong>。相应的过程是<strong>最小化最大化算法（MM）</strong>。即如果我们改进下限，我们也会将目标改进至少相同的量。</p>
 <h2 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h2><p>在实际的算法实现方面，TRPO和自然策略梯度算法没有太大的区别。TRPO的核心是利用单调改进定理，验证更新是否真正改进了我们的策略。</p>
 <p>咕咕咕</p>
@@ -414,23 +383,24 @@ J(\pi_{\theta + \Delta \theta}) - J(\pi_{\theta}) \ge \mathcal{L}_{\pi_{\theta}}
 虽然自然梯度策略中提供了给定KL散度约束的最佳步长，但由于存在较多的近似值，实际上可能不满足该约束。
 
 TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新的大小，直到第一个不违反约束的更新。这个过程可以看作是不断缩小信任区域，即我们相信更新可以实际改进目标的区域。 -->
+
 <h1 id="近端策略优化算法（PPO）"><a href="#近端策略优化算法（PPO）" class="headerlink" title="近端策略优化算法（PPO）"></a>近端策略优化算法（PPO）</h1><h2 id="TRPO算法的缺陷"><a href="#TRPO算法的缺陷" class="headerlink" title="TRPO算法的缺陷"></a>TRPO算法的缺陷</h2><ul>
 <li>无法处理大参数矩阵</li>
 <li>二阶优化很慢</li>
 <li>TRPO 很复杂</li>
 </ul>
 <h2 id="PPO-Penalty"><a href="#PPO-Penalty" class="headerlink" title="PPO Penalty"></a>PPO Penalty</h2><p>TRPO在理论分析上推导出与KL散度相乘的惩罚项，但在实践中，这种惩罚往往过于严格，只产生非常小的更新。因此，问题是如何可靠地确定缩放参数$\beta$，同时避免overshooting：</p>
-<script type="math/tex; mode=display">
-\Delta \theta^* = \argmax_{\Delta \theta} \mathcal{L}_{\theta + \Delta \theta}(\theta + \Delta \theta) - \beta \mathcal{D}_{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta})</script><p>PPO通过设置目标散度$\delta$的方式解决了这个问题，希望我们的每次更新都位于目标散度附近的某个地方。目标散度应该大到足以显著改变策略，但又应该小到足以使更新稳定。</p>
+<p>$$<br>\Delta \theta^* &#x3D; \argmax_{\Delta \theta} \mathcal{L}<em>{\theta + \Delta \theta}(\theta + \Delta \theta) - \beta \mathcal{D}</em>{KL}(\pi_{\theta} || \pi_{\theta + \Delta \theta})<br>$$</p>
+<p>PPO通过设置目标散度$\delta$的方式解决了这个问题，希望我们的每次更新都位于目标散度附近的某个地方。目标散度应该大到足以显著改变策略，但又应该小到足以使更新稳定。</p>
 <p>每次更新后，PPO都会检查更新的大小。如果最终更新的散度超过目标散度的1.5倍，则下一次迭代我们将加倍$\beta$来更加重惩罚。相反，如果更新太小，我们将$\beta$减半，从而有效地扩大信任区域。迭代更新的思路与TRPO线搜索有一些相似之处，但PPO搜索是在两个方向上都有效的，而TRPO是单向减小的。</p>
 <p>只是基于启发式确定的。根据经验，PPO对数值设置是非常不敏感的。总之，我们牺牲了一些数学上的严谨性来使实际的效果更好。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Input: initial policy parameters theta_0, initial KL penalty beta_0, target KL-divergence delta</span><br><span class="line">for k = 0, 1, 2, ... do</span><br><span class="line">    Collect set of partial trajectories D_k on policy pi_k = pi_&#123;theta_k&#125;</span><br><span class="line">    Estimate advantages A_t^&#123;pi_k&#125; using any advantage estimation algorithm</span><br><span class="line">    Compute policy update:</span><br><span class="line">        theta_&#123;k + 1&#125; = argmax(theta, L_&#123;theta_k&#125;(theta) - beta_k * D_&#123;KL&#125;(theta || theta_k))</span><br><span class="line">    by taking K steps of minibatch SGD (via Adam)</span><br><span class="line">    if D_&#123;KL&#125;(theta_&#123;k + 1&#125; || theta_k) &gt;= 1.5 delta then</span><br><span class="line">        beta_&#123;k + 1&#125; = beta_&#123;k&#125; * 2</span><br><span class="line">    else if D_&#123;KL&#125;(theta_&#123;k + 1&#125; || theta_k) &lt;= delta / 1.5 then</span><br><span class="line">        beta_&#123;k + 1&#125; = beta_&#123;k&#125; / 2</span><br><span class="line">    else</span><br><span class="line">        beta_&#123;k + 1&#125; = beta_k</span><br></pre></td></tr></table></figure>
+
 <h2 id="PPO-Clip"><a href="#PPO-Clip" class="headerlink" title="PPO Clip"></a>PPO Clip</h2><p>与其费心随着时间的推移改变惩罚，PPO Clip直接限制策略可以改变的范围。我们重新定义了替代优势：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\pi_{\theta}}^{CLIP}(\pi_{\theta_k}) \\\\
-= \mathbb{E}_{\tau \sim \pi_{\theta}} \left[ \sum_{t=0}^T [\min \left( \rho_t(\pi_{\theta}, \pi_{\theta_k})A_{t}^{\pi_{\theta_k}}, clip(\rho_t(\pi_{\theta}, \pi_{\theta_k}), 1 - \epsilon, 1 + \epsilon)A_{t}^{\pi_{\theta_k}} \right)] \right]</script><p>$\rho_t$ 为重要性采样：</p>
-<script type="math/tex; mode=display">
-\rho_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_k}(a_t | s_t)}</script><p>为了实现想要达到的效果，我们应该调整$\epsilon$，作为对KL散度的隐式限制。根据经验，$\epsilon=0.1 or 0.2$是实际效果较好的值。</p>
+<p>$$<br>\mathcal{L}<em>{\pi</em>{\theta}}^{CLIP}(\pi_{\theta_k}) \\<br>&#x3D; \mathbb{E}<em>{\tau \sim \pi</em>{\theta}} \left[ \sum_{t&#x3D;0}^T [\min \left( \rho_t(\pi_{\theta}, \pi_{\theta_k})A_{t}^{\pi_{\theta_k}}, clip(\rho_t(\pi_{\theta}, \pi_{\theta_k}), 1 - \epsilon, 1 + \epsilon)A_{t}^{\pi_{\theta_k}} \right)] \right]<br>$$</p>
+<p>$\rho_t$ 为重要性采样：</p>
+<p>$$<br>\rho_t(\theta) &#x3D; \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_k}(a_t | s_t)}<br>$$</p>
+<p>为了实现想要达到的效果，我们应该调整$\epsilon$，作为对KL散度的隐式限制。根据经验，$\epsilon&#x3D;0.1 or 0.2$是实际效果较好的值。</p>
 <h2 id="PPO2"><a href="#PPO2" class="headerlink" title="PPO2"></a>PPO2</h2><p>PPO2是Open AI发布的算法更新版本，是矢量化环境的PPO算法实现，针对 GPU 进行了优化，更好地支持并行训练。它与PPO也有许多实际实现的差异，例如优势被自动归一化、价值函数被裁剪等，但与本文概述的PPO具有相同的数学基础。如果需要直接使用OpenAI实现的PPO算法，则应该使用PPO2。</p>
 
     </div>
@@ -503,13 +473,13 @@ TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:25</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

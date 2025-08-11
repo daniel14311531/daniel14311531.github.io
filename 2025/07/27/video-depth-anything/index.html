@@ -171,7 +171,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -262,7 +262,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -281,6 +281,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><span id="more"></span>
+
 <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Depth Anything 的问题：处理视频时遭受时间不一致性（temporal inconsistency）。  </p>
 <p>作者提出了Video Depth Anything，能够对长视频高效地生成高质量持续的深度估计。  </p>
 <p>Video Depth Anything 基于 Depth Anything v2 ，将它的 head 替换为高效的 spatial-temporal<br>head。  </p>
@@ -289,7 +290,7 @@
 <p>接着，作者提出了时间梯度匹配损失函数，去约束沿着时间维度的深度估计梯度，匹配从ground truth 计算得到的值。这个损失函数同时用尺度平移不变损失和空间梯度匹配损失优化了。  </p>
 <p>为了能够做长视频的推断，作者开发了新的分段处理策略（segment-wise processing strategy）。每一个新的段都用 8 个重叠的帧和之前视频片段的两个关键帧连接，共形成 32 帧。然后，为了保证平滑性，重叠的帧将逐步在两个连续的窗口插值。  </p>
 <h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><p>略  </p>
-<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><img src="/2025/07/27/video-depth-anything/video_depth_anything_pipeline.jpg" alt="">  </p>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p><img src="/2025/07/27/video-depth-anything/video_depth_anything_pipeline.jpg">  </p>
 <h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>由于缺少足够的视频资源，作者从预训练的 Depth Anything v2 开始，采用共同训练策略，同时用图像和视频数据。  </p>
 <h3 id="Depth-Anything-Encoder"><a href="#Depth-Anything-Encoder" class="headerlink" title="Depth Anything Encoder"></a>Depth Anything Encoder</h3><p>用了 Depth Anything Encoder 作为模型的 encoder。为了减少训练损耗和保护训练好的特征，这个encoder要冻结参数。  </p>
 <p>为了用image encoder提取视频帧里的特征，作者将视频片段中的时间维度折叠到批次（batch）维度中。  </p>
@@ -300,30 +301,30 @@
 <p>STH在 $ {F_i} $ 均匀采样了4个特征图（包含最终特征，记为 $ {F_4} $）作为输入，预测深度图 $ {D} \in \mathbb{R}^{H \times W} $ 。选中的 $ {F_i} $ 输入reassemble layer生成特征金字塔。然后，特征从低分辨率到高分辨率通过fusion layer进行融合。reassemble layer和fusion layer由DPT提出。最终融合得到的高分辨率特征图通过输出层生成深度图 $ {D} $ 。为了减少计算量，作者在一些特征分辨率低的地方插入了temporal layer。  </p>
 <h2 id="Temporal-Gradient-Matching-Loss"><a href="#Temporal-Gradient-Matching-Loss" class="headerlink" title="Temporal Gradient Matching Loss"></a>Temporal Gradient Matching Loss</h2><h3 id="OPW-Optical-Flow-Based-Warping-loss"><a href="#OPW-Optical-Flow-Based-Warping-loss" class="headerlink" title="OPW(Optical Flow Based Warping) loss"></a>OPW(Optical Flow Based Warping) loss</h3><p>为了约束时间一致性，之前的视频模型假定相邻帧对应位置的深度一致，通过光流检验。  </p>
 <p>对于两个深度预测结果， $ p_{i}, p_{i + 1} $ ，根据从光流推出的扭曲关系， $ p_{i + 1} $ 被扭曲成 $ \hat{p}_{i} $ ，则损失函数为  </p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{OPW}=\frac{1}{N - 1}\sum_{i = 2}^{N} || p_{i} - \hat{p}_{i} ||</script><p>N为视频窗口长度， $ ||\cdot || $ 为 $ l1 $ 距离。  </p>
+<p>$$<br>\mathcal{L}<em>{OPW}&#x3D;\frac{1}{N - 1}\sum</em>{i &#x3D; 2}^{N} || p_{i} - \hat{p}_{i} ||<br>$$</p>
+<p>N为视频窗口长度， $ ||\cdot || $ 为 $ l1 $ 距离。  </p>
 <p>OPW的严重问题：相邻帧对应点的深度不是不变的。  </p>
 <p>作者提出新的方式。  </p>
 <h3 id="Temporal-gradient-matching-loss-TGM"><a href="#Temporal-gradient-matching-loss-TGM" class="headerlink" title="Temporal gradient matching loss(TGM)"></a>Temporal gradient matching loss(TGM)</h3><p>我们假设相邻预测帧中对应点的深度变化应与在ground truth中观察到的变化保持一致。  </p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{SE} = \frac{1}{N - 1} \sum_{i = 2}^{N}|| \  |\hat{d}_i - d_i| - |\hat{g}_i - g_i| \  ||</script><p>这里d, g都是预测值和ground truth缩放和平移后的版本。  </p>
+<p>$$<br>\mathcal{L}<em>{SE} &#x3D; \frac{1}{N - 1} \sum</em>{i &#x3D; 2}^{N}|| \  |\hat{d}_i - d_i| - |\hat{g}_i - g_i| \  ||<br>$$</p>
+<p>这里d, g都是预测值和ground truth缩放和平移后的版本。  </p>
 <p>然而，生成光流会带来额外的开销。  </p>
 <p>事实上，不需要用光流得到对应点来使用，可以直接用相邻帧同一坐标系的深度计算损失。假设是相邻帧同一个 图像位置 的深度应当与ground truth一致。这个过程和在时间维度计算梯度一致。  </p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{TGM} = \frac{1}{N - 1} \sum_{i = 1}^{N - 1}|| \  |d_{i + 1} - d_i| - |g_{i + 1} - g_{i}| \  ||</script><p>实践中，参考的点在ground truth里在相邻帧深度变化较小，$ |g_{i + 1} - g_i| &lt; 0.05 $ ，避免边缘、动态物体等因素对深度图产生突然变化使得训练不稳定。  </p>
-<h3 id="总损失"><a href="#总损失" class="headerlink" title="总损失"></a>总损失</h3><script type="math/tex; mode=display">
-\mathcal{L}_{all}=\alpha\mathcal{L}_{TGM}+\beta\mathcal{L}_{ssi}</script><p>$ \mathcal{L}_{ssi} $ 是尺度和平移不变损失函数（见MiDaS）。$ \alpha, \beta $ 用于平衡时空一致性和单帧的空间结构。  </p>
+<p>$$<br>\mathcal{L}<em>{TGM} &#x3D; \frac{1}{N - 1} \sum</em>{i &#x3D; 1}^{N - 1}|| \  |d_{i + 1} - d_i| - |g_{i + 1} - g_{i}| \  ||<br>$$</p>
+<p>实践中，参考的点在ground truth里在相邻帧深度变化较小，$ |g_{i + 1} - g_i| &lt; 0.05 $ ，避免边缘、动态物体等因素对深度图产生突然变化使得训练不稳定。  </p>
+<h3 id="总损失"><a href="#总损失" class="headerlink" title="总损失"></a>总损失</h3><p>$$<br>\mathcal{L}<em>{all}&#x3D;\alpha\mathcal{L}</em>{TGM}+\beta\mathcal{L}_{ssi}<br>$$</p>
+<p>$ \mathcal{L}_{ssi} $ 是尺度和平移不变损失函数（见MiDaS）。$ \alpha, \beta $ 用于平衡时空一致性和单帧的空间结构。  </p>
 <h2 id="Inference-strategy-for-super-long-sequence"><a href="#Inference-strategy-for-super-long-sequence" class="headerlink" title="Inference strategy for super-long sequence"></a>Inference strategy for super-long sequence</h2><p>提出了关键帧参考（key-frame referencing），继承之前预测的尺度和平移信息，将插值重叠保证平滑变化。  </p>
-<h3 id="key-frame-referencing"><a href="#key-frame-referencing" class="headerlink" title="key-frame referencing"></a>key-frame referencing</h3><p><img src="/2025/07/27/video-depth-anything/inference_strategy_for_long_videos.jpg" alt=""></p>
+<h3 id="key-frame-referencing"><a href="#key-frame-referencing" class="headerlink" title="key-frame referencing"></a>key-frame referencing</h3><p><img src="/2025/07/27/video-depth-anything/inference_strategy_for_long_videos.jpg"></p>
 <p>将一段视频分成三段：$ N - T_o - T_k $ 张未来的帧，$ T_o $ 张重叠的帧（之前的帧），$ T_k $ 张关键帧（之前的帧）。关键帧从之前的帧里子采样，间隔大小为 $ \Delta k $ 。这种方法将早期窗口的内容最小化计算量，融入当前窗口。根据实验结果，这种简单的策略可以显著减少累积的尺度漂移，特别是对于长视频。  </p>
 <h3 id="Depth-clip-stitching"><a href="#Depth-clip-stitching" class="headerlink" title="Depth clip stitching"></a>Depth clip stitching</h3><p>相邻窗口的 $ T_o $ 张重叠的帧对避免深度图像闪烁很重要。  </p>
 <ol>
 <li><p>通过共享部分帧特征，连续窗口间的尺度和平移将更加相似。  </p>
 </li>
-<li><p>重叠帧的深度预测是通过在两个片段之间进行插值来更新的。  </p>
+<li><p>重叠帧的深度预测是通过在两个片段之间进行插值来更新的。</p>
 </li>
 </ol>
-<p>假设之前的段第 $ o_i $ 张重叠帧的深度为 $ {D}_{o_i} ^{pre} $ ，当前的段深度为 $ {D}_{o_i}^{cur} $ ，则最终深度为 $ {D}_{o_i} = {D}_{o_i}^{pre} \cdot w_i + {D}_{o_i}^{cur} \cdot (1 - w_i) $ ， $ w_i $ 大小从1到0、长度为 $ T_o $ 的线性衰减函数。  </p>
+<p>假设之前的段第 $ o_i $ 张重叠帧的深度为 $ {D}<em>{o_i} ^{pre} $ ，当前的段深度为 $ {D}</em>{o_i}^{cur} $ ，则最终深度为 $ {D}<em>{o_i} &#x3D; {D}</em>{o_i}^{pre} \cdot w_i + {D}_{o_i}^{cur} \cdot (1 - w_i) $ ， $ w_i $ 大小从1到0、长度为 $ T_o $ 的线性衰减函数。  </p>
 <h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>略  </p>
 <h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>略  </p>
 
@@ -397,13 +398,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">225k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:25</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

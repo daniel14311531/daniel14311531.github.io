@@ -20,13 +20,13 @@
 
 
 
-<link rel="canonical" href="https://daniel14311531.github.io/2025/07/27/JLOI2015-you-yi-yi-de-zi-fu-chuan/">
+<link rel="canonical" href="https://daniel14311531.github.io/2025/08/11/pytorch-xpu/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://daniel14311531.github.io/2025/07/27/JLOI2015-you-yi-yi-de-zi-fu-chuan/","path":"2025/07/27/JLOI2015-you-yi-yi-de-zi-fu-chuan/","title":"「JLOI2015」有意义的字符串"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://daniel14311531.github.io/2025/08/11/pytorch-xpu/","path":"2025/08/11/pytorch-xpu/","title":"在 Intel GPU 上开始使用pytorch-xpu(WSL2)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>「JLOI2015」有意义的字符串 | daniel14311531's blog</title>
+<title>在 Intel GPU 上开始使用pytorch-xpu(WSL2) | daniel14311531's blog</title>
   
 
 
@@ -156,7 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">相关配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intel-GPUs-Driver-Installation"><span class="nav-number">2.</span> <span class="nav-text">Intel GPUs Driver Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-Data-Center-GPU"><span class="nav-number">2.1.</span> <span class="nav-text">Installing Data Center GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Driver-Installation-for-Client-GPUs-from-Intel"><span class="nav-number">2.2.</span> <span class="nav-text">Driver Installation for Client GPUs from Intel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-pytorch-xpu-binaries"><span class="nav-number">3.</span> <span class="nav-text">Install pytorch-xpu binaries</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -216,7 +216,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://daniel14311531.github.io/2025/07/27/JLOI2015-you-yi-yi-de-zi-fu-chuan/">
+    <link itemprop="mainEntityOfPage" href="https://daniel14311531.github.io/2025/08/11/pytorch-xpu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -229,12 +229,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="「JLOI2015」有意义的字符串 | daniel14311531's blog">
-      <meta itemprop="description" content="https:&#x2F;&#x2F;loj.ac&#x2F;problem&#x2F;2106">
+      <meta itemprop="name" content="在 Intel GPU 上开始使用pytorch-xpu(WSL2) | daniel14311531's blog">
+      <meta itemprop="description" content="在 Intel GPU 上开始使用pytorch">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          「JLOI2015」有意义的字符串
+          在 Intel GPU 上开始使用pytorch-xpu(WSL2)
         </h1>
 
         <div class="post-meta-container">
@@ -245,14 +245,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-07-27 16:46:27" itemprop="dateCreated datePublished" datetime="2025-07-27T16:46:27+08:00">2025-07-27</time>
+      <time title="创建时间：2025-08-11 23:47:18" itemprop="dateCreated datePublished" datetime="2025-08-11T23:47:18+08:00">2025-08-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-04 11:33:32" itemprop="dateModified" datetime="2025-03-04T11:33:32+08:00">2025-03-04</time>
+      <time title="修改时间：2025-08-12 00:09:28" itemprop="dateModified" datetime="2025-08-12T00:09:28+08:00">2025-08-12</time>
     </span>
 
   
@@ -262,29 +262,85 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
-            <div class="post-description">https://loj.ac/problem/2106</div>
+            <div class="post-description">在 Intel GPU 上开始使用pytorch</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>  
+    <div class="post-body" itemprop="articleBody"><p>参考链接：</p>
+<p><a href="https://docs.pytorch.org/docs/2.8/notes/get_start_xpu.html">Getting Started on Intel GPU PyTorch 2.8 documentation</a></p>
+<p><a href="https://www.intel.com/content/www/us/en/developer/articles/tool/pytorch-prerequisites-for-intel-gpu/2-8.html">PyTorch Prerequisites for Intel® GPUs</a></p>
+<p><a href="https://dgpu-docs.intel.com/driver/client/overview.html#ubuntu-latest">Installing Client GPUs Intel® software for general purpose GPU capabilities documentation</a></p>
+<h1 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h1><p><img src="file:///E:/machine%20learning/pytorch-xpu/pytorch-xpu/ubuntu2404.png"></p>
+<h1 id="Intel-GPUs-Driver-Installation"><a href="#Intel-GPUs-Driver-Installation" class="headerlink" title="Intel GPUs Driver Installation"></a>Intel GPUs Driver Installation</h1><h2 id="Installing-Data-Center-GPU"><a href="#Installing-Data-Center-GPU" class="headerlink" title="Installing Data Center GPU"></a>Installing Data Center GPU</h2><p><a href="https://dgpu-docs.intel.com/driver/installation-rolling.html#ubuntu">Installing Data Center GPU: Rolling Releases —— Intel® software for general purpose GPU capabilities documentation</a></p>
+<p>执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install -y \</span><br><span class="line">    linux-headers-$(<span class="built_in">uname</span> -r) \</span><br><span class="line">    linux-modules-extra-$(<span class="built_in">uname</span> -r) \</span><br><span class="line">    flex bison \</span><br><span class="line">    intel-fw-gpu intel-i915-dkms xpu-smi</span><br><span class="line"><span class="built_in">sudo</span> reboot</span><br></pre></td></tr></table></figure>
 
-<h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://loj.ac/problem/2106">「JLOI2015」有意义的字符串</a>  </p>
-<h4 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h4><p>$ \frac{b + \sqrt{d}}{2} $ 和 $ \frac{b - \sqrt{d}}{2} $ 是二元一次方程 $ x^2 - bx + \frac{b^2 - d}{4} &#x3D; 0 $ 的解。<br>则 $ x^2 &#x3D; bx + \frac{d - b^2}{4} $ 。<br>两边同时乘 $ x^{n - 2} $ 得： $ x^n &#x3D; bx^{n - 1} + \frac{d - b^2}{4}x^{n - 2} $ 。<br>设 $ f[i] &#x3D; (\frac{b + \sqrt{d}}{2})^{i} + (\frac{b - \sqrt{d}}{2})^{i} $ ，则存在递推式 $ f[i] &#x3D; bf[i - 1] + \frac{d - b^2}{4}f[i - 2] $ 。其中 $ f[0] &#x3D; 2, f[1] &#x3D; b $ 。<br>这样就矩阵乘法得到 $ f[n] $ 。题目中有 $ b^2 \leq d &lt; (b + 1)^2 $ ，所以 $ \frac{b - \sqrt{d}}{2} \leq 0 $ 。特判 $ b^2 \neq d $ 且 $ n \mod 2 &#x3D; 0 $ 来判断是否减一。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> ll mod = <span class="number">7528443412579576937ll</span>;</span><br><span class="line">ll b, d, n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">add</span><span class="params">(<span class="type">const</span> ll &amp;x, <span class="type">const</span> ll &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (ull)x + (ull)y &lt; (ull)mod ? (ull)x + (ull)y : (ull)x + (ull)y - (ull)mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">sub</span><span class="params">(<span class="type">const</span> ll &amp;x, <span class="type">const</span> ll &amp;y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (ull)x - (ull)y &lt; (ull)<span class="number">0</span> ? (ull)x - (ull)y + (ull)mod : (ull)x - (ull)y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">mul</span><span class="params">(ll x, ll y)</span> </span>&#123;</span><br><span class="line">	ll ss = <span class="number">0</span>; <span class="keyword">for</span>(; y; y /= <span class="number">2</span>, x = <span class="built_in">add</span>(x, x)) <span class="keyword">if</span>(y % <span class="number">2</span>) ss = <span class="built_in">add</span>(ss, x);</span><br><span class="line">	<span class="keyword">return</span> ss;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">mtrx</span> &#123;</span><br><span class="line">	ll a[<span class="number">2</span>][<span class="number">2</span>]; <span class="built_in">mtrx</span>() &#123; <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a)); &#125;</span><br><span class="line">	<span class="keyword">inline</span> mtrx <span class="keyword">operator</span>*(<span class="type">const</span> mtrx &amp;yy)<span class="type">const</span> &#123;</span><br><span class="line">		mtrx res;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">					res.a[i][j] = <span class="built_in">add</span>(res.a[i][j], <span class="built_in">mul</span>(a[i][k], yy.a[k][j]));</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;; mtrx sum, ba;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">ksm</span><span class="params">(ll x, ll y = mod - <span class="number">2</span>)</span> </span>&#123;</span><br><span class="line">	ll ss = <span class="number">1</span>; <span class="keyword">for</span>(; y; y /= <span class="number">2</span>, x = <span class="built_in">mul</span>(x, x)) <span class="keyword">if</span>(y % <span class="number">2</span>) ss = <span class="built_in">mul</span>(ss, x);</span><br><span class="line">	<span class="keyword">return</span> ss;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>, &amp;b, &amp;d, &amp;n); ll flag = (n % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; b * b != d);</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">0</span>) &#123; <span class="built_in">printf</span>(<span class="string">&quot;1\n&quot;</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">1</span>) &#123; <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, b + (ll)<span class="built_in">sqrt</span>(d)); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br><span class="line">	sum.a[<span class="number">0</span>][<span class="number">0</span>] = b, sum.a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">	ba.a[<span class="number">0</span>][<span class="number">0</span>] = b, ba.a[<span class="number">0</span>][<span class="number">1</span>] = (d - b * b) / <span class="number">4</span>, ba.a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	n -= <span class="number">1</span>; <span class="keyword">if</span>(n &lt; <span class="number">0</span>) n = <span class="number">0</span>; mtrx tmp; tmp.a[<span class="number">0</span>][<span class="number">0</span>] = tmp.a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; n; n /= <span class="number">2</span>, ba = ba * ba) <span class="keyword">if</span>(n % <span class="number">2</span>) tmp = tmp * ba;</span><br><span class="line">	sum = tmp * sum;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">sub</span>(sum.a[<span class="number">0</span>][<span class="number">0</span>], flag));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可能遇到的问题：</p>
+<ol>
+<li>wsl: Failed to translate ‘C:\Windows\system32’<br>wsl: Failed to translate ‘C:\Windows’<br>wsl: Failed to translate ‘C:\Windows\System32\Wbem’<br>wsl: Failed to translate ‘C:\Windows\System32\WindowsPowerShell\v1.0&#39;<br>wsl: Failed to translate ‘C:\Windows\System32\OpenSSH&#39;<br>wsl: Failed to translate ‘C:\Program Files\dotnet&#39;<br>wsl: Failed to translate ‘D:\Program Files\Git\cmd’<br>wsl: Failed to translate ‘D:\Program Files\Git\bin’<br>wsl: Failed to translate ‘D:\Program Files\nodejs&#39;<br>wsl: Failed to translate ‘C:\Users\29655\AppData\Local\Microsoft\WindowsApps’<br>wsl: Failed to translate ‘D:\Program Files\Microsoft VS Code\bin’<br>wsl: Failed to translate ‘C:\Users\29655\AppData\Roaming\npm’</li>
+</ol>
+<ul>
+<li>解决方案：禁止wsl2访问windows的环境变量。</li>
+</ul>
+<ol start="2">
+<li>E: Unable to locate package linux-headers-6.6.87.2-microsoft-standard-WSL2<br>E: Couldn’t find any package by glob ‘linux-headers-6.6.87.2-microsoft-standard-WSL2’<br>E: Unable to locate package linux-modules-extra-6.6.87.2-microsoft-standard-WSL2<br>E: Couldn’t find any package by glob ‘linux-modules-extra-6.6.87.2-microsoft-standard-WSL2’</li>
+</ol>
+<ul>
+<li><p>解决方案：<del>问Kimi</del></p>
+</li>
+<li><ol>
+<li><p>在 WSL2 Ubuntu 中运行：<code>uname -r</code>，输出例如<code>6.6.87.2-microsoft-standard-WSL2</code>。</p>
+</li>
+<li><p>安装依赖</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install build-essential bc flex bison libssl-dev libelf-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><ol start="3">
+<li>下载并解压 WSL2 内核源码（含头文件）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/src</span><br><span class="line"><span class="built_in">sudo</span> git <span class="built_in">clone</span> --depth 1 --branch linux-msft-wsl-6.6.87.2 \</span><br><span class="line">  https://github.com/microsoft/WSL2-Linux-Kernel.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><ol start="4">
+<li>创建头文件链接（供编译模块使用）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/src/WSL2-Linux-Kernel /lib/modules/$(<span class="built_in">uname</span> -r)/build</span><br></pre></td></tr></table></figure>
+</li>
+<li><ol start="5">
+<li>验证是否成功</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /lib/modules/$(<span class="built_in">uname</span> -r)/build</span><br></pre></td></tr></table></figure>
+
+<p>如果输出的是源码目录的链接，说明已配置好。</p>
+</li>
+</ul>
+<p>执行<code>xpu-smi</code>时可能遇到的问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.32&#x27; not found (required by xpu-smi)</span><br><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.32&#x27; not found (required by /lib/x86_64-linux-gnu/libxpum.so.1)</span><br><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.30&#x27; not found (required by /lib/x86_64-linux-gnu/libxpum.so.1)</span><br><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.32&#x27; not found (required by /lib/x86_64-linux-gnu/libze_loader.so.1)</span><br></pre></td></tr></table></figure>
+
+<p>解决方案：</p>
+<p>升级 Conda 环境中的  libstdc++ 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge libstdcxx-ng=13</span><br></pre></td></tr></table></figure>
+
+<h2 id="Driver-Installation-for-Client-GPUs-from-Intel"><a href="#Driver-Installation-for-Client-GPUs-from-Intel" class="headerlink" title="Driver Installation for Client GPUs from Intel"></a>Driver Installation for Client GPUs from Intel</h2><p><a href="https://dgpu-docs.intel.com/driver/client/overview.html#ubuntu-latest">Installing Client GPUs ——Intel® software for general purpose GPU capabilities documentation</a></p>
+<h1 id="Install-pytorch-xpu-binaries"><a href="#Install-pytorch-xpu-binaries" class="headerlink" title="Install pytorch-xpu binaries"></a>Install pytorch-xpu binaries</h1><p><a href="https://docs.pytorch.org/docs/2.8/notes/get_start_xpu.html">Getting Started on Intel GPU PyTorch 2.8 documentation</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/xpu)</span><br></pre></td></tr></table></figure>
+
+<p><img src="file:///E:/machine%20learning/pytorch-xpu/pytorch-xpu/result.png"></p>
+
     </div>
 
     
@@ -301,7 +357,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://daniel14311531.github.io/2025/07/27/JLOI2015-you-yi-yi-de-zi-fu-chuan/" title="「JLOI2015」有意义的字符串">https://daniel14311531.github.io/2025/07/27/JLOI2015-you-yi-yi-de-zi-fu-chuan/</a>
+      <a href="https://daniel14311531.github.io/2025/08/11/pytorch-xpu/" title="在 Intel GPU 上开始使用pytorch-xpu(WSL2)">https://daniel14311531.github.io/2025/08/11/pytorch-xpu/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -310,21 +366,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/07/27/IQA/" rel="prev" title="Image Quality Assessment">
-                  <i class="fa fa-angle-left"></i> Image Quality Assessment
+                <a href="/2025/07/27/%E3%80%90libreoj573%E3%80%91dan-qiang-pi-ma/" rel="prev" title="【libreoj573】单枪匹马">
+                  <i class="fa fa-angle-left"></i> 【libreoj573】单枪匹马
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/07/27/JOISC-2016-Day-3-dian-bao/" rel="next" title="「JOISC 2016 Day 3」电报">
-                  「JOISC 2016 Day 3」电报 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
