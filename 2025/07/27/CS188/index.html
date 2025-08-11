@@ -269,7 +269,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>12 分钟</span>
+      <span>11 分钟</span>
     </span>
 </div>
 
@@ -281,41 +281,41 @@
     
     
     <div class="post-body" itemprop="articleBody"><p><a href="https://www.zhihu.com/column/c_1099720701925302272">前文内容</a>  </p>
-<p><a href="https://www.bilibili.com/video/BV1M24y1x7mM?p=56&vd_source=ae5e67f6772cc15652faf9cbf1b41d59">英文实在看不下去了</a></p>
+<p><a href="https://www.bilibili.com/video/BV1M24y1x7mM?p=56&amp;vd_source=ae5e67f6772cc15652faf9cbf1b41d59">英文实在看不下去了</a></p>
 <p>[TOC]</p>
 <h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note09.pdf">RL I notes</a>  </p>
 <p>在前面的笔记中，我们讨论了马尔可夫决策过程(Markov decision processes, MDP)，即通过值迭代(value iteration)和决策迭代(policy iteration)的方式去计算状态的最优价值(optimal value of states)并得到最优策略(optimal policy)。解决马尔可夫决策过程是 <strong>离线规划(offline planning)</strong> 的一个例子，此时 agent 知道每一处的转换函数(transition function)和奖励函数(reward function)，所有用来预处理最有价值的信息都不需要任何操作(action)来获取。在这节中，我们将讨论 <strong>在线规划(online planning)</strong> ，此时 agent 对任何一处的转换函数和奖励函数都一无所知。在在线规划中，agent 必须尝试 <strong>探索(exploration)</strong> ，在探索中它进行操作(actions)并在后继状态(successor states)得到反馈(feedbacks)并得到相应的奖励(rewards)。agent用反馈的信息去估计(estimate)最优策略，这个过程被称作 <strong>强化学习(reinforcement learning)</strong> ，再用估计过的最优策略去探索或者说使奖励最大化(reward maximization)。</p>
 <p>先从基本的术语开始。在在线规划的每一步，agent 从状态 $ s $ 出发，然后通过操作 $ a $ 最后到达后继状态 $ s’ $ ，获得奖励 $ r $ 。每一个多元组 $ (s, a, s’, r) $ 被称作 <strong>样本(sample)</strong> 。 agent 持续地进行操作并在后继状态收集样本直到到达结束状态(terminal state)。像这样的一组样本(a collection of sample)称作一个周期(episode)。agents会进行多个周期以得到足够的数据进行学习。</p>
 <p>有两种强化学习的类型——基于模型的学习(model-based learning)和不基于模型的学习(model-free learning)。基于模型的学习尝试用样本去估计转换和奖励函数，再用这些估计进行MDP（值迭代、策略迭代）。不基于模型的学习尝试去直接估计状态的 Q 值(Q-values of states)，而不用空间去构造MDP中转换函数和奖励函数的模型。</p>
 <h3 id="基于模型的学习"><a href="#基于模型的学习" class="headerlink" title="基于模型的学习"></a>基于模型的学习</h3><p>用某个策略 $ \pi_{explore} $ 探索。</p>
-<p>agent 生成转换函数的近似值 $ \hat{T}(s, a, s’) $ ，通过记录从 Q 状态 $ (s, a) $ 转换到状态 $ s’ $ 的次数，并规范化（即古典概率， $ \hat{T}(s, a, s’) &#x3D; \frac{count((s, a) \rightarrow s’)}{count((s, a))} $ ）。根据大数定律，收集的样本越多， $ \hat{T} $ 越接近真实值。</p>
+<p>agent 生成转换函数的近似值 $ \hat{T}(s, a, s’) $ ，通过记录从 Q 状态 $ (s, a) $ 转换到状态 $ s’ $ 的次数，并规范化（即古典概率， $ \hat{T}(s, a, s’) = \frac{count((s, a) \rightarrow s’)}{count((s, a))} $ ）。根据大数定律，收集的样本越多， $ \hat{T} $ 越接近真实值。</p>
 <p>agent 生成奖励函数 $ \hat{R} $ ，通过不断探索未知的多元组 $ (s, a, s’) $ 。</p>
 <p>当我们觉得合适的时候，我们结束 agent 的训练(training)，通过值迭代或者策略迭代在当前的模型（包含 $ \hat{T}, \hat{R} $ ）生成开发策略 $ \pi_{exploit} $ ，目标是使奖励最大化。我们将要讨论如何有效地在探索(exloration)和开发(exploitation)之间分配时间的方法。</p>
 <p>基于模型的学习简单易懂且高效，但是维护所有收集的多元组 $ (s, a, s’) $ 的成本昂贵（空间、时间），所以在下一节——不基于模型的学习，我们将开发一种方法，免于多元组 $ (s, a, s’) $ 的维护，避免基于模型学习的内存开销。</p>
 <h3 id="不基于模型的学习"><a href="#不基于模型的学习" class="headerlink" title="不基于模型的学习"></a>不基于模型的学习</h3><p>有很多不基于模型的学习算法，我们将讲以下三种：直接估值(direct evaluation)，时间差异学习(temporal difference learning)和 Q-learning 。直接估值和时间差异学习属于 <strong>被动强化学习(passive reinforcement learning)</strong> 的一类算法。在被动强化学习中，agent 遵循已知的策略操作并在过程中得到状态的值，这正是在 $ T $ 和 $ R $ 已知时 MDP 的策略评估所做的。 Q-learning 属于另一类不基于模型的学习—— <strong>主动强化学习(active reinforcement learning)</strong>，即agent在学习过程中可以通过反馈多次更新策略并最后经历足够多的探索后决定最优策略。</p>
 <h4 id="直接估值"><a href="#直接估值" class="headerlink" title="直接估值"></a>直接估值</h4><p>先确定一个策略 $ \pi $ ，然后让 agent 遵循策略 $ \pi $ 进行多个周期。在 agent 收集样本的同时也维护每个状态下得到的价值和(counts of the total utility)以及 agent 访问到每个状态的次数(the number of times it visited the state)。任何时候，我们可以计算任意状态 $ s $ 的价值（即期望收益）：状态 $ s $ 的价值和除以状态 $ s $ 的访问次数。</p>
 <p>例子：</p>
-<p>策略 $ \pi $ 如下，衰减系数 $ \gamma &#x3D; 1 $ ，每条边奖励函数为 $ -1 $ 。</p>
+<p>策略 $ \pi $ 如下，衰减系数 $ \gamma = 1 $ ，每条边奖励函数为 $ -1 $ 。</p>
 <p><img src="/2025/07/27/CS188/fig1.png" alt="fig1.png"></p>
 <p>状态 C 有概率走向状态 A 和状态 D，在探索次数较少时，从状态 B 出发和从状态 E 出发可能导致计算出的期望收益不同。在探索次数增多后会收敛成同一个值，但是这将会花费大量的时间。这个问题可以通过另一个被动强化学习——时间差异学习(temporal difference learning)来减轻。</p>
 <h4 id="时间差异学习"><a href="#时间差异学习" class="headerlink" title="时间差异学习"></a>时间差异学习</h4><p>时间差异学习(temporal difference learning， TD learning)用了<code>从每一次经历中学习</code>的想法，而不是像直接估值那样先对状态价值和以及访问次数统计再做学习。在策略评估中，我们用固定的策略生成的方程组和 Bellman 方程组决定状态的值（或者迭代更新，像值迭代一样）。</p>
-<p>$$<br>V^{\pi}(s) &#x3D; \sum_{s’}T(s, \pi(s), s’)[R(s, \pi(s), s’) + \gamma V^{\pi}(s’)]<br>$$</p>
-<p>TD learning 尝试去解决如何在没有权重的情况下计算加权平均值的问题，用 <strong>指数滑动平均(exponential moving average)</strong> 的方式。</p>
+<script type="math/tex; mode=display">
+V^{\pi}(s) = \sum_{s'}T(s, \pi(s), s')[R(s, \pi(s), s') + \gamma V^{\pi}(s')]</script><p>TD learning 尝试去解决如何在没有权重的情况下计算加权平均值的问题，用 <strong>指数滑动平均(exponential moving average)</strong> 的方式。</p>
 <p>步骤：</p>
 <ol>
 <li>初始化：</li>
 </ol>
-<p>$$<br>\forall s, V^{\pi}(s) &#x3D; 0<br>$$</p>
-<ol start="2">
+<script type="math/tex; mode=display">
+\forall s, V^{\pi}(s) = 0</script><ol>
 <li>对于每一步，agent 进行操作 $ \pi(s) $ ，从状态 $ s $ 转移到状态 $ s’ $ ，获得奖励 $ R(s, \pi(s), s’) $ 。我们可以得到样本值(sample value)：</li>
 </ol>
-<p>$$<br>sample &#x3D; R(s, \pi(s), s’) + \gamma V^{\pi}(s’)<br>$$</p>
-<p>$ \space \space \space \space \space \space $ 这是对 $ V^{\pi}(s) $ 的新的估计。</p>
-<ol start="3">
+<script type="math/tex; mode=display">
+sample = R(s, \pi(s), s') + \gamma V^{\pi}(s')</script><p>$ \space \space \space \space \space \space $ 这是对 $ V^{\pi}(s) $ 的新的估计。</p>
+<ol>
 <li>将样本值用指数滑动平均的方式纳入对 $ V^{\pi}(s) $ 的估计，对 $ V^{\pi}(s) $ 进行更新 ：</li>
 </ol>
-<p>$$<br>V^{\pi}(s) \leftarrow (1 - \alpha)V^{\pi}(s) + \alpha \cdot sample<br>$$</p>
-<p>$ \space \space \space \space \space \space $ 其中 $ \alpha (0 \leq \alpha \leq 1) $ 被称为 <strong>学习速率(learning rate)</strong> 。</p>
+<script type="math/tex; mode=display">
+V^{\pi}(s) \leftarrow (1 - \alpha)V^{\pi}(s) + \alpha \cdot sample</script><p>$ \space \space \space \space \space \space $ 其中 $ \alpha (0 \leq \alpha \leq 1) $ 被称为 <strong>学习速率(learning rate)</strong> 。</p>
 <p>由这个更新规则可知，越旧的样本的权重指数级减小，这正是我们更新 $ V^{\pi}(s) $ 所需要的（因为越旧的样本往往意味着较劣的策略，也意味着错误）！这就是 TD learning 的美妙之处——用一个简单直接的更新规则，我们能够：</p>
 <ul>
 <li>在每一步学习，因此没得到状态的值的信息可以直接使用。</li>
@@ -323,30 +323,34 @@
 <li>相比于直接估值，可以在更少的周期内更快地向正确的状态的值收敛。</li>
 </ul>
 <h4 id="Q-learning"><a href="#Q-learning" class="headerlink" title="Q-learning"></a>Q-learning</h4><p>无论是直接估值还是 TD learning ，它们都会在所遵循的策略下得到真实的状态的值。但是，它们都有一个固有的问题——我们想要找一个最优的策略，这需要知道每个状态的 Q 值。为了计算 Q 值，我们需要转换函数和奖励函数并用 Bellman 方程表示。</p>
-<p>$$<br>Q^{<em>}(s, a) &#x3D; \sum_{s’}T(s, a, s’)[R(s, a, s’) + \gamma V^{</em>}(s’)]<br>$$</p>
-<p>因此，为了高效地更新 agent 的策略，TD learning 和直接估值通常与一些基于模型的学习一起使用，以获得 $ T $ 和 $ R $ 的估计。这种情况可以通过 Q-learning 的思想避免，即绕过对转换函数、奖励函数的需要，直接对 Q 值进行学习。因此，Q-learning 是完全不基于模型的。Q-learning 用了 Q 值迭代进行更新：</p>
-<p>$$<br>Q_{k + 1}(s, a) \leftarrow \sum_{s’}T(s, a, s’)[R(s, a, s’) + \gamma \max_{a’} Q(s’, a’)]<br>$$</p>
-<p>有了这个新的更新规则，和 TD learning 一样，用指数滑动平均：</p>
-<p>$$<br>sample &#x3D; R(s, a, s’) + \gamma \max_{a’} Q(s’, a’)\<br>Q(s, a) \leftarrow (1 - \alpha) Q(s, a) + \alpha \cdot sample<br>$$</p>
-<p>只要我们花足够多的时间去探索，并且用恰当的速率去减小 $ \alpha $ ，Q-learning 会对每个 Q 状态得到最优的 Q 值。这使得 Q-learning 具有革命性的意义——当 TD learning 和直接估值在某个策略下得到状态的值再用其他技巧决定最优策略时，Q-learning 可以直接得到最优策略，即使做出的次优或者随机的操作。这就是所谓的 <strong>离线策略学习(off-policy learning)</strong> （相较于直接估值和 TD learning 作为 <strong>在线策略学习(on-policy learning)</strong> 的例子）。</p>
+<script type="math/tex; mode=display">
+Q^{*}(s, a) = \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma V^{*}(s')]</script><p>因此，为了高效地更新 agent 的策略，TD learning 和直接估值通常与一些基于模型的学习一起使用，以获得 $ T $ 和 $ R $ 的估计。这种情况可以通过 Q-learning 的思想避免，即绕过对转换函数、奖励函数的需要，直接对 Q 值进行学习。因此，Q-learning 是完全不基于模型的。Q-learning 用了 Q 值迭代进行更新：</p>
+<script type="math/tex; mode=display">
+Q_{k + 1}(s, a) \leftarrow \sum_{s'}T(s, a, s')[R(s, a, s') + \gamma \max_{a'} Q(s', a')]</script><p>有了这个新的更新规则，和 TD learning 一样，用指数滑动平均：</p>
+<script type="math/tex; mode=display">
+sample = R(s, a, s') + \gamma \max_{a'} Q(s', a')\\
+Q(s, a) \leftarrow (1 - \alpha) Q(s, a) + \alpha \cdot sample</script><p>只要我们花足够多的时间去探索，并且用恰当的速率去减小 $ \alpha $ ，Q-learning 会对每个 Q 状态得到最优的 Q 值。这使得 Q-learning 具有革命性的意义——当 TD learning 和直接估值在某个策略下得到状态的值再用其他技巧决定最优策略时，Q-learning 可以直接得到最优策略，即使做出的次优或者随机的操作。这就是所谓的 <strong>离线策略学习(off-policy learning)</strong> （相较于直接估值和 TD learning 作为 <strong>在线策略学习(on-policy learning)</strong> 的例子）。</p>
 <h4 id="Approximate-Q-learning"><a href="#Approximate-Q-learning" class="headerlink" title="Approximate Q-learning"></a>Approximate Q-learning</h4><p>Q-learning 还有进步的空间。Q-learning 将所有的状态以表格的形式存储，当状态数很多时，Q-learning 的效率并不高。这意味着我们不能访问所有状态并且不能存储所有的 Q 值，因为空间不够。</p>
 <p>假如一个局势下 Q-learning 判断出是不利的，那么对于类似的情况 Q-learning 无法判断也是不利的。Approximate Q-learning 尝试去学习一些一般的情况并外推到许多类似的情况来解释这一点。生成学习经验的关键是对状态的 <strong>基于特征的表示(feature-based representation)</strong> ，即用一个 <strong>特征向量(feature vector)</strong> 来表示状态。例如，吃豆人的特征向量可以编码为：</p>
 <ul>
 <li>距离最近的幽灵的距离</li>
 <li>距离最近的食物的距离</li>
 <li>幽灵的个数</li>
-<li>吃豆人是否被困(True&#x2F;False)</li>
+<li>吃豆人是否被困(True/False)</li>
 </ul>
 <p>使用特征向量，我们可以将状态的值和 Q 值视为线性函数：</p>
-<p>$$<br>\begin{aligned}<br>    V(s) &amp;&#x3D; \sum_{k &#x3D; 1}^{n} w_{k} \cdot f_{k}(s) &#x3D; \vec{w} \cdot \vec{f}(s)\<br>    Q(s, a) &amp;&#x3D; \vec{w} \cdot \vec{f}(s, a)<br>\end{aligned}<br>$$</p>
-<p>其中 $ \vec{f}(s) $ 表示状态的特征向量，$ \vec{f}(s, a) $ 表示 Q-状态 $ (s, a) $ 的特征向量，$ \vec{w} $ 表示权重向量。定义偏差(difference)为：</p>
-<p>$$<br>difference &#x3D; [R(s, a, s’) + \gamma \max_{a’} Q(s’, a’)] - Q(s, a)<br>$$</p>
-<p>Approximate Q-learning 的更新规则和 Q-learning 完全一致（实际上是最小二乘，不知道为什么笔记里写的是和 Q-learning 更新方式一致的）：</p>
-<p>$$<br>w_{k} \leftarrow w_{k} + \alpha \cdot difference \cdot f_{k}(s, a)<br>$$</p>
-<p>放弃对每个状态的 Q 值存储，使用 Approximate Q-learning 我们只需要存储一个权重向量就可以计算需要的 Q 值。因此，这不仅给了我们一个更泛用的 Q-learning 版本，并且显著提升了存储效率。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    V(s) &= \sum_{k = 1}^{n} w_{k} \cdot f_{k}(s) = \vec{w} \cdot \vec{f}(s)\\
+    Q(s, a) &= \vec{w} \cdot \vec{f}(s, a)
+\end{aligned}</script><p>其中 $ \vec{f}(s) $ 表示状态的特征向量，$ \vec{f}(s, a) $ 表示 Q-状态 $ (s, a) $ 的特征向量，$ \vec{w} $ 表示权重向量。定义偏差(difference)为：</p>
+<script type="math/tex; mode=display">
+difference = [R(s, a, s') + \gamma \max_{a'} Q(s', a')] - Q(s, a)</script><p>Approximate Q-learning 的更新规则和 Q-learning 完全一致（实际上是最小二乘，不知道为什么笔记里写的是和 Q-learning 更新方式一致的）：</p>
+<script type="math/tex; mode=display">
+w_{k} \leftarrow w_{k} + \alpha \cdot difference \cdot f_{k}(s, a)</script><p>放弃对每个状态的 Q 值存储，使用 Approximate Q-learning 我们只需要存储一个权重向量就可以计算需要的 Q 值。因此，这不仅给了我们一个更泛用的 Q-learning 版本，并且显著提升了存储效率。</p>
 <p>用偏差来重写 Q-learning 的更新规则：</p>
-<p>$$<br>Q(s, a) \leftarrow Q(s, a) + \alpha \cdot difference<br>$$</p>
-<p>这个更新规则和 $ w_{k} \leftarrow w_{k} + \alpha \cdot difference \cdot f_{k}(s, a) $ 略有不同但同样具有价值：它计算估计值和当前值的偏差，然后往估计值方向趋近，幅度和偏差值成正比。</p>
+<script type="math/tex; mode=display">
+Q(s, a) \leftarrow Q(s, a) + \alpha \cdot difference</script><p>这个更新规则和 $ w_{k} \leftarrow w_{k} + \alpha \cdot difference \cdot f_{k}(s, a) $ 略有不同但同样具有价值：它计算估计值和当前值的偏差，然后往估计值方向趋近，幅度和偏差值成正比。</p>
 <h4 id="策略搜索-policy-search"><a href="#策略搜索-policy-search" class="headerlink" title="策略搜索(policy search)"></a>策略搜索(policy search)</h4><p>（note 里没写，PPT 里讲地不清楚，视频里一笔带过，以下内容疑似 PPT 内容的机翻）</p>
 <p>问题：通常，运行良好的基于特征的策略（能赢，最大化得分）不是去选 V 值或者 Q 值最好的策略。</p>
 <p>解决方案：学习奖励最大化的策略，而不是预测的值。</p>
@@ -379,22 +383,34 @@
 </ul>
 <h4 id="探索函数-exploration-functions"><a href="#探索函数-exploration-functions" class="headerlink" title="探索函数(exploration functions)"></a>探索函数(exploration functions)</h4><p>对于随机操作，可以探索一定次数后结束。</p>
 <p>更好的想法是，去探索访问次数少的点，最后停止探索(explore areas whose badness is not (yet) established, eventually stop exlporing)。</p>
-<p>用估计的值 $ u $ 和访问次数 $ n $ 来定义探索函数，返回一个乐观的估计，例如 $ f(u, n) &#x3D; u + k &#x2F; n $ 。</p>
+<p>用估计的值 $ u $ 和访问次数 $ n $ 来定义探索函数，返回一个乐观的估计，例如 $ f(u, n) = u + k / n $ 。</p>
 <p>对 Q 值更新规则进行修改：</p>
-<p>$$<br>\begin{aligned}<br>    sample &amp;&#x3D; R(s, a, s’) + \gamma \max_{a’}f(Q(s’, a’), N(s’, a’))\<br>    Q(s, a) &amp;\leftarrow (1 - \alpha) Q(s, a) + \alpha \cdot sample<br>\end{aligned}<br>$$</p>
-<h4 id="反悔-regret"><a href="#反悔-regret" class="headerlink" title="反悔(regret)"></a>反悔(regret)</h4><p>即使你能找到最优策略，在过程中你依旧可能会犯错误。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    sample &= R(s, a, s') + \gamma \max_{a'}f(Q(s', a'), N(s', a'))\\
+    Q(s, a) &\leftarrow (1 - \alpha) Q(s, a) + \alpha \cdot sample
+\end{aligned}</script><h4 id="反悔-regret"><a href="#反悔-regret" class="headerlink" title="反悔(regret)"></a>反悔(regret)</h4><p>即使你能找到最优策略，在过程中你依旧可能会犯错误。</p>
 <p>反悔值是你衡量错误成本的指标：最优（期望）的奖励和你（期望）的奖励（包括早期的次优选）的差。</p>
 <p>最大限度地减少反悔不仅仅是为了得到最优策略，它还需要最优化学习以达到最优策略。</p>
 <p>例如：随机探索和用探索函数探索都能得到最优策略，但是随机探索有更高的反悔值。</p>
 <h2 id="概率"><a href="#概率" class="headerlink" title="概率"></a>概率</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec11.pdf">Probability slides</a></p>
 <p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note11.pdf">Probability notes</a></p>
 <p>条件独立：事件A，B关于事件C条件独立（只要C事件发生，A、B相互独立），当且仅当：</p>
-<p>$$<br>P(A | BC) &#x3D; P(A | C)\<br>or \<br>P(AB | C) &#x3D; P(A | C)P(B | C)<br>$$</p>
-<p>记作：</p>
-<p>$$<br>A \perp B \vert {C}<br>$$</p>
-<p>推导：</p>
-<p>$$<br>\begin{aligned}<br>    P(A | BC) &amp;&#x3D; \frac{P(ABC)}{P(BC)} \<br>    &amp;&#x3D; \frac{P(ABC)}{P(C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; \underline{P(AB | C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; \underline{P(A | C) P(B | C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; P(A | C) \frac{P(BC)}{P(C)} \frac{P(C)}{P(BC)} \<br>    &amp;&#x3D; P(A | C)<br>\end{aligned}<br>$$</p>
-<h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec12.pdf">BN: Representation slides</a></p>
+<script type="math/tex; mode=display">
+P(A | BC) = P(A | C)\\
+or \\
+P(AB | C) = P(A | C)P(B | C)</script><p>记作：</p>
+<script type="math/tex; mode=display">
+A \perp B \vert \{C\}</script><p>推导：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    P(A | BC) &= \frac{P(ABC)}{P(BC)} \\
+    &= \frac{P(ABC)}{P(C)} \frac{P(C)}{P(BC)} \\
+    &= \underline{P(AB | C)} \frac{P(C)}{P(BC)} \\
+    &= \underline{P(A | C) P(B | C)} \frac{P(C)}{P(BC)} \\
+    &= P(A | C) \frac{P(BC)}{P(C)} \frac{P(C)}{P(BC)} \\
+    &= P(A | C)
+\end{aligned}</script><h2 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h2><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec12.pdf">BN: Representation slides</a></p>
 <p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note12.pdf">BN: Representation notes</a></p>
 <h3 id="贝叶斯网络表达-Bayesian-Network-Representation"><a href="#贝叶斯网络表达-Bayesian-Network-Representation" class="headerlink" title="贝叶斯网络表达(Bayesian Network Representation)"></a>贝叶斯网络表达(Bayesian Network Representation)</h3><p>虽然枚举可以计算我们所有想要知道的概率，在计算机中用内存存储所有的联合分布(joint distribution)对于实际问题是不切实际的——假如有 n 个变量，每个变量有 d 个取值，那联合分布表会有 d^n^ 个条目，呈指数级。</p>
 <p>贝叶斯网络通过条件概率(conditional probility)避免了这个问题。概率被存储在一些小的条件概率表并用有向无环图(directed acyclic graph, DAG)描述变量之间的关系。本地的概率表和DAG一起将信息存储，并足以计算任何条件概率分布。</p>
@@ -417,22 +433,26 @@
 <p><img src="/2025/07/27/CS188/fig2.png" alt="fig2.png"></p>
 <p>在贝叶斯网络里，我们存储概率表 $ P(B), P(E), P(A | BE), P(J | A), P(M | A) $ 。</p>
 <p>我们可以计算概率：</p>
-<p>$$<br>P(X_1 X_1 \dots X_n) &#x3D; \prod_{i &#x3D; 1}^{n} P(X_i | parents(X_i))<br>$$</p>
-<p>例如：</p>
-<p>$$<br>P(-b, -e, +a, +j, -m) &#x3D; P(-b) \cdot P(-e) \cdot P(+a | -b, -e) \cdot P(+j | +a) \cdot P(-m | +a)<br>$$</p>
-<h3 id="贝叶斯网络结构-Structure-of-Bayes-Nets"><a href="#贝叶斯网络结构-Structure-of-Bayes-Nets" class="headerlink" title="贝叶斯网络结构(Structure of Bayes Nets)"></a>贝叶斯网络结构(Structure of Bayes Nets)</h3><p>$$<br>P(x_i | x_1 x_2 \dots x_{i - 1}) &#x3D; P(x_i | parents(x_i))\<br>\Rightarrow P(x_1 x_2 \dots x_{i - 1}) &#x3D; \prod_{i &#x3D; 1}^{n} P(x_i | parents(x_i))<br>$$</p>
-<p>即 $ x_i $ 与 $ x_1, x_2, \dots x_{i - 1} &#x2F; parents(x_i) $ 在 $ parents(x_i) $ 下条件独立。</p>
+<script type="math/tex; mode=display">
+P(X_1 X_1 \dots X_n) = \prod_{i = 1}^{n} P(X_i | parents(X_i))</script><p>例如：</p>
+<script type="math/tex; mode=display">
+P(-b, -e, +a, +j, -m) = P(-b) \cdot P(-e) \cdot P(+a | -b, -e) \cdot P(+j | +a) \cdot P(-m | +a)</script><h3 id="贝叶斯网络结构-Structure-of-Bayes-Nets"><a href="#贝叶斯网络结构-Structure-of-Bayes-Nets" class="headerlink" title="贝叶斯网络结构(Structure of Bayes Nets)"></a>贝叶斯网络结构(Structure of Bayes Nets)</h3><script type="math/tex; mode=display">
+P(x_i | x_1 x_2 \dots x_{i - 1}) = P(x_i | parents(x_i))\\
+\Rightarrow P(x_1 x_2 \dots x_{i - 1}) = \prod_{i = 1}^{n} P(x_i | parents(x_i))</script><p>即 $ x_i $ 与 $ x_1, x_2, \dots x_{i - 1} / parents(x_i) $ 在 $ parents(x_i) $ 下条件独立。</p>
 <p>例如：</p>
 <p><img src="/2025/07/27/CS188/fig2.png" alt="fig2.png"></p>
-<p>$$<br>\begin{aligned}<br>    P(BEAJM) &amp;&#x3D; P(B) P(B | E)P(A | BE) P(J | BEA) P(M | BEAJ) \<br>    &amp;&#x3D; P(B) P(E) P(A | BE) P(J | A) P(M | A)<br>\end{aligned}<br>$$</p>
-<p>一一对应可得条件独立关系。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    P(BEAJM) &= P(B) P(B | E)P(A | BE) P(J | BEA) P(M | BEAJ) \\
+    &= P(B) P(E) P(A | BE) P(J | A) P(M | A)
+\end{aligned}</script><p>一一对应可得条件独立关系。</p>
 <p>每个节点与其马尔可夫覆盖(Markov blanket)之外的点条件独立。</p>
 <p>一个变量的马尔可夫覆盖包含它的父亲、儿子和儿子的其他父亲（因为是DAG）。</p>
 <h3 id="D分离-D-Seperation"><a href="#D分离-D-Seperation" class="headerlink" title="D分离(D-Seperation)"></a>D分离(D-Seperation)</h3><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note13.pdf">Slides</a></p>
 <p>D分离（D-Separation）又被称作有向分离，是一种用来判断变量是否条件独立的图形化方法。相比于非图形化方法，D-Separation更加直观且计算简单。对于一个DAG（有向无环图），D-Separation方法可以快速的判断出两个节点之间是否是条件独立的。</p>
-<p>查询：$ x_i \perp x_j \vert {x_{k_1}, x_{k_2}, \dots x_{k_n}} $</p>
+<p>查询：$ x_i \perp x_j \vert \{x_{k_1}, x_{k_2}, \dots x_{k_n}\} $</p>
 <p>检查所有连接 $ x_i $ 和 $ x_j $ 的路径。如果一条或者多条路径是 <strong>激活</strong> 的，那么，条件独立性不成立。</p>
-<p>否则，条件独立性成立： $ x_i \perp x_j \vert {x_{k_1}, x_{k_2}, \dots x_{k_n}} $ 。</p>
+<p>否则，条件独立性成立： $ x_i \perp x_j \vert \{x_{k_1}, x_{k_2}, \dots x_{k_n}\} $ 。</p>
 <p>如果路径中所有的三元组都是 <strong>激活</strong> 的，则该路径是 <strong>激活</strong> 的。</p>
 <p>三元组的三种形式（又或者没有证据变量）：</p>
 <ul>
@@ -441,37 +461,59 @@
 <blockquote>
 <p>A(0) -&gt; B(1) -&gt; C(0)</p>
 </blockquote>
-<p>$$<br>P(ABC) &#x3D; P(A)P(B | A)P(C | B) \<br>A \perp C ? \space (P(AC) &#x3D; P(A)P(C) ?) \<br>No. \<br>A \perp C | B ? \space (P(AC | B) &#x3D; P(A | B)P(C | B) ? )\<br>Yes. \<br>P(AC | B) &#x3D; \frac{P(ABC)}{P(B)}\<br>&#x3D; \frac{P(A)P(B|A)P(C|B)}{P(B)}<br>\&#x3D; \frac{P(AB)}{P(A)} \times P(C|B)\<br>&#x3D; P(A|B)P(C|B)<br>$$</p>
-<p>链上的中间变量可以阻隔影响传播。</p>
+<script type="math/tex; mode=display">
+P(ABC) = P(A)P(B | A)P(C | B) \\
+A \perp C ? \space (P(AC) = P(A)P(C) ?) \\
+No. \\
+A \perp C | B ? \space (P(AC | B) = P(A | B)P(C | B) ? )\\
+Yes. \\
+P(AC | B) = \frac{P(ABC)}{P(B)}\\
+= \frac{P(A)P(B|A)P(C|B)}{P(B)}
+\\= \frac{P(AB)}{P(A)} \times P(C|B)\\
+= P(A|B)P(C|B)</script><p>链上的中间变量可以阻隔影响传播。</p>
 <ul>
 <li>共同原因<blockquote>
 <p>A(0) &lt;- B(1) -&gt; C(0)</p>
 </blockquote>
 </li>
 </ul>
-<p>$$<br>P(ABC) &#x3D; P(B)P(A|B)P(C|B) \<br>A \perp C ? \space (P(AC) &#x3D; P(A)P(C) ?) \<br>No. \<br>A \perp C | B ? \space (P(AC | B) &#x3D; P(A | B)P(C | B) ? )\<br>Yes. \<br>P(AC|B) &#x3D; \frac{P(ABC)}{P(B)}\<br>&#x3D; \frac{P(B)P(A|B)P(C|B)}{P(B)}\<br>&#x3D; P(A|B)P(C|B)<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+P(ABC) = P(B)P(A|B)P(C|B) \\
+A \perp C ? \space (P(AC) = P(A)P(C) ?) \\
+No. \\
+A \perp C | B ? \space (P(AC | B) = P(A | B)P(C | B) ? )\\
+Yes. \\
+P(AC|B) = \frac{P(ABC)}{P(B)}\\
+= \frac{P(B)P(A|B)P(C|B)}{P(B)}\\
+= P(A|B)P(C|B)</script><ul>
 <li>共同结果<blockquote>
 <p>A(0) -&gt; B(1) &lt;- C(0)</p>
 </blockquote>
 </li>
 </ul>
-<p>$$<br>P(ABC) &#x3D; P(A)P(C)P(B|AC)\<br>P(A)P(C) &#x3D; P(AC)\<br>A \perp C | B ? \space (P(AC | B) &#x3D; P(A | B)P(C | B) ? )\<br>No. \<br>P(A) &#x3D; P(C) &#x3D; \frac{1}{2}\<br>P(B) &#x3D; A \space or \space C\<br>P(AC|B) &#x3D; \frac{1}{3}\<br>P(A|B) &#x3D; P(C|B) &#x3D; \frac{2}{3}<br>$$</p>
-<p>如果路径中某三元组是非激活的，那么这条路径就是非激活的。</p>
+<script type="math/tex; mode=display">
+P(ABC) = P(A)P(C)P(B|AC)\\
+P(A)P(C) = P(AC)\\
+A \perp C | B ? \space (P(AC | B) = P(A | B)P(C | B) ? )\\
+No. \\
+P(A) = P(C) = \frac{1}{2}\\
+P(B) = A \space or \space C\\
+P(AC|B) = \frac{1}{3}\\
+P(A|B) = P(C|B) = \frac{2}{3}</script><p>如果路径中某三元组是非激活的，那么这条路径就是非激活的。</p>
 <h4 id="贝叶斯网络独立性问题的形式化定义"><a href="#贝叶斯网络独立性问题的形式化定义" class="headerlink" title="贝叶斯网络独立性问题的形式化定义"></a>贝叶斯网络独立性问题的形式化定义</h4><ul>
-<li><p>问题：给定证据变量(evidence variables) $ {Z} $ ， $ X $ 是否条件独立于 $ Y $ ?</p>
+<li><p>问题：给定证据变量(evidence variables) $ \{Z\} $ ， $ X $ 是否条件独立于 $ Y $ ?</p>
 </li>
 <li><p>D-分离：在贝叶斯网络中寻找关联路径，并基于路径作独立性判断。</p>
 </li>
 </ul>
 <ol>
 <li>列出所有连接 $ X $ 和 $ Y $ 的路径。</li>
-<li>没有激活路径 &#x3D; 独立性，有激活路径 &#x3D; 独立性不成立。</li>
+<li>没有激活路径 = 独立性，有激活路径 = 独立性不成立。</li>
 </ol>
 <ul>
 <li>路径的独立性判断：将路径拆解为多个三元组，检查三元组的独立性。</li>
 </ul>
-<h4 id="激活-非激活路径"><a href="#激活-非激活路径" class="headerlink" title="激活 &#x2F; 非激活路径"></a>激活 &#x2F; 非激活路径</h4><p>如果每个三元组都是激活的，那这条路径就是激活的。</p>
+<h4 id="激活-非激活路径"><a href="#激活-非激活路径" class="headerlink" title="激活 / 非激活路径"></a>激活 / 非激活路径</h4><p>如果每个三元组都是激活的，那这条路径就是激活的。</p>
 <ul>
 <li>因果链条：若 $ B $ 未被观察， $ A $ 和 $ C $ 不相互独立；否则相互独立。</li>
 <li>共同原因：若 $ B $ 未被观察， $ A $ 和 $ C $ 不相互独立；否则相互独立。</li>
@@ -480,16 +522,16 @@
 <p>出现不独立的情况，这个三元组就被激活。</p>
 <p>如果任一三元组不激活，这条路径就不激活。</p>
 <h4 id="贝叶斯网络中的条件独立性"><a href="#贝叶斯网络中的条件独立性" class="headerlink" title="贝叶斯网络中的条件独立性"></a>贝叶斯网络中的条件独立性</h4><p>给定贝叶斯网络，运用 D-分离 方法，可以得到所有形式的条件独立性。</p>
-<p>$$<br>x_i \perp x_j | {x_{k_1}, \dots, x_{k_n}}<br>$$</p>
-<p>基于得到的条件独立列表，可以确定贝叶斯网络能够表达的所有概率分布。</p>
+<script type="math/tex; mode=display">
+x_i \perp x_j | \{x_{k_1}, \dots, x_{k_n}\}</script><p>基于得到的条件独立列表，可以确定贝叶斯网络能够表达的所有概率分布。</p>
 <h3 id="贝叶斯网络的独立性隐含关系"><a href="#贝叶斯网络的独立性隐含关系" class="headerlink" title="贝叶斯网络的独立性隐含关系"></a>贝叶斯网络的独立性隐含关系</h3><p>给定贝叶斯网络，只有特定的联合分布能够被表达。</p>
 <p>贝叶斯网络中的某些（条件）独立性，确立了能被表达的联合分布。</p>
 <p>表达扩充：在贝叶斯网络中增加边，可以扩充能表达的分布范围。</p>
 <p>极端情况：节点不存在独立性，能表达任意分布。</p>
 <h3 id="概率推断"><a href="#概率推断" class="headerlink" title="概率推断"></a>概率推断</h3><p><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/lectures/cs188-fa22-lec14.pdf">Slides</a></p>
 <p>询问</p>
-<p>$$<br>P(Q | e_1 e_2 \dots e_k)<br>$$</p>
-<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>通常情况：</p>
+<script type="math/tex; mode=display">
+P(Q | e_1 e_2 \dots e_k)</script><h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>通常情况：</p>
 <ul>
 <li>证据变量： $ e_1, e_2, \dots , e_k $</li>
 <li>询问变量： $ Q $</li>
@@ -500,12 +542,13 @@
 <li>选出包含证据变量的条件概率表的条目。</li>
 <li>将 $ H $ 相加：</li>
 </ol>
-<p>$$<br>P(Q \space e_1 \dots e_k) &#x3D; \sum_{h_1, h_2, \dots , h_r} P(Q \space h_1 \dots h_r \space e_1 \dots e_k)<br>$$</p>
-<ol start="3">
+<script type="math/tex; mode=display">
+P(Q \space e_1 \dots e_k) = \sum_{h_1, h_2, \dots , h_r} P(Q \space h_1 \dots h_r \space e_1 \dots e_k)</script><ol>
 <li>规范化</li>
 </ol>
-<p>$$<br>Z &#x3D; \sum_{q} P(Q \space e_1 \dots e_k) \<br>P(Q | e_1 \dots e_k) &#x3D; \frac{P(Q \space e_1 \dots e_k)}{Z}<br>$$</p>
-<p>时间复杂度是指数级的，能够得到准确的答案。</p>
+<script type="math/tex; mode=display">
+Z = \sum_{q} P(Q \space e_1 \dots e_k) \\
+P(Q | e_1 \dots e_k) = \frac{P(Q \space e_1 \dots e_k)}{Z}</script><p>时间复杂度是指数级的，能够得到准确的答案。</p>
 <h4 id="消元法"><a href="#消元法" class="headerlink" title="消元法"></a>消元法</h4><p>联合分布 $ P(x y) $ 的和为 $ 1 $ 。</p>
 <p>选定几个节点固定： $ P(x Y) $ 。这是联合分布的一部分，其和为 $ P(x) $ 。</p>
 <p>大写字母（未确定变量）的个数即概率表的维数。</p>
@@ -526,7 +569,6 @@
 </ol>
 <p>一个因子定义为未被规范化的概率。在变量消除期间的所有时候，每个因子都将与其对应的概率成正比，但每个因子的基础分布不一定像概率分布那样总和 $ 1 $ 。伪代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">elimination</span>(<span class="params">X, e, bn</span>): <span class="comment"># returns a distribution of X</span></span><br><span class="line">    <span class="comment"># X : query variable.</span></span><br><span class="line">    <span class="comment"># e : observed values for variables E(evidence variables).</span></span><br><span class="line">    <span class="comment"># bn : a Bayesian network specifying joint distribution</span></span><br><span class="line">    <span class="comment"># P(x1, ..., xn).</span></span><br><span class="line">    factors = []</span><br><span class="line">    <span class="keyword">for</span> var <span class="keyword">in</span> ORDER(var, e):</span><br><span class="line">        factors = [MAKE_FACTOR(var, e) | factors]</span><br><span class="line">        <span class="keyword">if</span> var <span class="keyword">is</span> hidden variable:</span><br><span class="line">            factors = SUM_OUT(var, factors)</span><br><span class="line">    <span class="keyword">return</span> NORMALIZE(POINTWISE_PRODUCT(factors))</span><br></pre></td></tr></table></figure>
-
 <p>（CS188 Notes 里写得和天书一样）</p>
 <p>举个例子：</p>
 <p><img src="/2025/07/27/CS188/fig3.png" alt="fig3.png"></p>
@@ -534,11 +576,11 @@
 <p>假设我们要求 $ P(T | +e) $ 。假如用枚举的方法我们需要 16 行的概率分布函数 $ P(T, C, S, E) $ ，选择包含 $ +e $ 的行，对 $ C, S $ 求和最后规范化。</p>
 <p>用消元法就先将 $ C $ 消掉，再把 $ S $ 消掉。</p>
 <ol>
-<li>将包含 $ C $ 的因子乘起来， $  f_1(C, +e, T, S) &#x3D; P(C | T) \cdot P(+e | C, S)  $ ，也写作 $ P(C, +e | T, S) $ 。</li>
+<li>将包含 $ C $ 的因子乘起来， $  f_1(C, +e, T, S) = P(C | T) \cdot P(+e | C, S)  $ ，也写作 $ P(C, +e | T, S) $ 。</li>
 <li>在这个新的因子里将 $ C $ 求和，得到新的因子 $ f_2(+e, T, S) $ ，也写作 $ P(+e | T, S) $ 。</li>
-<li>将包含 $ S $ 的因子乘起来， $  f_3(+e, T, S) &#x3D; P(S | T) \cdot f_2(+e, T, S) $ ，也写作 $ P(+e, S | T) $ 。</li>
+<li>将包含 $ S $ 的因子乘起来， $  f_3(+e, T, S) = P(S | T) \cdot f_2(+e, T, S) $ ，也写作 $ P(+e, S | T) $ 。</li>
 <li>将 $ S $ 求和，得到新的因子 $ f_4(+e, T) $ ，也写作 $ P(+e | T) $ 。</li>
-<li>将剩下的因子乘起来，$ f_5(+e, T) &#x3D; f_4(+e, T) \cdot P(T) $ 。</li>
+<li>将剩下的因子乘起来，$ f_5(+e, T) = f_4(+e, T) \cdot P(T) $ 。</li>
 </ol>
 <p>消元的顺序也会影响复杂度。如图：</p>
 <p><img src="/2025/07/27/CS188/fig4.png" alt="fig4.png"></p>
@@ -550,22 +592,22 @@
 <li>体现这个概率收敛于真实概率 P 。</li>
 </ul>
 <h4 id="先验采样-Prior-Sampling"><a href="#先验采样-Prior-Sampling" class="headerlink" title="先验采样(Prior Sampling)"></a>先验采样(Prior Sampling)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">For i = 1, 2, ..., n</span><br><span class="line">    Sample x_i from P(X_i | Parents(X_i))</span><br><span class="line">return (x_1, x_2, ..., x_n)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>这个过程生成样本，其中有 $ P(x_1, \dots, x_n) $ 的概率生成样本 $ (x_1, \dots, x_n) $ 。</li>
 <li>令一个事件的样本数量为 $ N_{PS}(x_1, \dots, x_n) $ 。</li>
-<li></li>
+<li><script type="math/tex; mode=display">
+\begin{aligned}
+\lim_{N \rightarrow \infin} \hat{P}(x_1, \dots, x_n) &= \lim_{N \rightarrow \infin} N_{PS}(x_1, \dots, x_n) / N \\
+&= P(x_1, \dots, x_n)
+\end{aligned}</script></li>
 </ul>
-<p>$$<br>\begin{aligned}<br>    \lim_{N \rightarrow \infin} \hat{P}(x_1, \dots, x_n) &amp;&#x3D; \lim_{N \rightarrow \infin} N_{PS}(x_1, \dots, x_n) &#x2F; N \<br>    &amp;&#x3D; P(x_1, \dots, x_n)<br>\end{aligned}<br>$$</p>
 <h4 id="拒绝采样-Rejection-Sampling"><a href="#拒绝采样-Rejection-Sampling" class="headerlink" title="拒绝采样(Rejection Sampling)"></a>拒绝采样(Rejection Sampling)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: evidence instantiation</span><br><span class="line">For i = 1, 2, ..., n</span><br><span class="line">    Sample x_i from P(X_i | Parents(X_i))</span><br><span class="line">    if x_i not consistent with evidence</span><br><span class="line">        return: reject this sample</span><br><span class="line">return (x_1, x_2, ..., x_n)</span><br></pre></td></tr></table></figure>
-
 <p>在 Prior Sampling 的基础上把不符合条件（不满足证据变量条件）的样本直接在采样的时候删去。</p>
 <h4 id="Likelihood-Weighting"><a href="#Likelihood-Weighting" class="headerlink" title="Likelihood Weighting"></a>Likelihood Weighting</h4><ul>
 <li>rejection sampling 的问题：当证据变量的概率很小时，会拒绝很多样本。</li>
 <li>Idea：直接固定证据变量(要赋予一定的权重，大小为得到证据变量的条件概率)。</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input: evidence instantiation</span><br><span class="line">w = 1.0</span><br><span class="line">For i = 1, 2, ..., n</span><br><span class="line">    if x_i is an evidence variable</span><br><span class="line">        X_i = observation x_i for X_i</span><br><span class="line">        set w = w * P(x_i | Parents(X_i))</span><br><span class="line">    else</span><br><span class="line">        sample x_i from P(x_i | Parents(X_i))</span><br><span class="line">return (x_1, x_2, ..., x_n), w</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Likelihood Weighting 的问题：Evidence influences the choice of downstream variables, but not upstream ones (C isn’t more<br>likely to get a value matching the evidence) （没看懂，大概是拓扑序前面的节点会影响后面的节点，但是后面的节点不会对前面的节点有影响，但这怎么成了问题）（哦，大概是条件概率表不构成拓扑关系，这时候就不能用之前的方式）</li>
 </ul>
@@ -643,13 +685,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">222k</span>
+    <span title="站点总字数">219k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:22</span>
+    <span title="站点阅读时长">3:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

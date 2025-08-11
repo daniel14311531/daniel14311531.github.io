@@ -286,15 +286,23 @@
 <p>DeepSeek</p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>Image Quality Assessment (IQA)</strong>，即<strong>图像质量评估</strong>，是计算机视觉和图像处理领域的一个重要研究方向，旨在通过算法自动评估图像的质量，模拟人类视觉系统（HVS）对图像的主观感知。其核心任务是量化图像的失真程度或感知质量，广泛应用于图像压缩、传输、增强、修复等场景。</p>
 <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h2 id="全参考-Full-Reference-FR-IQA"><a href="#全参考-Full-Reference-FR-IQA" class="headerlink" title="全参考 (Full-Reference, FR-IQA)"></a><strong>全参考 (Full-Reference, FR-IQA)</strong></h2><p>需要完整的原始无失真图像作为参考，通过对比失真图像与参考图像的差异来量化质量。</p>
-<h3 id="典型方法"><a href="#典型方法" class="headerlink" title="典型方法"></a>典型方法</h3><h4 id="PSNR（峰值信噪比）"><a href="#PSNR（峰值信噪比）" class="headerlink" title="PSNR（峰值信噪比）"></a><strong>PSNR（峰值信噪比）</strong></h4><p>PSNR 基于<strong>均方误差（MSE, Mean Squared Error）<strong>计算，单位为</strong>分贝（dB）</strong>，值越大表示图像质量越好。<br>$$<br>PSNR &#x3D; 10 \cdot \log_{10} \left( \frac{MAX_I^2}{MSE} \right)<br>$$<br>$MAX_I$：图像像素的最大可能值（如8位图像为255）。</p>
-<p>$MSE$：均方误差，计算两图像像素差的平方均值：<br>$$<br>MSE &#x3D; \frac{1}{MN} \sum_{i&#x3D;0}^{M - 1} \sum_{j&#x3D;0}^{N - 1} [I(i, j) - K(i, j)]^2<br>$$<br>$I$：原始图像。$K$：失真图像。</p>
+<h3 id="典型方法"><a href="#典型方法" class="headerlink" title="典型方法"></a>典型方法</h3><h4 id="PSNR（峰值信噪比）"><a href="#PSNR（峰值信噪比）" class="headerlink" title="PSNR（峰值信噪比）"></a><strong>PSNR（峰值信噪比）</strong></h4><p>PSNR 基于<strong>均方误差（MSE, Mean Squared Error）</strong>计算，单位为<strong>分贝（dB）</strong>，值越大表示图像质量越好。</p>
+<script type="math/tex; mode=display">
+PSNR = 10 \cdot \log_{10} \left( \frac{MAX_I^2}{MSE} \right)</script><p>$MAX_I$：图像像素的最大可能值（如8位图像为255）。</p>
+<p>$MSE$：均方误差，计算两图像像素差的平方均值：</p>
+<script type="math/tex; mode=display">
+MSE = \frac{1}{MN} \sum_{i=0}^{M - 1} \sum_{j=0}^{N - 1} [I(i, j) - K(i, j)]^2</script><p>$I$：原始图像。$K$：失真图像。</p>
 <ul>
 <li>优点：计算简单、物理意义明确、通用性强</li>
 <li>局限性：对局部失真不敏感、依赖参考图像、对图像内容不敏感</li>
 </ul>
-<h4 id="SSIM（结构相似性）"><a href="#SSIM（结构相似性）" class="headerlink" title="SSIM（结构相似性）"></a><strong>SSIM（结构相似性）</strong></h4><p>SSIM 认为，人眼对图像的<strong>亮度（Luminance）</strong>、<strong>对比度（Contrast）</strong> 和 <strong>结构（Structure）</strong> 三个维度最为敏感，因此分别计算这三者的相似度，再综合得到最终评分：<br>$$<br>SSIM(x, y) &#x3D; [l(x, y)]^{\alpha}[c(x, y)]^{\beta}[s(x, y)]^{\gamma}<br>$$<br>$x$为参考图像，$y$为失真图像。</p>
+<h4 id="SSIM（结构相似性）"><a href="#SSIM（结构相似性）" class="headerlink" title="SSIM（结构相似性）"></a><strong>SSIM（结构相似性）</strong></h4><p>SSIM 认为，人眼对图像的<strong>亮度（Luminance）</strong>、<strong>对比度（Contrast）</strong> 和 <strong>结构（Structure）</strong> 三个维度最为敏感，因此分别计算这三者的相似度，再综合得到最终评分：</p>
+<script type="math/tex; mode=display">
+SSIM(x, y) = [l(x, y)]^{\alpha}[c(x, y)]^{\beta}[s(x, y)]^{\gamma}</script><p>$x$为参考图像，$y$为失真图像。</p>
 <p>$l(x, y), c(x, y), s(x, y)$分别为亮度相似度、对比度相似度、结构相似度。</p>
-<p>$\alpha, \beta, \gamma$通常设为1 。<br>$$<br>SSIM(x, y) &#x3D; \frac{(2 \mu_x \mu_y + C_1)(2 \sigma_{xy} + C_2)}{(\mu_x^2 + \mu_y^2 + C_1)(\sigma_x^2 + \sigma_y^2 + C_2)}<br>$$<br>$\mu_x, \mu_y$：图像的均值（亮度）。</p>
+<p>$\alpha, \beta, \gamma$通常设为1 。</p>
+<script type="math/tex; mode=display">
+SSIM(x, y) = \frac{(2 \mu_x \mu_y + C_1)(2 \sigma_{xy} + C_2)}{(\mu_x^2 + \mu_y^2 + C_1)(\sigma_x^2 + \sigma_y^2 + C_2)}</script><p>$\mu_x, \mu_y$：图像的均值（亮度）。</p>
 <p>$\sigma_x, \sigma_y$：图像标准差（对比度）。</p>
 <p>$\sigma_{xy}$：协方差（结构相似性）。</p>
 <p>$C_1, C_2$：防止分母为0的小常数。</p>
@@ -303,7 +311,7 @@
 <li>缺点：计算复杂度高、不适用于极端失真、依赖参考图像</li>
 </ul>
 <h4 id="MS-SSIM（多尺度SSIM）"><a href="#MS-SSIM（多尺度SSIM）" class="headerlink" title="MS-SSIM（多尺度SSIM）"></a><strong>MS-SSIM（多尺度SSIM）</strong></h4><p>在多分辨率下计算SSIM，更适合复杂失真。</p>
-<h4 id="VIF（视觉信息保真度）"><a href="#VIF（视觉信息保真度）" class="headerlink" title="VIF（视觉信息保真度）"></a><strong>VIF（视觉信息保真度）</strong></h4><p>VIF 将图像视为信息源，将人类视觉系统视为通信信道，通过计算参考图像和失真图像通过HVS（人类视觉系统）信道后的**互信息（Mutual Information）**来评估质量。</p>
+<h4 id="VIF（视觉信息保真度）"><a href="#VIF（视觉信息保真度）" class="headerlink" title="VIF（视觉信息保真度）"></a><strong>VIF（视觉信息保真度）</strong></h4><p>VIF 将图像视为信息源，将人类视觉系统视为通信信道，通过计算参考图像和失真图像通过HVS（人类视觉系统）信道后的<strong>互信息（Mutual Information）</strong>来评估质量。</p>
 <ul>
 <li>优点：符合人类感知、多尺度分析、信息论基础、对复杂失真敏感</li>
 <li>缺点：计算复杂度高、依赖参数调优、对某些失真不敏感</li>
@@ -396,13 +404,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">222k</span>
+    <span title="站点总字数">219k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:22</span>
+    <span title="站点阅读时长">3:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
