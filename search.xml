@@ -1588,7 +1588,12 @@ TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新
   <entry>
     <title>Advanced Optimization - Introduction; Mathematical Background</title>
     <url>/2025/09/13/introduction-and-mathematical-background/</url>
-    <content><![CDATA[<p>写一些不会的东西。</p>
+    <content><![CDATA[<p>如果LaTeX挂了：</p>
+<div class="pdf-container">
+  <iframe src="/pdfjs/web/viewer.html?file=/assets/advanced-optimization/introduction-and-mathematical-background.pdf" width="100%" height="800px"></iframe>
+</div>
+
+<p>写一些不会的东西。</p>
 <h1 id="Notational-Convention"><a href="#Notational-Convention" class="headerlink" title="Notational Convention"></a>Notational Convention</h1><ul>
 <li>$[n] = \{ 1, 2, \dots, n \}$</li>
 <li>$\bold{x}, \bold{y}, \bold{v}$: vectors</li>
