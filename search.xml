@@ -1585,4 +1585,144 @@ TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新
         <tag>数论</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Advanced Optimization - Introduction; Mathematical Background</title>
+    <url>/2025/09/13/introduction-and-mathematical-background/</url>
+    <content><![CDATA[<p>写一些不会的东西。</p>
+<h1 id="Notational-Convention"><a href="#Notational-Convention" class="headerlink" title="Notational Convention"></a>Notational Convention</h1><ul>
+<li>$[n] = \{ 1, 2, \dots, n \}$</li>
+<li>$\bold{x}, \bold{y}, \bold{v}$: vectors</li>
+<li>$A, B$: matrices</li>
+<li>$\mathcal{X}, \mathcal{Y}, \mathcal{K}$: domains</li>
+<li>$d, m, n$: dimensions</li>
+<li>$I$: identity matrix</li>
+<li>$X, Y$: random variables</li>
+<li>$\bold{p}, \bold{q}$: probability distributions</li>
+</ul>
+<h1 id="Calculus"><a href="#Calculus" class="headerlink" title="Calculus"></a>Calculus</h1><h2 id="Hessian"><a href="#Hessian" class="headerlink" title="Hessian"></a>Hessian</h2><script type="math/tex; mode=display">
+\nabla^2 f(\bold{x}) = \left[ \frac{\partial^2 f}{\partial x_i, x_j} (\bold{x}) \right]_{1 \le i, j \le d}</script><h2 id="Reference-The-Matrix-Cookbook"><a href="#Reference-The-Matrix-Cookbook" class="headerlink" title="Reference: The Matrix Cookbook"></a>Reference: The Matrix Cookbook</h2><p><a href="https://www.math.uwaterloo.ca/%7Ehwolkowi/matrixcookbook.pdf">&gt; link &lt;</a></p>
+<h1 id="Linear-Algebra"><a href="#Linear-Algebra" class="headerlink" title="Linear Algebra"></a>Linear Algebra</h1><h2 id="Positive-Semi-Definite-Matrix"><a href="#Positive-Semi-Definite-Matrix" class="headerlink" title="Positive (Semi-)Definite Matrix"></a>Positive (Semi-)Definite Matrix</h2><p>Positive Definite matrix =&gt; PD, $\forall \bold{x} \in \mathbb{R}^d, \bold{x}^T A \bold{x} &gt; 0 \Leftrightarrow  A \succ 0$</p>
+<p>Positive Semi-Definite matrix =&gt; PSD, $\forall \bold{x} \in \mathbb{R}^d, \bold{x}^T A \bold{x} \ge 0 \Leftrightarrow A \succeq 0$</p>
+<h2 id="Inner-Product"><a href="#Inner-Product" class="headerlink" title="Inner Product"></a>Inner Product</h2><ul>
+<li>Vector Space:</li>
+</ul>
+<script type="math/tex; mode=display">
+\bold{x}, \bold{y} \in \mathbb{R}^d \\
+\left< \bold{x}, \bold{y} \right> = \bold{x}^T \bold{y} = \sum_{i = 1}^{d} x_i y_i</script><ul>
+<li>Matrix Space:</li>
+</ul>
+<script type="math/tex; mode=display">
+A, B \in \mathbb{R}^{m \times n} \\
+\left< A, B \right> = \text{Tr}(A^T B) = \sum_{i = 1}^{m} \sum_{j = 1}^{n} A_{ij} B_{ij}</script><h2 id="Norm"><a href="#Norm" class="headerlink" title="Norm"></a>Norm</h2><ul>
+<li>Quadratic Norm:</li>
+</ul>
+<script type="math/tex; mode=display">
+\lVert \bold{x} \rVert_{A} = \sqrt{\bold{x}^T A \bold{x}}, A \space \text{is positive semi-definite}</script><h2 id="Dual-Norm"><a href="#Dual-Norm" class="headerlink" title="Dual Norm"></a>Dual Norm</h2><script type="math/tex; mode=display">
+\lVert \bold{y} \rVert_{*} = \sup \{ \bold{y}^T \bold{x} \space | \space \lVert \bold{x} \rVert \le 1 \}</script><p>Hölder’s Inequality: $\left&lt; \bold{x}, \bold{y} \right&gt; \le \lVert \bold{x} \rVert \cdot \lVert \bold{y} \rVert_{*}$</p>
+<h2 id="Norm-Relationship"><a href="#Norm-Relationship" class="headerlink" title="Norm Relationship"></a>Norm Relationship</h2><p><strong>Lemma</strong> (Mathematical Equivalence of Norms). Suppose that $\lVert \cdot \rVert_{a}$ and $\lVert \cdot \rVert_{b}$ are norms on $\mathbb{R}^{d}$, there exist positive “constants”(depend on dimension) $\alpha$ and $\beta$, such that</p>
+<script type="math/tex; mode=display">
+\alpha \lVert \bold{x} \rVert_{a} \le \lVert \bold{x} \rVert_{b} \le \beta \lVert \bold{x} \rVert_{a}</script><h2 id="Cauchy-Schwarz-Inequality"><a href="#Cauchy-Schwarz-Inequality" class="headerlink" title="Cauchy-Schwarz Inequality"></a>Cauchy-Schwarz Inequality</h2><script type="math/tex; mode=display">
+\left< \bold{x}, \bold{y} \right> \le \lVert \bold{x} \rVert \cdot \lVert \bold{y} \rVert_{*} \\
+\left( \sum_{i = 1}^n a_i b_i \right)^2 \le \left(\sum_{i = 1}^n a_i^2 \right) \cdot \left(\sum_{i = 1}^n b_i^2 \right) \\
+\left( \int_{a}^{b} f(x)g(x) \text{d}x \right)^2 \le \left(\int_{a}^{b} f^2(x) \text{d}x \right) \cdot \left(\int_{a}^{b} g^2(x) \text{d}x \right)</script><h2 id="Matrix-Operator-Norm"><a href="#Matrix-Operator-Norm" class="headerlink" title="Matrix Operator Norm"></a>Matrix Operator Norm</h2><p><strong>Definition</strong> (Matrix Operator Norm). The operator norm (or called induced norm) of a matrix $A \in \mathbb{R}^{m \times n}$ is defined by</p>
+<script type="math/tex; mode=display">
+\lVert A \rVert_{\text{op}, p} \triangleq \max \left\{ \frac{\lVert A \bold{x} \rVert_{p}}{\lVert \bold{x} \rVert_{p} } \space | \space    \bold{x} \in \mathbb{R}^{d}, \bold{x} \neq \bold{0} \right\}</script><ul>
+<li>$l_2$ norm (Spectral Norm):</li>
+</ul>
+<script type="math/tex; mode=display">
+\lVert A \rVert_{\text{op}, 2} = \max_{i \in [r]} | \sigma_i |</script><p>Where $A = \sum_{i = 1}^{r} \sigma_i \bold{u}_i \bold{v}_i^T$, namely, $\sigma_i$ is the $i$-th singular value.</p>
+<h2 id="Matrix-Entrywise-Norm"><a href="#Matrix-Entrywise-Norm" class="headerlink" title="Matrix Entrywise Norm"></a>Matrix Entrywise Norm</h2><p><strong>Definition</strong> (Matrix Entrywise Norm). The entrywise norm of a matrix $A \in \mathbb{R}^{m \times n}$ is defined by</p>
+<script type="math/tex; mode=display">
+\lVert A \rVert_{\text{en}, p} \triangleq \left( \sum_{i = 1}^{m} \sum_{j = 1}^{n} |A_{i, j}|^p \right)^{1 / p}</script><script type="math/tex; mode=display">
+\lVert A \rVert_{\text{F}} = \lVert A \rVert_{\text{en}, 2}</script><h2 id="Eigen-Value-Decomposition"><a href="#Eigen-Value-Decomposition" class="headerlink" title="Eigen Value Decomposition"></a>Eigen Value Decomposition</h2><p>Let $A$ be an $d \times d$ PSD matrix, then it can be factored as</p>
+<script type="math/tex; mode=display">
+A = Q \Lambda Q^T</script><p>where</p>
+<ul>
+<li><p>$Q = (\bold{v}_1, \bold{v}_2, \dots, \bold{v}_d) \in \mathbb{R}^{d \times d}$ is orthogonal, and $\bold{v}_1, \dots, \bold{v}_{d}$ are eigenvectors</p>
+</li>
+<li><p>$\Lambda = \text{diag} (\lambda_1, \dots, \lambda_{d})$, and $\lambda_1, \dots, \lambda_{d}$ are eigenvalues</p>
+</li>
+</ul>
+<p>Some property:</p>
+<ul>
+<li>$A = \sum_{i = 1}^{d} \lambda_i \bold{v}_i \bold{v}_i^T$</li>
+<li>$\det(A) = \prod_{i = 1}^{d} \lambda_i$</li>
+<li>$\text{Tr}(A) = \sum_{i = 1}^{d} \lambda_i$</li>
+<li>$\lVert A \rVert_{\text{F}} = \sqrt{\sum_{i = 1}^{d} \lambda_i^2} $</li>
+</ul>
+<h2 id="Singular-Value-Decomposition"><a href="#Singular-Value-Decomposition" class="headerlink" title="Singular Value Decomposition"></a>Singular Value Decomposition</h2><p>Suppose $A \in \mathbb{R}^{m \times n}$ has a rank $r$, then it can be factored as</p>
+<script type="math/tex; mode=display">
+A = U \Sigma V^T</script><p>where</p>
+<ul>
+<li>$U = (\bold{u}_1, \dots, \bold{u}_r) \in \mathbb{R}^{m \times r}$ satisfies $U^T U = I$; $V = (\bold{v}_1, \dots, \bold{v}_r) \in \mathbb{R}^{n \times r}$ satisfies $V^T V = I$</li>
+<li>$\Sigma = (\sigma_1, \dots, \sigma_r)$ and $\sigma_1, \dots, \sigma_r$ are singular valuess.</li>
+</ul>
+<p>Some property:</p>
+<ul>
+<li>$A = \sum_{i = 1}^{r} \sigma_i \bold{u}_i \bold{v}_i^T$</li>
+<li>$\lVert A \rVert_{\text{F}} = \sqrt{\sum_{i = 1}^{r} \sigma_i^2} $</li>
+</ul>
+<h2 id="Schatten-Norm"><a href="#Schatten-Norm" class="headerlink" title="Schatten Norm"></a>Schatten Norm</h2><p><strong>Definition</strong> (Matrix Schatten Norm). The Schatten norm of a matrix $A \in \mathbb{R}^{m \times n}$ with rank $r$ is defined by</p>
+<script type="math/tex; mode=display">
+\lVert A \rVert_{\text{Sc}, p} \triangleq \left( \sum_{i = 1}^{r} \sigma_{i}^p \right)^{1 / p}</script><h1 id="Probability-and-Statistics"><a href="#Probability-and-Statistics" class="headerlink" title="Probability and Statistics"></a>Probability and Statistics</h1><h2 id="Cauchy-Schwarz-Inequality-in-Probability"><a href="#Cauchy-Schwarz-Inequality-in-Probability" class="headerlink" title="Cauchy-Schwarz Inequality in Probability"></a>Cauchy-Schwarz Inequality in Probability</h2><script type="math/tex; mode=display">
+(\mathbb{E}[XY])^2 \le \mathbb{E}[X^2] \cdot \mathbb{E}[Y^2]</script><h2 id="Concentration-Inequalities"><a href="#Concentration-Inequalities" class="headerlink" title="Concentration Inequalities"></a>Concentration Inequalities</h2><p><strong>Theorem</strong> (Markov’s Inequality). Let X be a non-negative random variable with $\mathbb{E}[X] &lt; \infin$, then for all $t &gt; 0$,</p>
+<script type="math/tex; mode=display">
+\Pr[X \ge t \mathbb{E}[X]] \le \frac{1}{t}</script><p><strong>Theorem</strong> (Chebyshev’s Inequality). Let X be a non-negative random variable with $\mathbb{E}[X], \text{Var}[X] &lt; \infin$, then for all $\epsilon &gt; 0$,</p>
+<script type="math/tex; mode=display">
+\Pr[|X - \mathbb{E}[X]| \ge \epsilon] \le \frac{\text{Var}[X]}{\epsilon^2}</script><p><strong>Theorem</strong> (Hoeffding’s Inequality). Let $X_1, \dots, X_m$ be independent random variables with $X_i$ taking values in $[a_i, b_i]$ for all $i \in [m]$. Then, for any $\epsilon &gt; 0$, the following inequalities hold for $S_m = \sum_{i = 1}^{m} X_i$,</p>
+<script type="math/tex; mode=display">
+\Pr [S_m - \mathbb{E}[S_m] \ge \epsilon] \le \exp \left(\frac{-2 \epsilon^2}{\sum_{i = 1}^{m}(b_i - a_i)^2} \right) \\
+\Pr [S_m - \mathbb{E}[S_m] \le -\epsilon] \le \exp \left(\frac{-2 \epsilon^2}{\sum_{i = 1}^{m}(b_i - a_i)^2} \right) \\</script><h1 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h1><p><strong>Definition</strong> (Entropy). The enotropy of a discrete random variable X with probability mass function $\bold{p}(x) = \Pr[X = x]$ is denoted by $H(X)$:</p>
+<script type="math/tex; mode=display">
+H(X) = -\sum_{x \in \mathcal{X}} \bold{p}(x) \log \bold{p}(x)</script><p>The entropy is a lower bound on lossless data compression.</p>
+<p>A explanation of entropy: $\log_2(1 / \bold{p}(x))$ is the code length needed to encode the information, and $H(X)$ measures the expected code length to encode a distribution $\bold{p}$.</p>
+<p><strong>Definition</strong> (Condition Entropy).</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+H(Y | X) &= -\sum_{x \in \mathcal{X}, y \in \mathcal{Y}} \bold{p}(x, y) \log \left[\frac{\bold{p}(x, y)}{\bold{p}(x)} \right] \\
+&= -\sum_{x \in \mathcal{X}, y \in \mathcal{Y}} \bold{p}(x, y) \log \bold{p}(x, y) + \sum_{x \in \mathcal{X}} \bold{p}(x) \log \bold{p}(x) \\
+&= H(X, Y) - H(X)
+\end{aligned}</script><p><strong>Definition</strong> (Mutual Information).</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+I(X, Y) &= KL(\bold{p}(x, y) \Vert \bold{p}(x) \bold{p}(y)) \\
+&= \sum_{x \in \mathcal{X}, y \in \mathcal{Y}} \bold{p}(x, y) \log \left[ \frac{\bold{p}(x, y)}{\bold{p}(x) \bold{p}(y)} \right] \\
+&= \sum_{x \in \mathcal{X}, y \in \mathcal{Y}} \bold{p}(x, y) \log \bold{p}(x, y) - \sum_{x \in \mathcal{X}} \bold{p}(x) \log \bold{p}(x) - \sum_{y \in \mathcal{Y}} \bold{p}(y) \log \bold{p}(y) \\
+&= H(X) + H(Y) - H(X, Y)
+\end{aligned}</script><p>with the conventions: $0 \log 0 = 0, 0 \log \frac{0}{0} = 0, \text{ and } a \log \frac{a}{0} = + \infin \text{ for } a &gt; 0$</p>
+<h2 id="KL-Divergence-Relative-Entropy"><a href="#KL-Divergence-Relative-Entropy" class="headerlink" title="KL Divergence (Relative Entropy)"></a>KL Divergence (Relative Entropy)</h2><p><strong>Definition</strong> (KL Divergence). The KL divergence of two distributions $p$ and $q$ is defined by $KL(\bold{p} \Vert \bold{q})$:</p>
+<script type="math/tex; mode=display">
+KL(\bold{p} \Vert \bold{q}) = \sum_{x \in \mathcal{X}} \bold{p}(x) \log \left[ \frac{\bold{p}(x)}{\bold{q}(x)} \right]</script><p>with the conventions: $0 \log 0 = 0, 0 \log \frac{0}{0} = 0, \text{ and } a \log \frac{a}{0} = + \infin \text{ for } a &gt; 0$</p>
+<p>Some property:</p>
+<ul>
+<li>KL divergence is always non-negative</li>
+<li>Pinsker’s Inequality: $ KL(\bold{p} \Vert \bold{q}) \ge \frac{1}{2} \lVert \bold{p} - \bold{q} \rVert_1^2 $</li>
+<li>$KL(\bold{p} \Vert \bold{q})$ doesn’t always equal to $KL(\bold{q} \Vert \bold{p})$</li>
+</ul>
+<h2 id="Bregman-Divergence"><a href="#Bregman-Divergence" class="headerlink" title="Bregman Divergence"></a>Bregman Divergence</h2><p><strong>Definition</strong> (Bregman Divergence). Let $\psi$ be a convex and differentiable function over a convex set $\mathcal{K}$, and then for any $\bold{x}, \bold{y} \in \mathcal{K}$, the bregman divergence $\mathcal{D}_{\psi}$ associated to $\psi$ is defined as</p>
+<script type="math/tex; mode=display">
+\mathcal{D}_{\psi} (\bold{x} \Vert \bold{y}) = \psi(\bold{x}) - \psi(\bold{y}) - \left< \nabla \psi(\bold{y}), \bold{x} - \bold{y} \right></script><p><img src="/2025/09/13/introduction-and-mathematical-background/bregman-divergence-demo.png" alt=""></p>
+<p>Bregman divergence measures the difference of a function and its linear approximation.</p>
+<p>KL divergence is a special case when $\bold{p}(x)$ is defined as negative entropy: $\bold{p}(x) = \sum_{i} x_i \log x_i$.</p>
+<h1 id="Asymptotic-Notations"><a href="#Asymptotic-Notations" class="headerlink" title="Asymptotic Notations"></a>Asymptotic Notations</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><img src="/2025/09/13/introduction-and-mathematical-background/definition-of-asymptotic-notations.png" alt=""></p>
+<h1 id="Optimization-in-Machine-Learning"><a href="#Optimization-in-Machine-Learning" class="headerlink" title="Optimization in Machine Learning"></a>Optimization in Machine Learning</h1><h2 id="Learning-by-Optimization"><a href="#Learning-by-Optimization" class="headerlink" title="Learning by Optimization"></a>Learning by Optimization</h2><p>The fundamental goal of (supervised) learning: <strong>Risk Minimization</strong>.</p>
+<script type="math/tex; mode=display">
+\min_{h \in \mathcal{H}} \mathbb{E}_{\bold{x}, y \in \mathcal{D}} [ f(h(\bold{x}), y) ]</script><p>where:</p>
+<ul>
+<li>$h$ denotes the hypothesis (model) from the hypothesis space $\mathcal{H}$</li>
+<li>$(\bold{x}, y)$ is an instance chosen from a unknown distribution $\mathcal{D}$</li>
+<li>$f(h(\bold{x}), y)$ denotes the loss of using hypothesis $h$ on the instance $(\bold{x}, y)$</li>
+</ul>
+<h2 id="Empirical-Risk-Minimization"><a href="#Empirical-Risk-Minimization" class="headerlink" title="Empirical Risk Minimization"></a>Empirical Risk Minimization</h2><p>The distribution of the data is unavailable, and the risk can’t be computed.</p>
+<p>In practice, the learner instead tries to optmize empirical risk.</p>
+<script type="math/tex; mode=display">
+\min_{h \in \mathcal{H}} \frac{1}{m} \sum_{i = 1}^{m} f(h(\bold{x}_i), y_i)</script><ul>
+<li>IID assumption: <strong>independent</strong> and <strong>identically distributed</strong> random variables.</li>
+<li>ERM approximates RM: All instance are i.i.d. sampled from the same distribution.</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>machine learning</tag>
+      </tags>
+  </entry>
 </search>
