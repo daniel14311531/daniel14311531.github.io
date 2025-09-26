@@ -1588,7 +1588,8 @@ TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新
   <entry>
     <title>Advanced Optimization - Introduction; Mathematical Background</title>
     <url>/2025/09/13/introduction-and-mathematical-background/</url>
-    <content><![CDATA[<div class="pdf-container">
+    <content><![CDATA[<p>It’s fucking difficult…</p>
+<div class="pdf-container">
   <iframe src="/pdfjs/web/viewer.html?file=/assets/advanced-optimization/introduction-and-mathematical-background.pdf" width="100%" height="800px"></iframe>
 </div>]]></content>
       <tags>
