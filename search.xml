@@ -1596,4 +1596,67 @@ TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新
         <tag>machine learning</tag>
       </tags>
   </entry>
+  <entry>
+    <title>AI Infra和算子开发(1)</title>
+    <url>/2026/09/06/Infra-1/</url>
+    <content><![CDATA[<h1 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h1><p>整体而言，GPU 相比于 CPU 牺牲了复杂计算上的能力，取而代之的是大规模并行处理数据的能力。</p>
+<p><img src="/2026/09/06/Infra-1/gpu-structure.png" alt="gpu-structure"></p>
+<p>GPU 存在三个并行层级：</p>
+<ol>
+<li>thread：GPU 上最小执行单位，对应一次函数调用的一个实例。每个 thread 有自己的寄存器和程序计数器，每个 thread 执行逻辑相同，处理的数据不同（Single Instruction Multiple Data）。</li>
+<li>block：由多个能互相合作的 thread 组成，每个 block 有自己的共享内存，其中的线程可以交换数据，可以与其他 block 并行执行。</li>
+<li>grid：是一次 kernel launch 的所有 block 的集合，对应整个 GPU 上跑的任务，不同 block 之间完全独立，调度顺序无所谓。</li>
+</ol>
+<h2 id="warp"><a href="#warp" class="headerlink" title="warp"></a>warp</h2><p>GPU 不是以 thread 为单位执行，而是以 warp（32 个 thread）为单位执行的。</p>
+<p>SIMT（Single Instruction, Multiple Thread）的含义：</p>
+<ul>
+<li>这 32 个 thread 在同一个时钟周期执行完全相同的指令</li>
+<li>每个 thread 操作自己那份数据（不同寄存器值）</li>
+</ul>
+<p>算子开发里要尽量保证同一 warp 内的 thread 走相同控制流。比如，</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 危险！同一个 warp 内不同 thread 走不同分支</span></span><br><span class="line"><span class="keyword">if</span> (thread_idx % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">    do_A();   <span class="comment">// 偶数 thread 走这</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    do_B();   <span class="comment">// 奇数 thread 走这</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于 warp 必须执行同一条指令，硬件会串行执行两个分支：先让走 A 的 thread 执行 <code>do_A()</code>，其他 thread 闲置；再让走 B 的执行 <code>do_B()</code>。原本的并行变成串行，性能直接砍半。</p>
+<p>当 warp 访问全局内存时，32 个 thread 各自请求一个地址。硬件会把这些请求合并，此时连续的寻址会更好。</p>
+<h2 id="Streaming-Multiprocessor"><a href="#Streaming-Multiprocessor" class="headerlink" title="Streaming Multiprocessor"></a>Streaming Multiprocessor</h2><p>SM（Streaming Multiprocessor） 是 GPU 内部一个完整的“小处理器”，负责调度和执行 block。</p>
+<p>一次 kernel launch 有成千上万个 block，但 SM 数量有限。规则是：</p>
+<ol>
+<li>每个 SM 可以同时驻留多个 block</li>
+<li>SM 用 warp 调度在这些 block 的 warp 之间快速切换，掩盖延迟</li>
+<li>一个 SM 同时能跑多少 warp，取决于资源限制</li>
+</ol>
+<p>一个 SM 同时能驻留多少 warp，受三种资源限制：</p>
+<ol>
+<li>每个 SM 最多支持的 warp 数</li>
+<li>每个 SM 最多支持的 block 数</li>
+<li>每个 block 用的寄存器&#x2F;共享内存</li>
+</ol>
+<p>Occupancy（占用率）记为<code>实际驻留的 warp 数 / SM 最大 warp 数</code>。</p>
+<h1 id="算子的性能指标"><a href="#算子的性能指标" class="headerlink" title="算子的性能指标"></a>算子的性能指标</h1><h2 id="1-核心利用率"><a href="#1-核心利用率" class="headerlink" title="1. 核心利用率"></a>1. 核心利用率</h2><p>Bandwidth Utilization（带宽利用率） &#x3D; 实际带宽 &#x2F; 硬件峰值带宽</p>
+<p>Compute Utilization（MFU） &#x3D; 实际 FLOPS &#x2F; 硬件峰值 FLOPS</p>
+<p>FLOPS：floating-point operations per second（每秒浮点算力）</p>
+<p>MACs：Multiply ACcumulate operations（乘加累积操作次数），一个MACs包含一个乘法操作与一个加法操作，因此1个MACs约等价于2个FLOPs。</p>
+<h2 id="Roofline-Model"><a href="#Roofline-Model" class="headerlink" title="Roofline Model"></a>Roofline Model</h2><p>算力 $\pi$ 是一个计算平台倾尽全力每秒钟所能完成的浮点运算数（FLOPS）。</p>
+<p>带宽 $\beta$ 是一个计算平台倾尽全力每秒所能完成的内存交换量（Byte&#x2F;s）。</p>
+<p>计算强度上限 $I_{\text{max}}&#x3D;\frac{\pi}{\beta}$ 单位是FLOPs&#x2F;Byte。</p>
+<p><img src="/2026/09/06/Infra-1/roofline-model.png" alt="roofline-model"></p>
+<p>Compute-bound：整个计算的耗时主要在于计算本身，对显存的读写耗时较低。</p>
+<p>Memory-bound：整个计算的耗时主要集中在存储的访问上，计算本身耗时较低。</p>
+<p>Memory-bound 的优化方向：减少访存</p>
+<ol>
+<li>算子融合（Fusion）</li>
+<li>数据布局 &#x2F; 向量化访问</li>
+<li>用更小的 dtype</li>
+<li>减少中间结果落盘（不写回 HBM）</li>
+</ol>
+<p>Compute-bound 的优化方向：提高算力利用率</p>
+<ol>
+<li>用 Tensor Core</li>
+<li>Tiling（分块）</li>
+<li>双缓冲 &#x2F; 流水线（Pipelining）</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>infra</tag>
+      </tags>
+  </entry>
 </search>
