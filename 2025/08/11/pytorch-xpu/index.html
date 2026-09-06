@@ -284,19 +284,18 @@
 <p><a href="https://docs.pytorch.org/docs/2.8/notes/get_start_xpu.html">Getting Started on Intel GPU PyTorch 2.8 documentation</a></p>
 <p><a href="https://www.intel.com/content/www/us/en/developer/articles/tool/pytorch-prerequisites-for-intel-gpu/2-8.html">PyTorch Prerequisites for Intel® GPUs</a></p>
 <p><a href="https://dgpu-docs.intel.com/driver/client/overview.html#ubuntu-latest">Installing Client GPUs Intel® software for general purpose GPU capabilities documentation</a></p>
-<h1 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h1><p><img src="/2025/08/11/pytorch-xpu/ubuntu2404.png"></p>
+<h1 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h1><p><img src="/2025/08/11/pytorch-xpu/ubuntu2404.png" alt=""></p>
 <h1 id="Intel-GPUs-Driver-Installation"><a href="#Intel-GPUs-Driver-Installation" class="headerlink" title="Intel GPUs Driver Installation"></a>Intel GPUs Driver Installation</h1><h2 id="Installing-Data-Center-GPU"><a href="#Installing-Data-Center-GPU" class="headerlink" title="Installing Data Center GPU"></a>Installing Data Center GPU</h2><p><a href="https://dgpu-docs.intel.com/driver/installation-rolling.html#ubuntu">Installing Data Center GPU: Rolling Releases —— Intel® software for general purpose GPU capabilities documentation</a></p>
 <p>执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install -y \</span><br><span class="line">    linux-headers-$(<span class="built_in">uname</span> -r) \</span><br><span class="line">    linux-modules-extra-$(<span class="built_in">uname</span> -r) \</span><br><span class="line">    flex bison \</span><br><span class="line">    intel-fw-gpu intel-i915-dkms xpu-smi</span><br><span class="line"><span class="built_in">sudo</span> reboot</span><br></pre></td></tr></table></figure>
-
 <p>可能遇到的问题：</p>
 <ol>
-<li>wsl: Failed to translate ‘C:\Windows\system32’<br>wsl: Failed to translate ‘C:\Windows’<br>wsl: Failed to translate ‘C:\Windows\System32\Wbem’<br>wsl: Failed to translate ‘C:\Windows\System32\WindowsPowerShell\v1.0&#39;<br>wsl: Failed to translate ‘C:\Windows\System32\OpenSSH&#39;<br>wsl: Failed to translate ‘C:\Program Files\dotnet&#39;<br>wsl: Failed to translate ‘D:\Program Files\Git\cmd’<br>wsl: Failed to translate ‘D:\Program Files\Git\bin’<br>wsl: Failed to translate ‘D:\Program Files\nodejs&#39;<br>wsl: Failed to translate ‘C:\Users\29655\AppData\Local\Microsoft\WindowsApps’<br>wsl: Failed to translate ‘D:\Program Files\Microsoft VS Code\bin’<br>wsl: Failed to translate ‘C:\Users\29655\AppData\Roaming\npm’</li>
+<li>wsl: Failed to translate ‘C:\Windows\system32’<br>wsl: Failed to translate ‘C:\Windows’<br>wsl: Failed to translate ‘C:\Windows\System32\Wbem’<br>wsl: Failed to translate ‘C:\Windows\System32\WindowsPowerShell\v1.0\’<br>wsl: Failed to translate ‘C:\Windows\System32\OpenSSH\’<br>wsl: Failed to translate ‘C:\Program Files\dotnet\’<br>wsl: Failed to translate ‘D:\Program Files\Git\cmd’<br>wsl: Failed to translate ‘D:\Program Files\Git\bin’<br>wsl: Failed to translate ‘D:\Program Files\nodejs\’<br>wsl: Failed to translate ‘C:\Users\29655\AppData\Local\Microsoft\WindowsApps’<br>wsl: Failed to translate ‘D:\Program Files\Microsoft VS Code\bin’<br>wsl: Failed to translate ‘C:\Users\29655\AppData\Roaming\npm’</li>
 </ol>
 <ul>
 <li>解决方案：禁止wsl2访问windows的环境变量。</li>
 </ul>
-<ol start="2">
+<ol>
 <li>E: Unable to locate package linux-headers-6.6.87.2-microsoft-standard-WSL2<br>E: Couldn’t find any package by glob ‘linux-headers-6.6.87.2-microsoft-standard-WSL2’<br>E: Unable to locate package linux-modules-extra-6.6.87.2-microsoft-standard-WSL2<br>E: Couldn’t find any package by glob ‘linux-modules-extra-6.6.87.2-microsoft-standard-WSL2’</li>
 </ol>
 <ul>
@@ -310,36 +309,32 @@
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install build-essential bc flex bison libssl-dev libelf-dev</span><br></pre></td></tr></table></figure>
 </li>
-<li><ol start="3">
+<li><ol>
 <li>下载并解压 WSL2 内核源码（含头文件）</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/src</span><br><span class="line"><span class="built_in">sudo</span> git <span class="built_in">clone</span> --depth 1 --branch linux-msft-wsl-6.6.87.2 \</span><br><span class="line">  https://github.com/microsoft/WSL2-Linux-Kernel.git</span><br></pre></td></tr></table></figure>
 </li>
-<li><ol start="4">
+<li><ol>
 <li>创建头文件链接（供编译模块使用）</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/src/WSL2-Linux-Kernel /lib/modules/$(<span class="built_in">uname</span> -r)/build</span><br></pre></td></tr></table></figure>
 </li>
-<li><ol start="5">
+<li><ol>
 <li>验证是否成功</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /lib/modules/$(<span class="built_in">uname</span> -r)/build</span><br></pre></td></tr></table></figure>
-
 <p>如果输出的是源码目录的链接，说明已配置好。</p>
 </li>
 </ul>
 <p>执行<code>xpu-smi</code>时可能遇到的问题：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.32&#x27; not found (required by xpu-smi)</span><br><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.32&#x27; not found (required by /lib/x86_64-linux-gnu/libxpum.so.1)</span><br><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.30&#x27; not found (required by /lib/x86_64-linux-gnu/libxpum.so.1)</span><br><span class="line">xpu-smi: /home/daniel/miniconda3/envs/learning/lib/libstdc++.so.6: version `GLIBCXX_3.4.32&#x27; not found (required by /lib/x86_64-linux-gnu/libze_loader.so.1)</span><br></pre></td></tr></table></figure>
-
 <p>解决方案：</p>
 <p>升级 Conda 环境中的  libstdc++ 。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge libstdcxx-ng=13</span><br></pre></td></tr></table></figure>
-
 <h2 id="Driver-Installation-for-Client-GPUs-from-Intel"><a href="#Driver-Installation-for-Client-GPUs-from-Intel" class="headerlink" title="Driver Installation for Client GPUs from Intel"></a>Driver Installation for Client GPUs from Intel</h2><p><a href="https://dgpu-docs.intel.com/driver/client/overview.html#ubuntu-latest">Installing Client GPUs ——Intel® software for general purpose GPU capabilities documentation</a></p>
 <h1 id="Install-pytorch-xpu-binaries"><a href="#Install-pytorch-xpu-binaries" class="headerlink" title="Install pytorch-xpu binaries"></a>Install pytorch-xpu binaries</h1><p><a href="https://docs.pytorch.org/docs/2.8/notes/get_start_xpu.html">Getting Started on Intel GPU PyTorch 2.8 documentation</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/xpu)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2025/08/11/pytorch-xpu/result.png"></p>
+<p><img src="/2025/08/11/pytorch-xpu/result.png" alt=""></p>
 
     </div>
 
@@ -411,13 +406,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">227k</span>
+    <span title="站点总字数">224k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:26</span>
+    <span title="站点阅读时长">3:23</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
