@@ -1659,4 +1659,69 @@ TRPO 通过执行线搜索来解决此问题，通过不断地迭代减小更新
         <tag>数论</tag>
       </tags>
   </entry>
+  <entry>
+    <title>本地 codex 连接 linux 服务器</title>
+    <url>/2026/09/17/codex-ssh-linux-server/</url>
+    <content><![CDATA[<p>参考链接：<a href="https://lucajiang.github.io/2026/04/30/codex-in-server/index.html">在没有梯子的服务器上使用 VSCode Codex 的完整指南</a></p>
+<h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><ul>
+<li>本地安装 codex ，有可以使用的 chatgpt 账号（&#x3D;本地有代理，代理<strong>不要</strong>开虚拟网卡）</li>
+<li>本地代理端口 127.0.0.1:7897 （clash verge 默认设置？）</li>
+<li>vscode 可以通过 Remote-SSH 连接到 linux 服务器，且 vscode 装有 codex 插件</li>
+<li>服务器安装 codex （通过 npm，可以没有 root 权限）</li>
+</ul>
+<h1 id="Step-1-配置-SSH-隧道"><a href="#Step-1-配置-SSH-隧道" class="headerlink" title="Step 1 配置 SSH 隧道"></a>Step 1 配置 SSH 隧道</h1><p>编辑本地的 <code>~/.ssh/config</code> 文件，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host &lt;server&gt;</span><br><span class="line">    HostName 172.29.103.202</span><br><span class="line">    IdentityFile &lt;path_to_your_private_key&gt;</span><br><span class="line">    User &lt;user&gt;</span><br><span class="line">    RemoteForward 17897 127.0.0.1:7897</span><br><span class="line">    LocalForward 1455 127.0.0.1:1455</span><br><span class="line">    ServerAliveInterval 60</span><br><span class="line">    ServerAliveCountMax 3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>RemoteForward</code>（远程转发）：在 linux 服务器上开通 SSH 隧道，通向本地内网里的某个服务。</li>
+<li><code>LocalForward</code>（本地转发）：在你本地开通 SSH 隧道，通向远程服务器里的某个服务。</li>
+<li><code>ServerAliveInterval</code>、<code>ServerAliveCountMax</code>：用于保持 SSH 连接的活跃状态。</li>
+</ul>
+<h1 id="Step-2-复制-Codex-登录凭证到服务器"><a href="#Step-2-复制-Codex-登录凭证到服务器" class="headerlink" title="Step 2 复制 Codex 登录凭证到服务器"></a>Step 2 复制 Codex 登录凭证到服务器</h1><ul>
+<li>在本地登录 codex 后，找到 <code>~/.codex/auth.json</code> 文件，并将其复制到服务器上的相同位置。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp ~/.codex/auth.json &lt;user&gt;@&lt;server&gt;:~/.codex/auth.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上传后不要在本地退出或重新登录 Codex，否则本地的 token 会更新，服务器上的也会跟着过期，就要重新粘过去。</li>
+<li>每隔一段时间如果服务器端 Codex 提示认证失败，重新从本地复制一次最新的 <code>auth.json</code> 即可。</li>
+</ul>
+<h1 id="Step-3-配置-VSCode-远程代理"><a href="#Step-3-配置-VSCode-远程代理" class="headerlink" title="Step 3 配置 VSCode 远程代理"></a>Step 3 配置 VSCode 远程代理</h1><ul>
+<li>在 VSCode 中通过 Remote-SSH 连接到服务器</li>
+<li>打开远程设置：<code>Cmd/Ctrl + Shift + P</code> → 输入 <code>Preferences: Open Remote Settings (JSON)</code>。</li>
+<li>在打开的 JSON 文件中添加：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;http.proxy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://127.0.0.1:17897&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;http.proxySupport&quot;</span><span class="punctuation">:</span> <span class="string">&quot;override&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这部分可能不需要？我直接在服务器 <code>~/.bashrc</code> 的<strong>最顶上</strong>（<code>case $- in</code> 那段之前）添加代理设置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> HTTP_PROXY=<span class="variable">$http_proxy</span></span><br><span class="line"><span class="built_in">export</span> HTTPS_PROXY=<span class="variable">$https_proxy</span></span><br><span class="line"><span class="built_in">export</span> no_proxy=localhost,127.0.0.1</span><br><span class="line"><span class="built_in">export</span> NO_PROXY=<span class="variable">$no_proxy</span></span><br></pre></td></tr></table></figure>
+
+<p>检测端口：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ss -tlnp | grep 17897</span><br></pre></td></tr></table></figure>
+
+<p>结束后重启终端激活设置，然后检测是否可以连接 OpenAI：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -x http://127.0.0.1:17897 https://api.openai.com</span><br></pre></td></tr></table></figure>
+
+<p>或者直接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://api.openai.com</span><br></pre></td></tr></table></figure>
+
+<p>如果输出显示 <code>message</code> 之类的就成功了。</p>
+<h1 id="Step-4-中止服务器中-codex-进程"><a href="#Step-4-中止服务器中-codex-进程" class="headerlink" title="Step 4 中止服务器中 codex 进程"></a>Step 4 中止服务器中 codex 进程</h1><p>检查服务器上的 codex 进程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pgrep -af codex</span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> $(pgrep -f codex); <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;== <span class="variable">$p</span> ==&quot;</span>; <span class="built_in">tr</span> <span class="string">&#x27;\0&#x27;</span> <span class="string">&#x27;\n&#x27;</span> &lt; /proc/<span class="variable">$p</span>/environ | grep -i proxy; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>kill 残留进程</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkill -f <span class="string">&#x27;codex.*app-server&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>重启远程 VSCode 窗口（断开再重新连接）。</p>
+<h1 id="Step-5-本地连接检测"><a href="#Step-5-本地连接检测" class="headerlink" title="Step 5 本地连接检测"></a>Step 5 本地连接检测</h1><p>本地 ssh 检测</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh &lt;user&gt;@&lt;server&gt; <span class="string">&#x27;curl -sS -o /dev/null -w &quot;%&#123;http_code&#125;\n&quot; https://chatgpt.com/backend-api/codex/responses&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>返回 401&#x2F;405 都算“能通”。</p>
+<h1 id="Step-6-爽用-codex"><a href="#Step-6-爽用-codex" class="headerlink" title="Step 6 爽用 codex"></a>Step 6 爽用 codex</h1><p>用 vscode 打开一个服务器窗口以连接服务器。</p>
+<p>然后爽用 codex。</p>
+]]></content>
+      <tags>
+        <tag>服务器</tag>
+      </tags>
+  </entry>
 </search>
