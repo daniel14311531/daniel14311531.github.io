@@ -69,7 +69,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"><!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="headband"></div>
@@ -310,9 +310,9 @@
 <p>Compute Utilization（MFU） &#x3D; 实际 FLOPS &#x2F; 硬件峰值 FLOPS</p>
 <p>FLOPS：floating-point operations per second（每秒浮点算力）</p>
 <p>MACs：Multiply ACcumulate operations（乘加累积操作次数），一个MACs包含一个乘法操作与一个加法操作，因此1个MACs约等价于2个FLOPs。</p>
-<h2 id="Roofline-Model"><a href="#Roofline-Model" class="headerlink" title="Roofline Model"></a>Roofline Model</h2><p>算力 $\pi$ 是一个计算平台倾尽全力每秒钟所能完成的浮点运算数（FLOPS）。</p>
-<p>带宽 $\beta$ 是一个计算平台倾尽全力每秒所能完成的内存交换量（Byte&#x2F;s）。</p>
-<p>计算强度上限 $I_{\text{max}}&#x3D;\frac{\pi}{\beta}$ 单位是FLOPs&#x2F;Byte。</p>
+<h2 id="Roofline-Model"><a href="#Roofline-Model" class="headerlink" title="Roofline Model"></a>Roofline Model</h2><p>算力 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">π</span></span></span></span> 是一个计算平台倾尽全力每秒钟所能完成的浮点运算数（FLOPS）。</p>
+<p>带宽 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span></span></span></span> 是一个计算平台倾尽全力每秒所能完成的内存交换量（Byte&#x2F;s）。</p>
+<p>计算强度上限 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mtext>max</mtext></msub><mo>=</mo><mfrac><mi>π</mi><mi>β</mi></mfrac></mrow><annotation encoding="application/x-tex">I_{\text{max}}=\frac{\pi}{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">max</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1765em;vertical-align:-0.4811em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6954em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0528em;">β</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">π</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> 单位是FLOPs&#x2F;Byte。</p>
 <p><img src="/2026/09/06/Infra-1/roofline-model.png" alt="roofline-model"></p>
 <p>Compute-bound：整个计算的耗时主要在于计算本身，对显存的读写耗时较低。</p>
 <p>Memory-bound：整个计算的耗时主要集中在存储的访问上，计算本身耗时较低。</p>
@@ -400,13 +400,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">236k</span>
+    <span title="站点总字数">260k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:35</span>
+    <span title="站点阅读时长">3:56</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
